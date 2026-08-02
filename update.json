@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "webVersion": 48202,
+  "versionName": "1.2.2",
+  "minAppVersionCode": 29,
+  "mandatory": false,
+  "message": "Sửa lỗi chỉnh sửa theme trong trang quản trị",
+  "url": "https://github.com/NgMingZan/m4x-theme-ota/releases/download/web-1.2.2/web-update.zip",
+  "sha256": "1a0bad6ed50162e2aa4f2ddd118af7d4cb767cb053b45eeb347fa9781a3a4bc5",
+  "size": 727694
+}
