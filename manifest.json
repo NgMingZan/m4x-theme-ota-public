@@ -17,7 +17,7 @@
   "minVersion": "1.0",
   "minAppVersion": "1.0",
   "minimumAppVersion": "1.0",
-  "minNativeVersion": "1.0",
+  "minNativeVersion": 1,
   "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.2/m4x-web-1.2.zip",
   "downloadUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.2/m4x-web-1.2.zip",
   "bundleUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.2/m4x-web-1.2.zip",
@@ -757,5 +757,6 @@
       }
     ]
   },
-  "minAppVersionCode": 10000
+  "minAppVersionCode": 1,
+  "minimumAppVersionCode": 1
 }
