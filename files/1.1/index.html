@@ -1,0 +1,2049 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07101d">
+<script>
+var adminThemeSearchTimer=null,themeCatalogChangesCache=[],adminThemeEditingId='';
+if(location.hostname==='m4x.local'){document.documentElement.classList.add('native-app')}</script>
+<title>M4X THEME 1.1</title>
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root{
+ --bg:#06111f;--text:#f6f8ff;--muted:#aab7c9;--glass:rgba(255,255,255,.10);
+ --glass2:rgba(255,255,255,.16);--line:rgba(255,255,255,.22);
+ --blue:#6aa8ff;--purple:#b56cff;--cyan:#69e6ff;--gold:#ffd66b;--danger:#ff718b;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}button,.setting,.card,.chip,.iconbtn{touch-action:manipulation}
+html{background:var(--bg)}
+body{margin:0;color:var(--text);font-family:Inter,system-ui,sans-serif;min-height:100vh;overflow-x:hidden;
+ background:
+ radial-gradient(circle at 12% 8%,rgba(82,151,255,.42),transparent 30%),
+ radial-gradient(circle at 88% 18%,rgba(174,93,255,.34),transparent 31%),
+ radial-gradient(circle at 50% 100%,rgba(54,221,255,.20),transparent 35%),
+ linear-gradient(160deg,#07111f,#0c1730 50%,#120c25);
+}
+body:before,body:after{content:"";position:fixed;border-radius:50%;filter:blur(12px);pointer-events:none;z-index:-1}
+body:before{width:280px;height:280px;background:#66c9ff55;left:-90px;top:180px}
+body:after{width:340px;height:340px;background:#aa62ff45;right:-130px;bottom:70px}
+button,input{font:inherit}.hidden{display:none!important}
+.app{max-width:520px;margin:auto;min-height:100vh;padding:env(safe-area-inset-top) 16px calc(104px + env(safe-area-inset-bottom))}
+.glass{background:linear-gradient(145deg,rgba(255,255,255,.17),rgba(255,255,255,.06));border:1px solid var(--line);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 10px 28px rgba(0,0,0,.18);backdrop-filter:blur(12px) saturate(125%);-webkit-backdrop-filter:blur(12px) saturate(125%);border-radius:28px}
+.liquid{position:relative;overflow:hidden}
+.liquid:before{content:"";position:absolute;inset:-60%;background:conic-gradient(from 90deg,transparent,#ffffff18,#65d9ff30,#a86cff33,transparent);animation:none;pointer-events:none}
+.liquid>*{position:relative;z-index:1}@keyframes spin{to{transform:rotate(360deg)}}
+.primary{border:1px solid #ffffff35;color:white;background:linear-gradient(100deg,rgba(83,146,255,.95),rgba(165,91,255,.92));padding:16px 19px;border-radius:20px;width:100%;font-weight:800;box-shadow:inset 0 1px 0 #ffffff55,0 12px 34px #734cff45}
+.secondary{border:1px solid var(--line);background:var(--glass);color:white;padding:14px 17px;border-radius:18px}
+header{display:flex;align-items:center;justify-content:space-between;padding:20px 2px 15px}.brand{font-size:23px;font-weight:900;letter-spacing:.3px}.brand span{color:#8fb2ff}.actions{display:flex;gap:8px}.iconbtn{width:44px;height:44px;border-radius:16px;border:1px solid var(--line);background:var(--glass);color:white;font-size:19px;backdrop-filter:blur(18px)}
+.banner{padding:24px;height:205px;position:relative}.banner h2{font-size:25px;line-height:1.22;margin:0}.banner p{color:#d6e0ef;font-size:13px}.blob{position:absolute;width:190px;height:190px;border-radius:48% 52% 61% 39% / 49% 39% 61% 51%;right:-30px;bottom:-55px;background:linear-gradient(135deg,#65d9ff66,#b76cff88);filter:blur(1px);animation:blob 6s ease-in-out infinite alternate}@keyframes blob{to{transform:rotate(16deg) scale(1.08);border-radius:60% 40% 38% 62% / 45% 62% 38% 55%}}
+.notice{margin-top:14px;padding:13px 15px;display:flex;gap:10px;align-items:center}.notice b{font-size:13px}.notice span{font-size:19px}
+.search{margin:17px 0}.search input,.field{width:100%;border:1px solid var(--line);background:var(--glass);color:white;padding:15px 17px;border-radius:19px;outline:none;backdrop-filter:blur(18px)}
+.chips{display:flex;gap:8px;overflow:auto;padding-bottom:5px;scrollbar-width:none}.chip{white-space:nowrap;border:1px solid var(--line);background:var(--glass);color:white;padding:10px 14px;border-radius:999px}.chip.active{background:linear-gradient(100deg,#5d96ff,#a25eff)}
+.section{display:flex;justify-content:space-between;align-items:center;margin:25px 2px 12px}.section h3{margin:0;font-size:19px}.section small{color:var(--muted)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.card{cursor:pointer}.preview{height:230px;border-radius:24px;background-size:cover;background-position:center;position:relative;overflow:hidden;border:1px solid #ffffff2d;box-shadow:0 8px 22px #0003}.preview:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,#06101dcc)}
+.badge,.cost{position:absolute;z-index:2;background:#07101fc9;border:1px solid #ffffff30;padding:7px 10px;border-radius:999px;font-size:11px;backdrop-filter:blur(14px)}.badge{top:10px;left:10px}.cost{bottom:10px;left:10px;color:var(--gold);font-weight:800}.heart{position:absolute;z-index:3;right:9px;top:9px;width:38px;height:38px;border-radius:14px;border:1px solid #ffffff35;background:#07101fab;color:white;font-size:20px}.heart.on{color:#ff7890}.meta{padding:10px 3px}.meta b{display:block}.meta small{color:var(--muted);font-size:12px}
+nav{position:fixed;z-index:20;left:50%;transform:translateX(-50%);bottom:0;width:min(520px,100%);display:grid;grid-template-columns:repeat(5,1fr);background:rgba(7,16,31,.72);border-top:1px solid var(--line);backdrop-filter:blur(14px) saturate(130%);-webkit-backdrop-filter:blur(14px) saturate(130%);padding:8px 4px calc(8px + env(safe-area-inset-bottom))}
+nav button{background:none;border:0;color:#90a0b7;font-size:10px;padding:7px 1px}.navicon{font-size:20px;display:block}.activeNav{color:#9bb6ff!important}
+.pageTitle{font-size:29px;margin:5px 0 4px}.pageSub,.muted{color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:40px 15px;grid-column:1/-1}
+.list{display:grid;gap:12px}.listItem{display:flex;gap:13px;padding:14px}.grow{flex:1}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.smallBtn{border:1px solid var(--line);background:var(--glass);color:white;border-radius:14px;padding:9px 12px}
+.wallet{padding:21px;background:linear-gradient(135deg,rgba(48,90,190,.66),rgba(126,61,199,.60))}.points{font-size:38px;font-weight:900;color:var(--gold)}.task{padding:15px;display:flex;gap:13px;align-items:center}.taskIcon{width:49px;height:49px;border-radius:17px;background:linear-gradient(135deg,#5999ff,#a763ff);display:grid;place-items:center;font-size:22px}.reward{color:var(--gold);font-weight:800}.progress{height:8px;background:#ffffff18;border-radius:999px;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,#66a9ff,#b56dff)}
+.profileHero{text-align:center;padding:26px}.avatar{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;margin:auto;background:linear-gradient(135deg,#5d9cff,#b365ff);font-size:30px;font-weight:900}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.stat{padding:14px 4px;text-align:center}.stat b{display:block;font-size:20px}.settings{margin-top:14px;overflow:hidden}.setting{display:flex;justify-content:space-between;padding:17px;border-bottom:1px solid var(--line)}.setting:last-child{border:0}
+.support{padding:18px}.supportQr{width:100%;border-radius:24px;display:block;margin-top:12px;border:1px solid #ffffff35}.supportButtons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.auth{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:22px;background:radial-gradient(circle at 80% 0,#315fd899 0,transparent 37%),radial-gradient(circle at 0 100%,#7e31d999 0,transparent 38%),#07101f}.authCard{width:min(100%,410px);padding:24px}.authLogo{text-align:center;font-size:51px;font-weight:950;color:#a3baff}.authTabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:18px 0}.authTabs button{padding:11px;border-radius:14px;border:1px solid var(--line);background:transparent;color:white}.authTabs .active{background:linear-gradient(90deg,#5f98ff,#a35fff)}.formGap{display:grid;gap:11px}.hint{font-size:12px;color:var(--muted)}
+.detail{position:fixed;inset:0;z-index:25;background:radial-gradient(circle at 90% 0,#3a2672 0,transparent 35%),#07101f;overflow:auto;padding:calc(14px + env(safe-area-inset-top)) 17px calc(100px + env(safe-area-inset-bottom));transform:translateX(100%);transition:.18s}.detail.open{transform:none}.top{display:flex;justify-content:space-between}.gallery{display:grid;grid-template-columns:1.25fr .75fr;gap:9px;margin-top:16px}.heroPreview{height:390px;border-radius:26px;background-size:cover;background-position:center}.sidePreviews{display:grid;gap:9px}.sidePreview{border-radius:22px;background-size:cover;background-position:center}.tags{display:flex;gap:7px;flex-wrap:wrap}.tag{background:var(--glass);padding:8px 11px;border-radius:999px;font-size:12px}.downloadbar{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(520px,100%);padding:11px 17px calc(11px + env(safe-area-inset-bottom));background:#07101fd9;backdrop-filter:blur(25px);display:flex;gap:10px}.downloadbar .primary{flex:1}.favBig{width:55px;border-radius:18px;border:1px solid var(--line);background:var(--glass);color:white;font-size:23px}
+.toast{position:fixed;z-index:70;left:50%;bottom:110px;transform:translate(-50%,25px);background:#102037e8;border:1px solid var(--line);padding:12px 17px;border-radius:16px;opacity:0;transition:.15s;max-width:90%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.toast.show{opacity:1;transform:translate(-50%,0)}
+.modal{position:fixed;inset:0;z-index:60;background:#0009;display:grid;place-items:center;padding:22px}.modalCard{width:min(100%,390px);padding:22px}.modalActions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.adminPanel{position:fixed;inset:0;z-index:45;background:radial-gradient(circle at 90% 0,#3a2672 0,transparent 35%),#07101f;overflow:auto;padding:calc(14px + env(safe-area-inset-top)) 17px calc(30px + env(safe-area-inset-bottom));transform:translateX(100%);transition:.18s}.adminPanel.open{transform:none}
+.adminTabs{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:17px 0}.adminTabs button{padding:12px;border-radius:16px;border:1px solid var(--line);background:var(--glass);color:white}.adminTabs button.active{background:linear-gradient(90deg,#5f98ff,#a35fff)}
+.adminStats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.adminStat{padding:16px;text-align:center}.adminStat b{display:block;font-size:25px}
+.adminForm{display:grid;gap:10px;padding:15px;margin:13px 0}.adminForm .row2{display:grid;grid-template-columns:1fr 1fr;gap:9px}.adminCard{padding:15px;margin-bottom:11px}.adminActions{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}.dangerBtn{border:1px solid #ff718b77;background:#ff718b1f;color:#ff9aac;border-radius:13px;padding:9px 11px}.goodBtn{border:1px solid #69e6ff77;background:#69e6ff16;color:#9cf0ff;border-radius:13px;padding:9px 11px}.adminBadge{display:inline-block;padding:5px 9px;border-radius:999px;background:#ffd66b24;color:var(--gold);font-size:11px;margin-top:7px}
+
+
+button:active,.setting:active,.card:active{transform:scale(.985);opacity:.9}
+button[disabled]{opacity:.55;pointer-events:none}
+.loadingText{opacity:.72}
+@media (prefers-reduced-motion:reduce){
+ *{animation:none!important;transition-duration:.01ms!important}
+}
+
+/* Chế độ nhẹ dành riêng cho APK Android */
+html.native-app body{
+  background:linear-gradient(160deg,#07111f,#0b1730 55%,#100b22)!important;
+}
+html.native-app body::before,
+html.native-app body::after,
+html.native-app .liquid::before,
+html.native-app .blob{
+  display:none!important;
+}
+html.native-app .glass,
+html.native-app .iconbtn,
+html.native-app .field,
+html.native-app .search input,
+html.native-app .badge,
+html.native-app .cost,
+html.native-app nav,
+html.native-app .downloadbar{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+html.native-app .glass{
+  background:rgba(20,35,61,.96)!important;
+  box-shadow:0 4px 14px rgba(0,0,0,.16)!important;
+}
+html.native-app nav,
+html.native-app .downloadbar{
+  background:rgba(7,16,31,.97)!important;
+}
+html.native-app .preview{
+  box-shadow:none!important;
+}
+html.native-app *{
+  animation:none!important;
+  transition:none!important;
+}
+.card,.task,.listItem,.adminCard{
+  content-visibility:auto;
+  contain-intrinsic-size:260px;
+}
+.preview img,.heroPreview,.sidePreview{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+
+/* Cửa hàng điểm và phòng chat */
+.shopGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.shopCard{padding:16px;min-height:170px;display:flex;flex-direction:column;gap:8px}
+.shopCard .shopIcon{font-size:31px}.shopCard h3{margin:0;font-size:17px}.shopCard p{margin:0;flex:1;font-size:12px;color:var(--muted)}
+.shopPrice{color:var(--gold);font-size:18px;font-weight:900}.shopOwned{color:#8ff0d1;font-size:12px;font-weight:800}
+.transferBox{padding:16px;display:grid;gap:10px;margin-top:14px}.transferNote{font-size:12px;color:var(--muted)}
+.vipBadge{display:inline-block;padding:5px 9px;border-radius:999px;background:#8d65ff2b;color:#c8b5ff;font-size:11px;margin-top:7px}
+.avatar.neonFrame{box-shadow:0 0 0 4px #66dfff,0 0 0 8px #b466ff,0 0 26px #7c72ff}
+.chatPage{padding-bottom:125px}.chatList{display:flex;flex-direction:column;gap:10px;min-height:52vh;margin:14px 0}
+.chatMessage{max-width:88%;padding:11px 13px;border-radius:18px;background:rgba(255,255,255,.09);border:1px solid var(--line);align-self:flex-start;overflow-wrap:anywhere}
+.chatMessage.mine{align-self:flex-end;background:rgba(90,142,255,.20)}
+.chatMessage.highlighted{border-color:#ffd66b;background:linear-gradient(135deg,#ffd66b20,#b565ff24);box-shadow:0 0 18px #ffd66b18}
+.chatMeta{display:flex;gap:7px;align-items:center;font-size:11px;color:var(--muted);margin-bottom:5px}.chatMeta b{color:#dce7ff}.chatText{white-space:pre-wrap;line-height:1.35}
+.chatAdmin{color:var(--gold)!important}.chatDelete{border:0;background:none;color:#ff91a5;padding:2px 5px;font-size:11px}
+.chatComposer{position:sticky;bottom:calc(78px + env(safe-area-inset-bottom));padding:12px;display:grid;gap:9px;z-index:8;background:#0e1d33f2}
+.chatComposer textarea{resize:none;min-height:54px;max-height:110px}.chatButtons{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.chatHint{font-size:11px;color:var(--muted);text-align:center}.chatReward{color:#79eec5;font-size:11px}
+@media(max-width:360px){.shopGrid{grid-template-columns:1fr}}
+
+
+/* Kinh tế điểm mở rộng 4.3 */
+.shopGroups{display:grid;gap:18px}.shopGroupTitle{display:flex;align-items:center;justify-content:space-between;margin:3px 2px 10px}.shopGroupTitle h3{margin:0}.shopCard{position:relative}.shopActions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.shopTag{font-size:10px;padding:4px 7px;border-radius:999px;background:#ffffff10;color:var(--muted)}
+.leaderboard{padding:14px;display:grid;gap:8px}.leaderRow{display:grid;grid-template-columns:30px 1fr auto;gap:8px;align-items:center}.leaderRow.me{outline:1px solid #ffd66b66}.requestList{display:grid;gap:9px}.requestCard{padding:13px}.requestStatus{font-size:10px;padding:4px 7px;border-radius:999px;background:#ffffff12}.requestStatus.done{color:#7cf29a}.requestStatus.rejected{color:#ff91a5}.requestStatus.processing{color:#70d6ff}
+.avatar.animatedFrame{animation:framePulse 1.4s linear infinite;box-shadow:0 0 0 4px #ff70a6,0 0 0 8px #70d6ff,0 0 28px #b388ff}@keyframes framePulse{50%{filter:hue-rotate(180deg);transform:scale(1.04)}}
+.profileTitle{margin-top:4px;color:#ffd166;font-size:12px;font-weight:800}.profileBadges{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:7px}.miniBadge{font-size:10px;padding:4px 7px;border-radius:999px;background:#ffffff12;border:1px solid var(--line)}
+.chatRoomBar{display:grid;grid-template-columns:1fr auto;gap:8px;margin:12px 0}.chatRoomBar select{min-width:0}.chatMessage.pinned{border-color:#70d6ff;box-shadow:0 0 18px #70d6ff22}.chatMessage.effect-rainbow{animation:rainbowMessage 2s linear infinite}@keyframes rainbowMessage{50%{filter:hue-rotate(180deg)}}.chatNameIcon{font-size:12px}.chatTitle{font-size:10px;color:#ffd166}.chatTier{font-size:9px;padding:2px 5px;border-radius:999px;background:#ffffff10}.chatTop{color:#ffd166;font-weight:900}.chatButtons3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}.chatPin{color:#70d6ff;font-size:10px;margin-top:6px}
+.adminTabs.three{grid-template-columns:1fr 1fr 1fr}.adminRequestActions{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
+html.native-app .animatedFrame{animation:framePulse 1.4s linear infinite!important}html.native-app .effect-rainbow{animation:rainbowMessage 2s linear infinite!important}
+@media(max-width:410px){.chatButtons3{grid-template-columns:1fr}.shopGrid{grid-template-columns:1fr}}
+
+
+/* M4X 4.4 Creator + Social */
+.featureGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.featureCard{padding:15px;min-height:115px}.featureCard b{display:block;margin-top:8px}.featureCard span{font-size:12px;color:var(--muted)}
+.referralCode{font-size:25px;font-weight:950;letter-spacing:2px;color:var(--gold);padding:12px;text-align:center;background:#0002;border-radius:16px;margin:10px 0}.creatorForm{display:grid;gap:10px;padding:15px}.creatorForm textarea{min-height:90px;resize:vertical}.submissionCard,.reviewCard,.weekTask,.seasonCard{padding:14px;margin-top:10px}.statusPill{font-size:11px;padding:5px 9px;border-radius:999px;background:#ffffff16}.statusPill.approved{color:#8ff0d1}.statusPill.rejected{color:#ff9cac}.statusPill.pending{color:#ffd66b}
+.memberCardDigital{padding:22px;background:linear-gradient(135deg,#172f63,#5e2b8a);position:relative;overflow:hidden}.memberCardDigital:after{content:'M4X';position:absolute;right:-12px;bottom:-35px;font-size:120px;font-weight:950;opacity:.08}.memberId{font-family:monospace;letter-spacing:2px;color:#bce6ff}.achievementRow{display:flex;gap:7px;flex-wrap:wrap}.achievement{padding:6px 9px;border-radius:999px;background:#ffffff15;font-size:11px}.milestoneTrack{height:9px;border-radius:99px;background:#ffffff14;overflow:hidden}.milestoneTrack i{display:block;height:100%;background:linear-gradient(90deg,#6aa8ff,#ffd66b)}
+.seasonHero{padding:20px;background:linear-gradient(135deg,#6e2cff55,#ff9d3555)}.seasonItems{display:grid;grid-template-columns:1fr 1fr;gap:10px}.seasonItem{padding:12px}.langSwitch{display:flex;gap:8px}.langSwitch button{flex:1}.verified{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;border-radius:50%;background:#4d9fff;color:#fff;font-size:11px;margin-left:4px}.riskBadge{color:#ff9cac;font-size:11px;font-weight:800}
+.chatPage{padding-bottom:102px}.chatList{gap:7px}.chatMessage{padding:8px 10px;border-radius:15px;max-width:91%}.chatMeta{margin-bottom:3px}.chatText{line-height:1.25}.chatSticker{font-size:42px;line-height:1.1}.chatComposer{padding:8px;position:sticky;bottom:76px;z-index:12;border-radius:18px}.chatInputRow{display:flex;gap:7px;align-items:flex-end}.chatInputRow textarea{min-height:42px;max-height:86px;padding:10px 12px;border-radius:14px;resize:none}.chatInputRow .sendRound{width:43px;height:43px;flex:0 0 43px;border-radius:14px;border:0;background:linear-gradient(135deg,#5596ff,#a45eff);color:#fff;font-size:18px}.stickerBar{display:flex;gap:5px;overflow:auto;padding:5px 1px}.stickerBtn{border:0;background:#ffffff0d;color:#fff;border-radius:10px;padding:7px 9px;font-size:18px}.chatExtra{display:flex;gap:6px}.chatExtra button{font-size:11px;padding:7px 9px}.reactionRow{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}.reactionChip{border:1px solid #ffffff20;background:#ffffff0b;color:#fff;border-radius:999px;padding:3px 7px;font-size:11px}.reactionPicker{display:flex;gap:3px;margin-top:4px;opacity:.75}.reactionPicker button{border:0;background:none;font-size:15px;padding:2px}
+.boxReveal{position:fixed;inset:0;z-index:90;background:#050914eF;display:grid;place-items:center;padding:25px}.boxOrb{width:180px;height:180px;border-radius:42px;display:grid;place-items:center;font-size:78px;background:linear-gradient(135deg,#377dff,#a74fff);box-shadow:0 0 70px #785cff88;animation:boxPulse .65s ease-in-out infinite alternate}.boxResult{margin-top:18px;text-align:center;font-size:22px;font-weight:900}@keyframes boxPulse{to{transform:scale(1.08) rotate(4deg);filter:brightness(1.25)}}
+body.skin-ocean{--blue:#45c8ff;--purple:#2d7dff;background:linear-gradient(155deg,#031b2f,#073653 55%,#09203b)}body.skin-purple{--blue:#9b78ff;--purple:#e15fff;background:linear-gradient(155deg,#150a2d,#32135b 55%,#190b36)}body.skin-gold{--blue:#ffd66b;--purple:#ff9d45;background:linear-gradient(155deg,#211705,#50360b 55%,#211306)}body.skin-dynamic:before{display:block!important;animation:auroraMove 5s ease-in-out infinite alternate;background:#65d9ff66}body.skin-dynamic:after{display:block!important;animation:auroraMove 6s ease-in-out infinite alternate-reverse;background:#b76cff66}@keyframes auroraMove{to{transform:translate(35px,-45px) scale(1.2)}}body.nav-compact nav{width:auto;min-width:330px;border-radius:22px 22px 0 0;padding-left:14px;padding-right:14px}body.nav-compact nav button{padding-left:7px;padding-right:7px}
+.fileNote{font-size:11px;color:var(--muted)}.reviewStars button{background:none;border:0;color:#ffd66b;font-size:25px;padding:2px}.reviewSummary{font-size:24px;font-weight:900;color:var(--gold)}
+
+
+/* M4X 4.4.2 — cho phép giao diện đã mua hoạt động trong APK */
+html.native-app body.skin-ocean{
+  --bg:#031725;
+  --blue:#45c8ff;
+  --purple:#2d7dff;
+  --cyan:#70efff;
+  --glass:rgba(7,58,84,.92);
+  --glass2:rgba(22,110,145,.42);
+  --line:rgba(110,226,255,.30);
+  background:
+    radial-gradient(circle at 12% 8%,rgba(69,200,255,.34),transparent 31%),
+    radial-gradient(circle at 88% 20%,rgba(45,125,255,.28),transparent 34%),
+    linear-gradient(155deg,#021522,#073653 55%,#061a31)!important;
+}
+html.native-app body.skin-purple{
+  --bg:#130922;
+  --blue:#a984ff;
+  --purple:#ec67ff;
+  --cyan:#d4a6ff;
+  --glass:rgba(47,20,82,.93);
+  --glass2:rgba(126,58,172,.40);
+  --line:rgba(212,151,255,.28);
+  background:
+    radial-gradient(circle at 10% 8%,rgba(155,120,255,.34),transparent 31%),
+    radial-gradient(circle at 90% 18%,rgba(225,95,255,.28),transparent 34%),
+    linear-gradient(155deg,#120824,#32135b 55%,#190b36)!important;
+}
+html.native-app body.skin-gold{
+  --bg:#1c1304;
+  --blue:#ffd66b;
+  --purple:#ff9d45;
+  --cyan:#ffe7a2;
+  --gold:#ffe27f;
+  --muted:#d9c9a5;
+  --glass:rgba(65,44,8,.94);
+  --glass2:rgba(164,107,19,.42);
+  --line:rgba(255,214,107,.30);
+  background:
+    radial-gradient(circle at 12% 8%,rgba(255,214,107,.30),transparent 31%),
+    radial-gradient(circle at 88% 20%,rgba(255,157,69,.24),transparent 34%),
+    linear-gradient(155deg,#1b1204,#50360b 55%,#211306)!important;
+}
+html.native-app body.skin-dynamic{
+  --bg:#071226;
+  --blue:#69e6ff;
+  --purple:#bd6cff;
+  --cyan:#8df4ff;
+  --glass:rgba(19,35,67,.90);
+  --glass2:rgba(92,72,171,.38);
+  --line:rgba(128,215,255,.28);
+  background:
+    radial-gradient(circle at 10% 15%,rgba(42,214,255,.52),transparent 30%),
+    radial-gradient(circle at 88% 18%,rgba(168,72,255,.50),transparent 32%),
+    radial-gradient(circle at 45% 90%,rgba(75,103,255,.38),transparent 38%),
+    linear-gradient(145deg,#041225,#12114a 52%,#250d47)!important;
+  background-size:160% 160%!important;
+  animation:m4xAuroraBackground 7s ease-in-out infinite alternate!important;
+}
+@keyframes m4xAuroraBackground{
+  0%{background-position:0% 0%,100% 0%,30% 100%,50% 50%}
+  50%{background-position:28% 20%,70% 32%,60% 72%,50% 50%}
+  100%{background-position:55% 8%,45% 55%,25% 45%,50% 50%}
+}
+
+/* Thẻ và thanh điều hướng đổi màu theo giao diện */
+html.native-app body.skin-ocean .glass,
+html.native-app body.skin-ocean .field,
+html.native-app body.skin-ocean .search input,
+html.native-app body.skin-ocean .iconbtn,
+html.native-app body.skin-ocean .secondary,
+html.native-app body.skin-ocean .smallBtn{
+  background:rgba(7,58,84,.94)!important;
+}
+html.native-app body.skin-purple .glass,
+html.native-app body.skin-purple .field,
+html.native-app body.skin-purple .search input,
+html.native-app body.skin-purple .iconbtn,
+html.native-app body.skin-purple .secondary,
+html.native-app body.skin-purple .smallBtn{
+  background:rgba(47,20,82,.94)!important;
+}
+html.native-app body.skin-gold .glass,
+html.native-app body.skin-gold .field,
+html.native-app body.skin-gold .search input,
+html.native-app body.skin-gold .iconbtn,
+html.native-app body.skin-gold .secondary,
+html.native-app body.skin-gold .smallBtn{
+  background:rgba(65,44,8,.95)!important;
+}
+html.native-app body.skin-dynamic .glass,
+html.native-app body.skin-dynamic .field,
+html.native-app body.skin-dynamic .search input,
+html.native-app body.skin-dynamic .iconbtn,
+html.native-app body.skin-dynamic .secondary,
+html.native-app body.skin-dynamic .smallBtn{
+  background:rgba(19,35,67,.91)!important;
+}
+
+html.native-app body.skin-ocean nav{background:rgba(2,31,48,.98)!important}
+html.native-app body.skin-purple nav{background:rgba(25,10,47,.98)!important}
+html.native-app body.skin-gold nav{background:rgba(34,23,5,.98)!important}
+html.native-app body.skin-dynamic nav{background:rgba(7,15,38,.95)!important}
+
+html.native-app body.skin-ocean .brand span,
+html.native-app body.skin-ocean .activeNav{color:#69e6ff!important}
+html.native-app body.skin-purple .brand span,
+html.native-app body.skin-purple .activeNav{color:#d89aff!important}
+html.native-app body.skin-gold .brand span,
+html.native-app body.skin-gold .activeNav{color:#ffd66b!important}
+html.native-app body.skin-dynamic .brand span,
+html.native-app body.skin-dynamic .activeNav{color:#8feaff!important}
+
+/* Cho phép riêng animation Aurora dù chế độ nhẹ đang tắt animation chung */
+html.native-app body.skin-dynamic{
+  animation:m4xAuroraBackground 7s ease-in-out infinite alternate!important;
+}
+
+
+/* ===== M4X THEME 4.8.3 ===== */
+.profileHeroPro{padding:24px;position:relative;overflow:hidden}
+.profileTop{display:flex;gap:16px;align-items:center;text-align:left}
+.avatarWrap{position:relative;flex:0 0 auto}
+.avatarEdit{position:absolute;right:-3px;bottom:-3px;width:31px;height:31px;border-radius:50%;border:2px solid #16243b;background:#5f8fff;color:#fff;font-weight:900}
+.profileIdentity h3{margin:0 0 4px;font-size:24px}
+.profileLevel{display:inline-flex;gap:6px;align-items:center;margin-top:8px;padding:5px 9px;border-radius:999px;background:#ffffff14;font-size:11px}
+.profileStats6{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:18px}
+.profileStats6 .stat{padding:12px 4px}
+.profileInfoStrip{margin-top:12px;padding:13px 15px;display:grid;gap:8px}
+.inventoryGrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.inventoryCard{padding:14px;min-height:145px;display:flex;flex-direction:column}
+.inventoryCard h4{margin:8px 0 5px}.inventoryCard p{margin:0 0 10px;font-size:12px;color:var(--muted);flex:1}
+.inventoryIcon{font-size:30px}.activePill{font-size:10px;padding:4px 7px;border-radius:999px;background:#71f0a622;color:#8ff6b5}
+.questMap{display:grid;gap:10px}.questStage{padding:14px;position:relative;overflow:hidden}.questStage.done{outline:1px solid #7cf29a66}
+.questRoad{height:3px;background:linear-gradient(90deg,#6aa8ff,#b56cff,#ffd66b);margin:0 28px;opacity:.7}
+.rankTabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}.rankTabs button.active{background:linear-gradient(90deg,#5f98ff,#a35fff)}
+.weeklyRankCard{padding:14px}.weeklyRankRow{display:grid;grid-template-columns:34px 1fr auto;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid #ffffff12}.weeklyRankRow:last-child{border:0}
+.birthdayHero{margin-top:14px;padding:18px;background:linear-gradient(135deg,rgba(255,80,145,.45),rgba(126,72,255,.48),rgba(255,185,65,.38));position:relative;overflow:hidden}
+.birthdaySchedule{display:grid;gap:8px;margin-top:12px}.birthdayDay{padding:11px;border-radius:17px;background:#ffffff0f;border:1px solid #ffffff1d}.birthdayDay.today{outline:2px solid #ffd66b}.birthdayDay.claimed{opacity:.62}
+.birthdayActions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+.airdropFloat{position:fixed;z-index:65;right:max(18px,calc((100vw - 520px)/2 + 18px));bottom:112px;border:0;border-radius:24px;padding:13px 16px;color:#fff;background:linear-gradient(135deg,#ff7d49,#ff4e9d,#7d64ff);box-shadow:0 15px 35px #ff4e6d66;animation:airdropPulse 1s ease-in-out infinite alternate;font-weight:900}
+@keyframes airdropPulse{to{transform:translateY(-7px) scale(1.04)}}
+.birthdayDecor{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.birthdayDecor i{position:absolute;top:105%;font-style:normal;animation:floatBirthday linear infinite}
+@keyframes floatBirthday{to{transform:translateY(-125vh) rotate(280deg)}}
+body.birthday-week .banner{background:linear-gradient(135deg,rgba(255,86,139,.36),rgba(110,76,255,.32),rgba(255,196,82,.25))}
+body.birthday-week .brand span{color:#ffd66b}
+body.skin-birthdayFireworks{
+ --bg:#13091d;--blue:#ff84bb;--purple:#9b72ff;--cyan:#ffd66b;
+ background:
+ radial-gradient(circle at 15% 10%,rgba(255,94,153,.42),transparent 28%),
+ radial-gradient(circle at 85% 18%,rgba(139,91,255,.42),transparent 30%),
+ radial-gradient(circle at 50% 90%,rgba(255,204,88,.24),transparent 38%),
+ linear-gradient(155deg,#14091f,#29103f 55%,#10172f)!important;
+ animation:birthdayBg 6s ease-in-out infinite alternate!important;
+}
+@keyframes birthdayBg{to{background-position:20% 10%,70% 35%,45% 70%,50% 50%}}
+.avatar.birthdayFrame{box-shadow:0 0 0 4px #ffd66b,0 0 22px #ff5d9d,0 0 42px #8a69ff;animation:birthdayFramePulse 1.4s ease-in-out infinite alternate}
+@keyframes birthdayFramePulse{to{box-shadow:0 0 0 4px #ff7db7,0 0 28px #ffd66b,0 0 48px #79dbff}}
+.discountOld{text-decoration:line-through;color:var(--muted);font-size:11px;margin-right:5px}
+.clueFragment{font-family:monospace;letter-spacing:3px;color:#ffd66b;font-weight:900}
+@media(max-width:380px){.inventoryGrid{grid-template-columns:1fr}.profileStats6{grid-template-columns:repeat(2,1fr)}}
+
+
+/* M4X 4.5.4 — ULTRA SMOOTH
+   Chỉ dùng transform + opacity để tận dụng GPU, không thêm blur nặng. */
+html.native-app .page{
+  contain:layout paint style;
+}
+html.native-app .page:not(.hidden){
+  animation:m4xPageEnter .17s cubic-bezier(.2,.75,.25,1) both!important;
+}
+@keyframes m4xPageEnter{
+  from{opacity:.22;transform:translate3d(0,8px,0)}
+  to{opacity:1;transform:translate3d(0,0,0)}
+}
+html.native-app button,
+html.native-app .setting,
+html.native-app .card,
+html.native-app .chip,
+html.native-app .iconbtn{
+  transition:transform .09s ease,opacity .09s ease,background-color .12s ease!important;
+}
+html.native-app button:active,
+html.native-app .setting:active,
+html.native-app .card:active,
+html.native-app .chip:active{
+  transform:scale(.975)!important;
+  opacity:.88!important;
+}
+html.native-app .detail,
+html.native-app .adminPanel{
+  transition:transform .19s cubic-bezier(.22,.75,.24,1)!important;
+  will-change:transform;
+}
+html.native-app .toast{
+  transition:transform .15s ease,opacity .15s ease!important;
+  will-change:transform,opacity;
+}
+html.native-app .modalCard,
+html.native-app .boxOrb{
+  animation:m4xPopupIn .18s cubic-bezier(.2,.8,.2,1) both!important;
+}
+@keyframes m4xPopupIn{
+  from{opacity:0;transform:scale(.94)}
+  to{opacity:1;transform:scale(1)}
+}
+html.native-app .loadingText{
+  animation:m4xLoadingSoft 1.1s ease-in-out infinite alternate!important;
+}
+@keyframes m4xLoadingSoft{to{opacity:.42}}
+html.native-app .card,
+html.native-app .task,
+html.native-app .listItem,
+html.native-app .adminCard,
+html.native-app .shopCard,
+html.native-app .inventoryCard,
+html.native-app .questStage,
+html.native-app .weeklyRankCard,
+html.native-app .submissionCard,
+html.native-app .chatMessage{
+  content-visibility:auto;
+  contain:layout paint style;
+  contain-intrinsic-size:auto 220px;
+}
+html.native-app .preview,
+html.native-app .preview img,
+html.native-app .heroPreview,
+html.native-app .sidePreview{
+  transform:translateZ(0);
+  backface-visibility:hidden;
+}
+html.native-app .preview img{
+  transition:opacity .15s ease!important;
+}
+html.native-app .birthdayDecor i:nth-child(n+9){
+  display:none!important;
+}
+html.native-app body.skin-dynamic{
+  animation-duration:12s!important;
+}
+html.native-app .animatedFrame{
+  animation:m4xFrameSoft 1.8s ease-in-out infinite alternate!important;
+}
+@keyframes m4xFrameSoft{
+  to{transform:scale(1.025);box-shadow:0 0 0 4px #ff70a6,0 0 0 8px #70d6ff,0 0 22px #b388ff}
+}
+html.native-app .effect-rainbow{
+  animation:m4xRainbowSoft 2.2s ease-in-out infinite alternate!important;
+}
+@keyframes m4xRainbowSoft{
+  to{transform:translate3d(0,-1px,0);box-shadow:0 0 16px rgba(130,170,255,.24)}
+}
+html.native-app .boxOrb{
+  filter:none!important;
+}
+
+
+/* M4X 4.8.3 — CYBER TECH UI */
+:root{
+ --bg:#020914;--text:#f4fbff;--muted:#7f9bb0;--glass:#071522;
+ --glass2:#0a1c2c;--line:#123d55;--blue:#00bfff;--purple:#8d5cff;
+ --cyan:#18e5ff;--gold:#ffd166;--danger:#ff6685;--tech:#00d9ff;
+}
+html{background:#020914!important}
+body{
+ background:
+  linear-gradient(rgba(0,216,255,.035) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(0,216,255,.035) 1px,transparent 1px),
+  radial-gradient(circle at 80% 3%,rgba(0,174,255,.16),transparent 28%),
+  radial-gradient(circle at 12% 42%,rgba(121,62,255,.12),transparent 30%),
+  #020914!important;
+ background-size:28px 28px,28px 28px,auto,auto,auto!important;
+}
+body:before,body:after{display:none!important}
+.app{max-width:560px;padding-left:18px;padding-right:18px}
+.glass,.field,.search input,.iconbtn,.secondary,.smallBtn{
+ background:linear-gradient(145deg,#071827,#04101c)!important;
+ border:1px solid #123f59!important;
+ box-shadow:inset 0 1px 0 rgba(77,217,255,.08),0 10px 28px rgba(0,0,0,.24)!important;
+ backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+.glass{border-radius:18px!important}
+header{padding:20px 4px 16px}
+.brand{font-size:26px;letter-spacing:.5px}.brand span{color:#12dcff!important;text-shadow:0 0 20px #00c8ff55}
+.iconbtn{border-radius:14px!important;color:#bfefff!important}
+.primary{background:linear-gradient(100deg,#007eff,#7b3fff)!important;border-color:#28d9ff88!important;border-radius:13px!important;box-shadow:0 0 24px #006cff33!important}
+.secondary,.smallBtn{border-radius:12px!important}
+.pageTitle{font-size:27px;letter-spacing:.2px}.pageSub{font-size:13px}
+
+.techHero{position:relative;min-height:264px;overflow:hidden;padding:22px;border:1px solid #0eaee0;border-radius:18px;background:#030c17;box-shadow:0 0 0 1px #08283c inset,0 16px 40px #0008}
+.techHero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,9,20,.98) 0%,rgba(2,9,20,.88) 43%,rgba(2,9,20,.18) 76%,rgba(2,9,20,.68) 100%);z-index:1}
+.techHero:after{content:"";position:absolute;inset:10px;pointer-events:none;border-top:1px solid #27ddff55;border-right:1px solid #865dff44;clip-path:polygon(0 0,100% 0,100% 74%,96% 74%,96% 100%,0 100%)}
+.techHeroImage{position:absolute;right:-5%;top:0;width:68%;height:100%;object-fit:cover;object-position:center;filter:saturate(1.15) contrast(1.05);opacity:.95}
+.techHeroCopy{position:relative;z-index:2;width:62%;min-height:220px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.techEyebrow{font-size:10px;letter-spacing:1.7px;color:#20ddff;border:1px solid #0fbde066;padding:7px 10px;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.techHero h1{font-size:31px;line-height:1.03;margin:13px 0 8px;text-transform:uppercase;max-width:270px}
+.techHeroMeta{color:#91b4c7;font-size:12px;line-height:1.5;margin:0 0 15px}
+.techHeroButton{width:auto!important;padding:12px 17px!important;font-size:12px;letter-spacing:.5px}
+.techHeroDots{position:absolute;z-index:3;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:5px}.techHeroDots i{width:6px;height:3px;background:#315267;border-radius:5px}.techHeroDots i:first-child{width:22px;background:#15dcff}
+
+.notice{border-radius:15px!important;margin-top:13px!important}.notice span{color:#22dcff}
+.techQuickGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:13px 0 16px}
+.techQuick{min-width:0;border:1px solid #123e56;background:linear-gradient(145deg,#071827,#04101c);color:#eaffff;border-radius:13px;padding:10px 3px;min-height:76px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.techQuick strong{font-size:18px;color:#18dcff}.techQuick span{font-size:9px;text-transform:uppercase;letter-spacing:.2px}
+.search{margin:12px 0}.search input{border-radius:13px!important;padding:14px 16px!important}
+.chips{gap:7px}.chip{border-radius:10px!important;background:#06131f!important;border:1px solid #15384d!important;padding:9px 13px!important}.chip.active{background:linear-gradient(105deg,#007dff,#7e3fff)!important;border-color:#26ddff88!important}
+.section{margin-top:22px}.section h3{text-transform:uppercase;font-size:16px;letter-spacing:.4px}
+.grid{gap:11px}.card{border:1px solid #11394f;border-radius:15px;background:#06131f;overflow:hidden;box-shadow:0 12px 26px #0005}
+.preview{height:205px;border:0!important;border-radius:0!important;box-shadow:none!important}.preview:after{background:linear-gradient(180deg,transparent 48%,#05111e 100%)}
+.badge{top:8px;left:8px;border-radius:8px;background:#03101ddd;border-color:#1b5973}.heart{border-radius:10px;background:#03101ddd;border-color:#1b5973}
+.meta{padding:11px 11px 12px}.meta b{font-size:14px}.meta small{display:block;margin-top:3px}.cardBottom{display:flex;justify-content:space-between;align-items:center;margin-top:8px}.cardPrice{font-weight:850;color:#13cfff}.cardRating{font-size:11px;color:#ffd166}
+#categoryPage .grid{grid-template-columns:1fr}
+#categoryPage .card{display:grid;grid-template-columns:128px 1fr;min-height:128px}
+#categoryPage .preview{height:128px}.categoryPage .meta{padding:12px}
+
+nav{width:min(560px,100%);background:#030c16f5!important;border-top:1px solid #12415b!important;backdrop-filter:none!important;padding-top:7px}
+nav button{color:#68859a;text-transform:uppercase;font-size:8px}.navicon{font-size:18px}.activeNav{color:#19dcff!important;text-shadow:0 0 15px #00bfff77}
+.wallet{background:linear-gradient(135deg,#06253a,#15143c)!important;border-color:#1d6582!important}.points{color:#28dfff!important}
+.task,.listItem,.adminCard,.submissionCard,.shopCard,.inventoryCard,.questStage,.weeklyRankCard{border-radius:14px!important}
+.taskIcon{border-radius:12px!important;background:linear-gradient(135deg,#007fff,#7c3cff)!important}
+.profileHeroPro{background:linear-gradient(145deg,#061622,#091225)!important;border-radius:18px!important;border:1px solid #15506a!important}
+.avatar{border:2px solid #20dfff!important;box-shadow:0 0 0 4px #071526,0 0 24px #00cfff55!important;background-color:#071526!important}
+.avatarEdit{background:#0b2540!important;border-color:#22dfff!important;color:#62efff!important}
+.settings{border-radius:16px!important}.setting{border-color:#12374d!important}
+.detail,.adminPanel{background:linear-gradient(rgba(0,216,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,216,255,.025) 1px,transparent 1px),#020914!important;background-size:28px 28px,28px 28px,auto!important}
+.heroPreview,.sidePreview{border:1px solid #174d67!important;border-radius:15px!important}
+.downloadbar{background:#020914f2!important;border-top:1px solid #16465f!important;backdrop-filter:none!important}
+.modal{background:#000d!important}.modalCard{border-radius:16px!important}
+.avatarActionGrid{display:grid;gap:9px;margin-top:14px}.avatarActionGrid button{text-align:left}.avatarHelp{font-size:11px;line-height:1.5;color:var(--muted);margin-top:10px}
+@media(max-width:380px){.techQuickGrid{grid-template-columns:repeat(3,1fr)}.techHeroCopy{width:69%}.techHero h1{font-size:27px}.techHeroImage{width:72%;right:-13%}}
+
+/* M4X 4.6.1 — Quản lý theme trong app */
+.adminThemeToolbar{display:grid;grid-template-columns:1fr auto;gap:8px;margin:12px 0}
+.adminThemeCard{display:grid;grid-template-columns:78px 1fr;gap:12px;align-items:start}
+.adminThemeThumb{width:78px;height:104px;border-radius:13px;object-fit:cover;background:#07111f;border:1px solid var(--line)}
+.adminThemeMeta{min-width:0}.adminThemeMeta b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.adminThemeId{font-size:10px;word-break:break-all;opacity:.68;margin-top:3px}
+.adminThemeDeleted{opacity:.72;border-color:#ff718b55!important}
+.adminThemeEditorGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.adminThemeEditorGrid .wide{grid-column:1/-1}
+.adminThemePreview{width:100%;max-height:190px;object-fit:cover;border-radius:16px;border:1px solid var(--line);background:#07111f}
+@media(max-width:420px){.adminThemeEditorGrid{grid-template-columns:1fr}.adminThemeEditorGrid .wide{grid-column:auto}}
+
+
+/* M4X 1.0 — Member Pass cao cấp + nút M4X Web trên trang chủ */
+.techQuickGrid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:9px!important}
+.techQuick{min-height:92px!important;border-radius:18px!important;padding:12px 5px!important}
+.techQuick strong{font-size:23px!important;line-height:1;color:#2ee8ff!important;text-shadow:0 0 18px rgba(46,232,255,.42)}
+.techQuick span{font-size:10px!important;font-weight:800;letter-spacing:.35px!important}
+.techQuickWeb{background:linear-gradient(145deg,rgba(5,46,71,.98),rgba(18,18,55,.98))!important;border-color:rgba(60,219,255,.45)!important;box-shadow:inset 0 0 0 1px rgba(124,95,255,.12),0 10px 24px rgba(0,0,0,.16)}
+.techQuickWeb strong{color:#7eeeff!important}
+@media(max-width:340px){.techQuickGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+
+.memberCardDigital{position:relative;isolation:isolate;overflow:hidden;width:min(100%,420px)!important;padding:22px!important;border:1px solid rgba(129,220,255,.42)!important;border-radius:30px!important;background:linear-gradient(145deg,rgba(8,35,68,.98),rgba(43,28,101,.97) 54%,rgba(88,35,130,.98))!important;box-shadow:0 28px 85px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.16),inset 0 -1px 0 rgba(97,215,255,.14)!important}
+.memberCardDigital:before{content:'';position:absolute;inset:0;z-index:-2;background:linear-gradient(115deg,transparent 0 31%,rgba(255,255,255,.08) 42%,transparent 53%),radial-gradient(circle at 18% 5%,rgba(62,221,255,.24),transparent 32%),radial-gradient(circle at 92% 94%,rgba(211,89,255,.26),transparent 38%)}
+.memberCardDigital:after{content:'M4X';position:absolute;right:-18px;bottom:-41px;z-index:-1;font-size:126px;font-weight:1000;letter-spacing:-12px;line-height:1;color:rgba(255,255,255,.055);opacity:1}
+.memberCardOrb{position:absolute;z-index:-1;border-radius:50%;filter:blur(1px);pointer-events:none}.memberCardOrbOne{width:105px;height:105px;right:-45px;top:56px;background:rgba(36,221,255,.12);box-shadow:0 0 60px rgba(36,221,255,.24)}.memberCardOrbTwo{width:130px;height:130px;left:-74px;bottom:-50px;background:rgba(190,70,255,.16);box-shadow:0 0 70px rgba(190,70,255,.24)}
+.memberCardHeader{display:flex;align-items:center;justify-content:space-between;gap:12px}.memberCardBrand{display:flex;align-items:center;gap:11px}.memberCardLogo{display:grid;place-items:center;width:50px;height:38px;border-radius:13px;background:linear-gradient(135deg,#22dfff,#7768ff 58%,#d75dff);box-shadow:0 9px 25px rgba(36,169,255,.30);font-size:15px;font-weight:1000;letter-spacing:-.5px;color:#fff}.memberCardBrand b{display:block;font-size:15px;letter-spacing:1.7px}.memberCardBrand small{display:block;margin-top:2px;color:#9fc0dd;font-size:8px;font-weight:800;letter-spacing:2.1px}.memberCardClose{display:grid;place-items:center;width:42px;height:42px;border-radius:15px;border:1px solid rgba(133,220,255,.22);background:rgba(7,25,48,.62);color:#d7f5ff;font-size:25px;line-height:1}
+.memberCardIdentity{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:13px;margin-top:25px;padding:15px;border:1px solid rgba(158,220,255,.15);border-radius:22px;background:linear-gradient(135deg,rgba(255,255,255,.085),rgba(255,255,255,.025));box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.memberCardAvatar{width:60px;height:60px;border-radius:19px;display:grid;place-items:center;overflow:hidden;background:linear-gradient(135deg,#26dfff,#865fff 62%,#e05cff);border:2px solid rgba(205,248,255,.70);box-shadow:0 0 0 4px rgba(37,207,255,.10),0 11px 25px rgba(0,0,0,.28);font-size:18px;font-weight:1000;color:white}.memberCardIdentityText{min-width:0}.memberCardName{font-size:24px;font-weight:1000;line-height:1.08;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.memberId{margin-top:6px;font-size:10px!important;letter-spacing:1.7px!important;color:#a9c9e8!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.memberCardStatus{align-self:start;padding:6px 9px;border:1px solid rgba(82,244,185,.34);border-radius:999px;background:rgba(37,196,137,.14);color:#70f4bd;font-size:9px;font-weight:950;letter-spacing:.8px}.memberCardStatus.vip{border-color:rgba(255,214,107,.40);background:rgba(255,184,70,.13);color:#ffe08b}
+.memberCardInfoGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.memberInfoCell{min-width:0;padding:13px 14px;border-radius:18px;border:1px solid rgba(158,220,255,.13);background:rgba(5,20,42,.34)}.memberInfoCell span{display:block;color:#92aec9;font-size:9px;font-weight:850;letter-spacing:1.2px}.memberInfoCell b{display:block;margin-top:6px;color:#f6fbff;font-size:18px;font-weight:1000}.memberInfoWide{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:10px}.memberInfoWide b{margin-top:0;font-size:15px}
+.memberCardSectionTitle{display:flex;align-items:center;gap:10px;margin:17px 1px 9px;color:#a8c9e4;font-size:9px;font-weight:900;letter-spacing:1.5px}.memberCardSectionTitle i{height:1px;flex:1;background:linear-gradient(90deg,rgba(104,220,255,.38),transparent)}.memberAchievementRow{gap:7px!important;max-height:96px;overflow:auto;padding-bottom:2px}.memberAchievementRow .achievement{padding:7px 10px!important;border:1px solid rgba(165,220,255,.15);background:rgba(255,255,255,.07)!important;color:#e8f7ff;font-size:10px!important;font-weight:750;backdrop-filter:blur(9px)}
+.memberCardFooter{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:17px;padding-top:13px;border-top:1px solid rgba(176,224,255,.13);color:#8faec9;font-size:8px;font-weight:900;letter-spacing:1.6px}.memberBarcode{width:100px;height:24px;opacity:.66;background:repeating-linear-gradient(90deg,#d9f7ff 0 2px,transparent 2px 4px,#d9f7ff 4px 5px,transparent 5px 8px,#d9f7ff 8px 11px,transparent 11px 13px);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+@media(max-width:360px){.memberCardDigital{padding:17px!important;border-radius:25px!important}.memberCardIdentity{grid-template-columns:auto minmax(0,1fr);padding:12px}.memberCardStatus{grid-column:2;justify-self:start}.memberCardName{font-size:21px}.memberCardAvatar{width:54px;height:54px}.memberInfoCell{padding:11px}.memberCardFooter{display:none}}
+
+</style>
+
+  <link rel="stylesheet" href="community-v2.css?v=50001">
+  <link rel="stylesheet" href="m4x-web.css?v=50013">
+  <link rel="stylesheet" href="theme-manager-4911.css?v=50001">
+  <link rel="stylesheet" href="m4x-ota.css?v=50014">
+</head>
+<body><div id="birthdayDecor" class="birthdayDecor hidden"></div>
+<section class="auth" id="authScreen"><div class="authCard glass liquid"><div class="authLogo">M4X</div><h2 style="text-align:center;margin:4px 0">M4X THEME</h2><p class="muted" style="text-align:center">Kính lỏng · Theme · Nhiệm vụ · Điểm thưởng</p><div class="authTabs"><button id="loginTab" class="active" onclick="switchAuth('login')">Đăng nhập</button><button id="registerTab" onclick="switchAuth('register')">Đăng ký</button></div><div id="loginForm" class="formGap"><input class="field" id="loginUser" placeholder="Tên đăng nhập"><input class="field" id="loginPass" type="password" placeholder="Mật khẩu"><button class="primary" onclick="login()">Đăng nhập</button></div><div id="registerForm" class="formGap hidden"><input class="field" id="regName" placeholder="Tên hiển thị"><input class="field" id="regUser" placeholder="Tên đăng nhập"><input class="field" id="regPass" type="password" placeholder="Mật khẩu từ 6 ký tự"><input class="field" id="regReferral" placeholder="Mã giới thiệu (không bắt buộc)"><button class="primary" onclick="register()">Tạo tài khoản</button></div><p class="hint">Tài khoản, điểm và Giftcode được đồng bộ trực tuyến.</p></div></section>
+
+<main class="app">
+<header><div class="brand"><span>M4X</span> THEME</div><div class="actions"><button class="iconbtn" onclick="showPage('chat')">💬</button><button class="iconbtn" onclick="focusSearch()">⌕</button></div></header>
+<section id="homePage" class="page">
+ <section class="techHero" id="featuredHero">
+  <img id="featuredThemeImage" class="techHeroImage" src="assets/theme-placeholder.svg" alt="Theme nổi bật" onerror="imageFallback(this)">
+  <div class="techHeroCopy">
+   <span class="techEyebrow">THEME NỔI BẬT</span>
+   <h1 id="featuredThemeName">M4X CYBER</h1>
+   <p id="featuredThemeMeta" class="techHeroMeta">Đang tải theme nổi bật…</p>
+   <button class="primary techHeroButton" onclick="openFeaturedTheme()">KHÁM PHÁ NGAY →</button>
+  </div>
+  <div class="techHeroDots"><i></i><i></i><i></i></div>
+ </section>
+ <div class="notice glass"><span>▣</span><b id="announcement">Chào mừng bạn đến với M4X THEME</b></div>
+ <div class="techQuickGrid">
+  <button class="techQuick" onclick="showPage('missions')"><strong>▣</strong><span>Nhiệm vụ</span></button>
+  <button class="techQuick" onclick="doTask('lucky')"><strong>◉</strong><span>Vòng quay</span></button>
+  <button class="techQuick" onclick="showPage('shop')"><strong>♛</strong><span>VIP</span></button>
+  <button class="techQuick" onclick="openGiftCode()"><strong>◇</strong><span>Giftcode</span></button>
+  <button class="techQuick" onclick="showPage('member')"><strong>⌁</strong><span>Sự kiện</span></button>
+  <button class="techQuick techQuickWeb" onclick="showPage('web')"><strong>◎</strong><span>M4X Web</span></button>
+ </div>
+ <div class="search"><input id="q" placeholder="Tìm theme bạn thích…" oninput="scheduleHomeRender()"></div>
+ <div class="chips" id="chips"></div>
+ <div class="section"><h3>Theme nổi bật</h3><small id="resultCount"></small></div>
+ <div class="grid" id="grid"></div>
+</section>
+<section id="categoryPage" class="page hidden"><h2 class="pageTitle">Danh mục</h2><p class="pageSub">HyperOS, MIUI, AMOLED và nhiều hơn</p><div class="chips" id="categoryChips"></div><div class="section"><h3 id="categoryTitle">Tất cả</h3></div><div class="grid" id="categoryGrid"></div></section>
+<section id="missionsPage" class="page hidden"><h2 class="pageTitle">Nhiệm vụ</h2><p class="pageSub">Hoàn thành nhiệm vụ để nhận điểm</p><div class="wallet glass liquid"><div class="row"><div><div class="muted">Số dư</div><div class="points"><span id="walletPoints">0</span> điểm</div></div><div style="font-size:40px">◆</div></div><div class="progress" style="margin-top:14px"><i id="levelBar"></i></div><div class="row" style="margin-top:8px"><span class="muted" id="levelName"></span><span class="muted" id="nextLevel"></span></div></div><div class="section"><h3>Nhiệm vụ hôm nay</h3></div><div class="list" id="taskList"></div><div class="section"><h3>Lịch sử điểm</h3></div><div class="list" id="pointHistory"></div></section>
+
+<section id="shopPage" class="page hidden"><h2 class="pageTitle">Cửa hàng điểm</h2><p class="pageSub">Kho vật phẩm cao cấp để tiêu điểm và nâng cấp tài khoản</p><div class="wallet glass liquid"><div class="row"><div><div class="muted">Số dư hiện tại</div><div class="points"><span id="shopBalance">0</span> điểm</div></div><div style="font-size:40px">🛍</div></div><div id="vipStatusText" class="muted" style="margin-top:9px"></div></div><div id="birthdayDiscountBanner" class="notice glass hidden"><span>🎂</span><b>Giảm 40% toàn bộ vật phẩm hôm nay · Mảnh mã: <span class="clueFragment">04</span></b></div><div id="shopGroups" class="shopGroups"></div><div class="section"><h3>Top đại gia tháng</h3></div><div id="leaderboardList" class="leaderboard glass"><div class="empty">Đang tải bảng xếp hạng…</div></div><div class="section"><h3>Yêu cầu theme của tôi</h3></div><div id="myRequestList" class="requestList"><div class="empty">Chưa có yêu cầu</div></div><div class="section"><h3>Chuyển điểm</h3></div><div class="transferBox glass"><input class="field" id="transferUsername" placeholder="Tên đăng nhập người nhận"><input class="field" id="transferAmount" type="number" min="100" max="100000" placeholder="Số điểm từ 100–100.000"><div class="transferNote">Phí hệ thống 20% được trừ thêm từ người gửi.</div><button class="primary" onclick="transferPoints()">Chuyển điểm</button></div></section>
+<section id="chatPage" class="page hidden c2-page">
+<button id="m4xWebShortcut" type="button" onclick="showPage('web')">
+  🌐 M4X Web · Mở website trong app
+</button>
+
+  <div class="c2-head">
+    <div><h2>Cộng đồng 2.0</h2><p>Bài viết, bình luận, reaction và theo dõi tác giả</p></div>
+    <div class="c2-head-actions"><button class="c2-icon" onclick="M4XCommunityV2.openMyProfile()" aria-label="Hồ sơ">◎</button><button class="c2-icon" onclick="showPage('web')" aria-label="M4X Web">🌐</button><button class="c2-icon" onclick="M4XCommunityV2.refresh()" aria-label="Làm mới">↻</button></div>
+  </div>
+  <div class="c2-tabs">
+    <button id="c2TabNew" class="c2-tab active" onclick="M4XCommunityV2.switchMode('new')">Mới nhất</button>
+    <button id="c2TabFollowing" class="c2-tab" onclick="M4XCommunityV2.switchMode('following')">Đang theo dõi</button>
+    <button id="c2TabTrending" class="c2-tab" onclick="M4XCommunityV2.switchMode('trending')">Thịnh hành</button>
+  </div>
+  <div id="c2Composer" class="c2-composer glass">
+    <div class="c2-compose-top"><div id="c2MyAvatar" class="c2-avatar c2-avatar-editable" role="button" title="Đổi ảnh đại diện" onclick="M4XCommunityV2.chooseAvatar()">M</div><textarea id="c2PostText" class="c2-compose-text" maxlength="4000" placeholder="Chia sẻ theme, mẹo HyperOS hoặc màn hình của bạn…"></textarea></div>
+    <div id="c2ComposeMore" class="c2-compose-more">
+  <input id="c2PostImageInput" class="hidden" type="file" accept="image/*" multiple
+         onchange="M4XCommunityV2.handlePostImages(event)">
+  <div id="c2UploadStatus" class="c2-upload-status hidden"></div>
+  <div id="c2PostImagePreview" class="c2-upload-preview"></div>
+  <input id="c2MediaUrls" placeholder="Hoặc dán link ảnh HTTPS, mỗi dòng một ảnh">
+  <input id="c2ThemeId" placeholder="ID theme đính kèm (không bắt buộc)">
+  <input id="c2Tags" placeholder="Thẻ: HyperOS, Dark, Anime…">
+</div>
+    <div class="c2-compose-actions"><div class="c2-compose-tools"><button class="c2-mini" type="button" onclick="M4XCommunityV2.choosePostImages()">＋ Chọn ảnh từ máy</button><button class="c2-mini" type="button" onclick="M4XCommunityV2.toggleComposeMore()">🎨 Theme / Link</button></div><button id="c2PublishBtn" class="c2-primary" onclick="M4XCommunityV2.createPost()">Đăng bài</button></div>
+    <div class="c2-toast-note">Không đăng nội dung vi phạm bản quyền hoặc thông tin riêng tư.</div>
+  </div>
+  <div id="c2Feed" class="c2-feed"><div class="c2-loading">Đang tải bảng tin…</div></div>
+  <button id="c2LoadMore" class="c2-loadmore hidden" onclick="M4XCommunityV2.loadMore()">Tải thêm</button>
+  <div id="c2Detail" class="c2-detail hidden">
+    <div class="c2-detail-head"><button class="c2-icon" onclick="M4XCommunityV2.closeDetail()">←</button><h3>Chi tiết bài viết</h3><button class="c2-icon" onclick="M4XCommunityV2.refreshDetail()">↻</button></div>
+    <div id="c2DetailPost"></div>
+    <div id="c2Comments" class="c2-comments"></div>
+    <button id="c2MoreComments" class="c2-loadmore hidden" onclick="M4XCommunityV2.loadMoreComments()">Tải thêm bình luận</button>
+    <div class="c2-comment-box"><div id="c2Replying" class="c2-replying hidden"></div><div class="c2-comment-row"><textarea id="c2CommentText" maxlength="1200" placeholder="Viết bình luận…"></textarea><button onclick="M4XCommunityV2.addComment()">➤</button></div></div>
+  </div>
+</section>
+
+
+<section id="creatorPage" class="page hidden">
+ <h2 class="pageTitle" data-i18n="creator_hub">Trung tâm tác giả</h2><p class="pageSub" data-i18n="creator_sub">Mời bạn bè, đăng theme và nhận điểm khi có lượt tải</p>
+ <div class="glass" style="padding:16px;margin-top:14px"><div class="row"><b data-i18n="referral">Mã giới thiệu bạn bè</b><span class="reward">+1.000đ</span></div><div id="referralCodeText" class="referralCode">...</div><p id="referralInfoText" class="muted"></p><div class="row2"><button class="secondary" onclick="copyReferralCode()" data-i18n="copy_code">Sao chép mã</button><button class="primary" onclick="claimReferralReward()" data-i18n="claim_reward">Nhận quà đủ 3 ngày</button></div></div>
+ <div class="section"><h3 data-i18n="submit_theme">Đăng Theme từ app</h3></div>
+ <div class="creatorForm glass"><input class="field" id="submitThemeName" placeholder="Tên theme"><input class="field" id="submitThemeCategory" placeholder="Danh mục, ví dụ HyperOS"><textarea class="field" id="submitThemeDescription" placeholder="Mô tả theme"></textarea><input class="field" id="submitThemePrice" type="number" min="0" max="500000" placeholder="Giá mở khóa bằng điểm">
+ <label class="fileNote">Ảnh xem trước tối đa 3 MB</label><input class="field" id="submitPreviewFile" type="file" accept="image/*"><input class="field" id="submitPreviewUrl" placeholder="Hoặc link ảnh Google Drive">
+ <label class="fileNote">File theme tối đa 12 MB; file lớn hãy dùng Drive</label><input class="field" id="submitThemeFile" type="file" accept=".mtz,.zip,.rar,.7z,application/octet-stream"><input class="field" id="submitThemeUrl" placeholder="Hoặc link file Google Drive"><button class="primary" id="submitThemeBtn" onclick="submitThemeFromApp()" data-i18n="send_review">Gửi Admin duyệt</button></div>
+ <div class="section"><h3 data-i18n="my_submissions">Theme tôi đã gửi</h3></div><div id="mySubmissionList"><div class="empty">Chưa có theme gửi lên</div></div>
+</section>
+<section id="memberPage" class="page hidden">
+ <h2 class="pageTitle" data-i18n="member_center">Thành viên M4X</h2><p class="pageSub">Quest Map, BXH tuần, quà đăng nhập và sự kiện</p>
+ <div id="birthdayWeekBox"></div>
+ <div class="featureGrid"><div class="featureCard glass" onclick="claimDailyGift()"><div style="font-size:30px">🎁</div><b data-i18n="daily_random">Quà đăng nhập ngẫu nhiên</b><span id="dailyGiftStatus">Đang tải…</span></div><div class="featureCard glass" onclick="openMemberCard()"><div style="font-size:30px">🪪</div><b data-i18n="member_card">Thẻ thành viên số</b><span data-i18n="view_card">Xem ID, VIP và thành tích</span></div></div>
+ <div class="section"><h3>🗺️ M4X Quest Map</h3><small>Rương + Boss cuối tuần</small></div><div id="questMapBox" class="questMap"><div class="empty">Đang tải bản đồ…</div></div>
+ <div class="section"><h3>🏆 Top tuần</h3><small>5.000–50.000 điểm</small></div>
+ <div class="rankTabs"><button id="rankMemberTab" class="secondary active" onclick="showRankCategory('member')">Thành viên</button><button id="rankCreatorTab" class="secondary" onclick="showRankCategory('creator')">Tác giả</button></div>
+ <div id="weeklyRankBox" class="weeklyRankCard glass"><div class="empty">Đang tải bảng xếp hạng…</div></div>
+ <div id="seasonEventBox"></div><div class="section"><h3 data-i18n="weekly_tasks">Nhiệm vụ tuần</h3></div><div id="weeklyTaskList"><div class="empty">Đang tải…</div></div>
+ <div class="section"><h3 data-i18n="lifetime_spent">Mốc tiêu điểm trọn đời</h3></div><div id="milestoneBox" class="glass" style="padding:15px"></div>
+ <div class="section"><h3 data-i18n="language">Ngôn ngữ</h3></div><div class="langSwitch"><button class="secondary" onclick="setLanguage('vi')">🇻🇳 Tiếng Việt</button><button class="secondary" onclick="setLanguage('en')">🇬🇧 English</button></div>
+</section>
+
+<section id="favoritePage" class="page hidden"><h2 class="pageTitle">Yêu thích</h2><p class="pageSub">Theme bạn đã lưu</p><div class="grid" id="favoriteGrid"></div></section>
+<section id="profilePage" class="page hidden"><h2 class="pageTitle">Hồ sơ cá nhân</h2>
+<div class="profileHeroPro glass liquid">
+ <div class="profileTop"><div class="avatarWrap"><div class="avatar" id="avatar">M4</div><button class="avatarEdit" onclick="editAvatar()">✎</button></div>
+ <div class="profileIdentity"><h3 id="profileName">Người dùng</h3><div class="muted" id="profileUser">@user</div><div id="profileTitleText" class="profileTitle hidden"></div><div id="profileLevelText" class="profileLevel">LV.1 · Thành viên M4X</div></div></div>
+ <div id="profileBadges" class="profileBadges" style="margin-top:14px"></div><div id="adminRoleBadge" class="adminBadge hidden">ADMIN</div><div id="vipRoleBadge" class="vipBadge hidden">VIP</div><div id="goldRoleBadge" class="adminBadge hidden">HUY HIỆU VÀNG</div>
+ <div class="profileStats6"><div class="stat glass"><b id="favStat">0</b><span class="muted">Yêu thích</span></div><div class="stat glass"><b id="downStat">0</b><span class="muted">Đã tải</span></div><div class="stat glass"><b id="pointStat">0</b><span class="muted">Điểm</span></div><div class="stat glass"><b id="themePostedStat">0</b><span class="muted">Theme đăng</span></div><div class="stat glass"><b id="creatorDownloadStat">0</b><span class="muted">Lượt tải</span></div><div class="stat glass"><b id="badgeStat">0</b><span class="muted">Huy hiệu</span></div></div>
+</div>
+<div id="profileInfoStrip" class="profileInfoStrip glass"><div class="muted">Đang tải thông tin hồ sơ…</div></div>
+<div class="settings glass"><div class="setting" onclick="showPage('inventory')"><span>🎒 Kho vật phẩm cá nhân</span><b>›</b></div><div class="setting" onclick="showPage('shop')"><span>Cửa hàng điểm</span><b>›</b></div><div class="setting" onclick="showPage('creator')"><span>Trung tâm tác giả & mã giới thiệu</span><b>›</b></div><div class="setting" onclick="showPage('member')"><span>Quest Map, BXH và sự kiện</span><b>›</b></div><div class="setting" onclick="showPage('chat')"><span>Phòng chat M4X</span><b>›</b></div>
+<div class="setting" onclick="showPage('web')">
+  <span>🌐 M4X Web · Chế độ toàn trang trong app</span>
+  <b>›</b>
+</div>
+<div class="setting" onclick="openGiftCode()"><span>Nhập Giftcode</span><b>›</b></div><div id="birthdayClueProfile" class="setting hidden"><span>🎂 Mảnh mã sinh nhật</span><b class="clueFragment">M4X</b></div><div id="adminSetting" class="setting hidden" onclick="openAdminPanel()"><span>Quản trị người dùng</span><b>›</b></div><div class="setting" onclick="showPage('support')"><span>Ủng hộ Admin</span><b>›</b></div><div class="setting" onclick="openExternal(appConfig.adminTelegram)"><span>Liên hệ Admin</span><b>›</b></div><div class="setting" onclick="openExternal(appConfig.channelTelegram)"><span>Telegram Channel</span><b>›</b></div><div class="setting"><span>Phiên bản</span><b id="versionText">1.1</b></div><div class="setting" onclick="M4XOta.open();M4XOta.check(false)"><span>Cập nhật trực tuyến</span><b id="m4xOtaSettingState">Kiểm tra ›</b></div><div class="setting" onclick="logout()" style="color:var(--danger)"><span>Đăng xuất</span><b>›</b></div></div></section>
+
+<section id="inventoryPage" class="page hidden"><h2 class="pageTitle">Kho vật phẩm</h2><p class="pageSub">Khung avatar, màu tên, hiệu ứng, VIP và vật phẩm đã mua</p><div id="inventoryStatusBox" class="wallet glass liquid" style="margin:14px 0"></div><div id="inventoryGrid" class="inventoryGrid"><div class="empty">Đang tải kho vật phẩm…</div></div></section>
+<section id="supportPage" class="page hidden"><h2 class="pageTitle">Ủng hộ Admin</h2><p class="pageSub">Cảm ơn bạn đã đồng hành cùng M4X THEME</p><div class="support glass liquid"><h3 style="margin-top:0">Quét mã VietQR</h3><p class="muted">Nguyễn Minh Dân · VietinBank</p><img id="donateQr" class="supportQr" src="assets/donate-qr.jpg" alt="Mã QR ủng hộ"><div class="supportButtons"><button class="secondary" onclick="openExternal(appConfig.adminTelegram)">Liên hệ Admin</button><button class="primary" onclick="openExternal(appConfig.channelTelegram)">Kênh Telegram</button></div></div></section>
+<section id="webPage" class="page hidden">
+  <button class="secondary webBack" type="button" onclick="showPage('chat')">← Quay lại Cộng đồng</button>
+
+  <div class="webHero">
+    <div class="webHeroTop">
+      <div class="webHeroIcon">🌐</div>
+      <div><h2>M4X Web</h2><p>Dán link website để mở trực tiếp toàn trang trong ứng dụng, không dùng khung iframe.</p></div>
+    </div>
+  </div>
+
+  <div class="webInputCard">
+    <div class="webInputGrid">
+      <input id="webTitleInput" class="field" maxlength="80" placeholder="Tên trang web (không bắt buộc)">
+      <input id="webUrlInput" class="field" inputmode="url" autocapitalize="none" autocomplete="url" placeholder="Dán link web, ví dụ https://example.com">
+      <div class="webInputActions">
+        <button class="primary" type="button" onclick="openWebFromInput(false)">Mở trong app</button>
+        <button class="secondary" type="button" onclick="openWebFromInput(true)">Mở và lưu</button>
+      </div>
+    </div>
+    <div class="webNote">Website tự khớp màn hình điện thoại. Thanh trình duyệt gọn, không đè lên đồng hồ; chạm tên miền để nhập địa chỉ khác.</div>
+  </div>
+
+  <div class="webInfoCard">
+    <div class="webInfoIcon">▣</div>
+    <div><b>Trình duyệt M4X an toàn</b><p>Website chạy trong WebView riêng. Thanh trạng thái, thanh điều hướng và nội dung được căn vừa màn hình.</p></div>
+  </div>
+
+  <div class="section"><h3>Mục web mặc định</h3><small id="defaultWebsiteCount">3 mục đang bật</small></div>
+  <div id="defaultWebsiteAdminNote" class="webAdminNote hidden"></div>
+  <div id="defaultWebsiteList" class="webList"><div class="empty">Đang tải mục mặc định…</div></div>
+
+  <div class="section webSavedSection defaultAppSectionHead">
+    <h3>Ứng dụng mặc định</h3>
+    <small id="defaultAppCount">0/0 ứng dụng đang bật</small>
+  </div>
+  <div id="defaultAppAdminNote" class="webAdminNote hidden"></div>
+  <button id="defaultAppAddButton" class="primary defaultAppAddButton hidden" type="button" onclick="openDefaultAppEditor()">＋ Thêm ứng dụng</button>
+  <div id="defaultAppList" class="webList"><div class="empty">Đang tải ứng dụng mặc định…</div></div>
+
+  <div class="section webSavedSection"><h3>Website đã lưu</h3><small id="savedWebsiteCount">0 trang</small></div>
+  <div id="savedWebsiteList" class="webList"><div class="empty">Chưa có website đã lưu</div></div>
+</section>
+</main>
+
+<div class="modal hidden" id="defaultAppEditorModal">
+  <div class="modalCard glass defaultAppModalCard">
+    <div class="row">
+      <div><h3 id="defaultAppEditorTitle" style="margin:0">Thêm ứng dụng mặc định</h3><p class="muted" style="margin:5px 0 0">Chỉ Admin có quyền quản lý mục này</p></div>
+      <button class="iconbtn" type="button" onclick="closeDefaultAppEditor()">×</button>
+    </div>
+    <div class="defaultAppEditorGrid">
+      <label>Tên ứng dụng<input id="defaultAppName" class="field" maxlength="70" placeholder="Ví dụ: Telegram"></label>
+      <label>Biểu tượng<input id="defaultAppIcon" class="field" maxlength="500" placeholder="Emoji 📱 hoặc link ảnh https://..."></label>
+      <label>Tên gói Android<input id="defaultAppPackage" class="field" autocapitalize="none" placeholder="Ví dụ: org.telegram.messenger"></label>
+      <label>Link mở / deep link<input id="defaultAppOpenUrl" class="field" autocapitalize="none" placeholder="Ví dụ: tg://resolve?domain=..."></label>
+      <label>Link cài đặt dự phòng<input id="defaultAppDownloadUrl" class="field" autocapitalize="none" placeholder="Play Store, website hoặc link APK"></label>
+    </div>
+    <div class="webNote">Khi đã cài, app sẽ được mở bằng tên gói. Nếu chưa cài, M4X dùng link dự phòng.</div>
+    <div class="modalActions"><button class="secondary" type="button" onclick="closeDefaultAppEditor()">Hủy</button><button class="primary" type="button" onclick="saveDefaultAppEditor()">Lưu ứng dụng</button></div>
+  </div>
+</div>
+
+<nav><button data-page="home" class="activeNav" onclick="showPage('home')"><span class="navicon">⌂</span>Trang chủ</button><button data-page="category" onclick="showPage('category')"><span class="navicon">▦</span>Danh mục</button><button data-page="missions" onclick="showPage('missions')"><span class="navicon">★</span>Nhiệm vụ</button><button data-page="favorite" onclick="showPage('favorite')"><span class="navicon">♡</span>Yêu thích</button><button data-page="profile" onclick="showPage('profile')"><span class="navicon">○</span>Tài khoản</button></nav>
+
+<section class="detail" id="detail"><div class="top"><button class="iconbtn" onclick="closeDetail()">←</button><button class="iconbtn" onclick="shareCurrent()">↗</button></div><div id="detailBody"></div><div class="downloadbar"><button class="favBig" id="favBig">♡</button><button class="primary" id="downloadBtn">Tải xuống</button></div></section>
+<section class="adminPanel" id="adminPanel">
+  <div class="top"><button class="iconbtn" onclick="closeAdminPanel()">←</button><button class="iconbtn" onclick="refreshAdmin()">↻</button></div>
+  <h2 class="pageTitle">Quản trị M4X</h2>
+  <p class="pageSub">Người dùng, Giftcode và quản lý Theme</p>
+  <div class="adminStats" id="adminStats"></div>
+  <div class="adminTabs"><button id="adminUsersTab" class="active" onclick="showAdminTab('users')">Người dùng</button><button id="adminGiftsTab" onclick="showAdminTab('gifts')">Giftcode</button><button id="adminRequestsTab" onclick="showAdminTab('requests')">Yêu cầu</button><button id="adminSubmissionsTab" onclick="showAdminTab('submissions')">Theme gửi</button><button id="adminThemesTab" onclick="showAdminTab('themes')">Theme app</button></div>
+  <section id="adminUsersSection">
+    <div class="search"><input id="adminUserSearch" placeholder="Tìm tên đăng nhập..." oninput="debouncedAdminSearch()"></div>
+    <div id="adminUserList"></div>
+  </section>
+  <section id="adminGiftsSection" class="hidden">
+    <div class="adminForm glass">
+      <input class="field" id="giftAdminCode" placeholder="Mã, ví dụ M4X100">
+      <div class="row2"><input class="field" id="giftAdminPoints" type="number" min="1" placeholder="Số điểm"><input class="field" id="giftAdminMaxUses" type="number" min="0" placeholder="Tổng lượt (0 = vô hạn)"></div>
+      <div class="row2"><input class="field" id="giftAdminPerUser" type="number" min="1" value="1" placeholder="Lượt/người"><input class="field" id="giftAdminExpiry" type="date"></div>
+      <input class="field" id="giftAdminNote" placeholder="Ghi chú">
+      <button class="primary" onclick="adminCreateGiftCode()">Tạo Giftcode</button>
+    </div>
+    <div id="adminGiftList"></div>
+  </section>
+  <section id="adminRequestsSection" class="hidden"><div id="adminRequestList"><div class="empty">Đang tải yêu cầu…</div></div></section><section id="adminSubmissionsSection" class="hidden"><div id="adminSubmissionList"><div class="empty">Đang tải theme gửi lên…</div></div></section><section id="adminThemesSection" class="hidden"><div class="adminThemeToolbar"><div class="search"><input id="adminThemeSearch" placeholder="Tìm tên, tác giả hoặc ID theme…" oninput="debouncedAdminThemeSearch()"></div><button class="smallBtn" onclick="loadAdminPublishedThemes()">↻</button></div><div id="adminThemeCount" class="muted" style="margin:0 0 10px"></div><div id="adminThemeList"><div class="empty">Đang tải theme trong app…</div></div></section>
+</section>
+<div class="modal hidden" id="adminThemeEditModal"><div class="modalCard glass" style="max-height:88vh;overflow:auto">
+ <div class="row"><div><h3 style="margin:0">Chỉnh sửa theme</h3><p id="adminThemeEditIdLabel" class="muted" style="margin:5px 0 0"></p></div><button class="iconbtn" onclick="closeAdminThemeEditor()">×</button></div>
+ <img id="adminThemeEditPreviewImg" class="adminThemePreview" src="assets/theme-placeholder.svg" alt="Ảnh theme" style="margin-top:12px">
+ <div class="adminThemeEditorGrid" style="margin-top:12px">
+  <input id="adminThemeEditName" class="field wide" placeholder="Tên theme">
+  <input id="adminThemeEditAuthor" class="field" placeholder="Tác giả hiển thị">
+  <input id="adminThemeEditCategory" class="field" placeholder="Danh mục">
+  <input id="adminThemeEditMode" class="field" placeholder="Chế độ">
+  <input id="adminThemeEditSize" class="field" placeholder="Dung lượng / nguồn">
+  <input id="adminThemeEditRating" class="field" type="number" min="0" max="5" step="0.1" placeholder="Điểm sao">
+  <input id="adminThemeEditVersion" class="field" placeholder="Phiên bản">
+  <input id="adminThemeEditPrice" class="field" type="number" min="0" placeholder="Giá điểm">
+  <input id="adminThemeEditPassword" class="field" placeholder="Mật khẩu theme">
+  <input id="adminThemeEditPreview" class="field wide" placeholder="Link ảnh xem trước" oninput="previewAdminThemeImage()">
+  <input id="adminThemeEditDownload" class="field wide" placeholder="Link tải theme">
+  <input id="adminThemeEditTags" class="field wide" placeholder="Tag, cách nhau bằng dấu phẩy">
+  <textarea id="adminThemeEditDescription" class="field wide" rows="4" placeholder="Mô tả theme"></textarea>
+ </div>
+ <div class="modalActions"><button class="secondary" onclick="closeAdminThemeEditor()">Hủy</button><button id="adminThemeSaveBtn" type="button" class="primary" onclick="saveAdminThemeEditor()">Lưu thay đổi</button></div>
+</div></div>
+<div class="modal hidden" id="giftModal"><div class="modalCard glass"><h3>Nhập Giftcode</h3><p class="muted">Nhập mã do Admin cung cấp để nhận điểm.</p><input class="field" id="giftCodeInput" placeholder="M4X..."><div class="modalActions"><button class="secondary" onclick="closeGiftCode()">Hủy</button><button class="primary" onclick="redeemGiftCode()">Nhận điểm</button></div></div></div>
+
+<div class="modal hidden" id="confirmModal"><div class="modalCard glass"><h3 id="modalTitle"></h3><p class="muted" id="modalText"></p><div class="modalActions"><button class="secondary" onclick="closeModal()">Hủy</button><button class="primary" id="modalConfirm">Xác nhận</button></div></div></div>
+
+
+
+<div class="modal hidden" id="avatarModal"><div class="modalCard glass">
+ <div class="row"><div><h3 style="margin:0">Ảnh đại diện</h3><p class="muted" style="margin:5px 0 0">Chọn ảnh trực tiếp từ điện thoại</p></div><button class="iconbtn" onclick="closeAvatarModal()">×</button></div>
+ <div class="avatarActionGrid">
+  <button class="primary" onclick="chooseAvatarFromPhone()">▣ Chọn ảnh từ thư viện</button>
+  <button class="secondary" onclick="chooseAvatarByLink()">⌁ Dán link ảnh HTTPS</button>
+  <button class="secondary" onclick="removeAvatarImage()">○ Dùng avatar chữ cái</button>
+ </div>
+ <div class="avatarHelp">Ảnh được cắt vuông và nén tự động để tải nhanh. Không làm mất tài khoản, điểm hoặc vật phẩm.</div>
+ <input id="avatarFileInput" class="hidden" type="file" accept="image/*" onchange="handleAvatarFile(event)">
+</div></div>
+<div class="modal hidden" id="memberCardModal">
+ <div class="modalCard memberCardDigital">
+  <div class="memberCardOrb memberCardOrbOne"></div>
+  <div class="memberCardOrb memberCardOrbTwo"></div>
+  <div class="memberCardHeader">
+   <div class="memberCardBrand"><span class="memberCardLogo">M4X</span><div><b>MEMBER PASS</b><small>DIGITAL IDENTITY</small></div></div>
+   <button class="memberCardClose" onclick="memberCardModal.classList.add('hidden')" aria-label="Đóng">×</button>
+  </div>
+  <div class="memberCardIdentity">
+   <div id="memberCardAvatar" class="memberCardAvatar">M4</div>
+   <div class="memberCardIdentityText"><div id="memberCardName" class="memberCardName"></div><div id="memberCardUser" class="memberId"></div></div>
+   <span id="memberCardStatus" class="memberCardStatus">ACTIVE</span>
+  </div>
+  <div class="memberCardInfoGrid">
+   <div class="memberInfoCell"><span>CẤP ĐỘ</span><b id="memberCardLevel"></b></div>
+   <div class="memberInfoCell"><span>THÀNH VIÊN</span><b id="memberCardVip"></b></div>
+   <div class="memberInfoCell memberInfoWide"><span>NGÀY THAM GIA</span><b id="memberCardJoined"></b></div>
+  </div>
+  <div class="memberCardSectionTitle"><span>THÀNH TÍCH</span><i></i></div>
+  <div id="memberCardAchievements" class="achievementRow memberAchievementRow"></div>
+  <div class="memberCardFooter"><span>VALID M4X MEMBER</span><div class="memberBarcode" aria-hidden="true"></div></div>
+ </div>
+</div>
+<div class="boxReveal hidden" id="boxReveal"><div><div class="boxOrb" id="boxOrb">🎁</div><div class="boxResult" id="boxResult">Đang mở…</div></div></div>
+
+<button id="airdropFloat" class="airdropFloat hidden" onclick="claimAirdrop()">🎁 AIRDROP <span id="airdropRewardText"></span></button><div class="toast" id="toast"></div>
+
+<script>
+let themes=[],appConfig={
+ adminTelegram:'https://t.me/bengtayy',
+ channelTelegram:'https://t.me/m4xthemestore',
+ announcement:'Chào mừng bạn đến M4X THEME 4.1',
+ donateQr:'assets/donate-qr.jpg',
+ onlineThemesUrl:'https://drive.google.com/uc?export=download&id=1Hh-BVzBGSmIG67BpTK5M-eMWR_yu4sOt',
+ onlineUserApiUrl:'https://script.google.com/macros/s/AKfycbzrjntTBpXTHQWrPyYAL2XU4wvqW9wnuFS01jPP8mbvwqFJfsu2940Zy3Vw8fmp4e5OqA/exec',
+ existingAdminUsernames:['minhdan']
+};
+let active='Tất cả',categoryActive='Tất cả',current=null,currentUser=null,cats=[];let lastMeRefresh=0,adminUsersCache=[],themeById=new Map(),homeRenderFrame=0;
+let apiWaiters={},adminSearchTimer=null,apiWarmPromise=null,authBusy=false,spinBusy=false,adminCurrentTab='users',monthlyTopUsername='',currentLang=localStorage.getItem('m4xLang')||'vi',selectedSticker='',reviewStars=5;let currentRankCategory='member',weeklyRankCache=null,activeAirdrop=null,airdropPollTimer=null,birthdayAudioCtx=null;
+const TASKS=[
+ {id:'daily',icon:'☀',title:'Điểm danh hằng ngày',desc:'Nhận điểm mỗi ngày',reward:10,type:'daily'},
+ {id:'lucky',icon:'🎰',title:'Vòng quay nhân phẩm',desc:'Mỗi lượt tốn 10 điểm · quay không giới hạn',rewardText:'Tới 250đ',type:'repeat'},
+ {id:'share',icon:'↗',title:'Chia sẻ ứng dụng',desc:'Chia sẻ M4X THEME',reward:15,type:'daily'},
+ {id:'fav2',icon:'♡',title:'Yêu thích 2 theme',desc:'Lưu 2 theme',reward:15,type:'daily',target:2},
+ {id:'download1',icon:'↓',title:'Tải 1 theme',desc:'Tải một theme bất kỳ',reward:10,type:'daily'},
+ {id:'unlockPaid',icon:'◆',title:'Mở khóa theme trả phí',desc:'Hoàn điểm một lần mỗi ngày',reward:10,type:'daily'},
+ {id:'chatDaily',icon:'💬',title:'Trò chuyện hôm nay',desc:'Gửi tin đầu tiên trong phòng chat',reward:3,type:'daily'},
+ {id:'telegram',icon:'➤',title:'Tham gia Telegram Channel',desc:'Theo dõi M4X THEME STORE',reward:20,type:'once'},
+ {id:'profile',icon:'○',title:'Hoàn thiện hồ sơ',desc:'Tạo tài khoản lần đầu',reward:20,type:'once'}
+];
+const SPIN_ODDS=[
+ {icon:'🏆',label:'250 điểm',chance:'0,5%'},{icon:'🥈',label:'200 điểm',chance:'1,5%'},
+ {icon:'🥉',label:'175 điểm',chance:'3%'},{icon:'⭐',label:'150 điểm',chance:'5%'},
+ {icon:'🎁',label:'70 điểm',chance:'10%'},{icon:'🎁',label:'50 điểm',chance:'15%'},
+ {icon:'💰',label:'10 điểm — hoàn vốn',chance:'40%'},{icon:'❌',label:'0 điểm',chance:'24%'},
+ {icon:'🍀',label:'Chúc bạn may mắn lần sau',chance:'1%'}
+];
+
+const STORE_ITEMS=[
+ {id:'vip1',group:'VIP & mở khóa',icon:'⚡',title:'VIP 1 ngày',desc:'Mở toàn bộ theme và huy hiệu VIP trong 24 giờ',cost:5000,type:'vip'},
+ {id:'vip7',group:'VIP & mở khóa',icon:'👑',title:'VIP 7 ngày',desc:'Mở toàn bộ theme và huy hiệu VIP trong 7 ngày',cost:25000,type:'vip'},
+ {id:'vip30',group:'VIP & mở khóa',icon:'💎',title:'VIP 30 ngày',desc:'Mở toàn bộ theme và huy hiệu VIP trong 30 ngày',cost:80000,type:'vip'},
+ {id:'vipForever',group:'VIP & mở khóa',icon:'♾',title:'VIP vĩnh viễn',desc:'Mở toàn bộ theme không giới hạn',cost:500000,type:'vip'},
+ {id:'themePass7',group:'VIP & mở khóa',icon:'🔓',title:'Mở theme 7 ngày',desc:'Mở toàn bộ theme 7 ngày, không kèm huy hiệu VIP',cost:40000,type:'themePass'},
+ {id:'themePass30',group:'VIP & mở khóa',icon:'🗝',title:'Mở theme 30 ngày',desc:'Mở toàn bộ theme 30 ngày, không kèm huy hiệu VIP',cost:120000,type:'themePass'},
+ {id:'memberSilver',group:'Cấp thành viên',icon:'🥈',title:'Thành viên Bạc',desc:'Nâng cấp cấp thành viên vĩnh viễn',cost:20000,type:'memberTier',value:'silver'},
+ {id:'memberGold',group:'Cấp thành viên',icon:'🥇',title:'Thành viên Vàng',desc:'Nâng cấp cấp thành viên vĩnh viễn',cost:100000,type:'memberTier',value:'gold'},
+ {id:'memberDiamond',group:'Cấp thành viên',icon:'💠',title:'Thành viên Kim Cương',desc:'Cấp thành viên cao nhất',cost:300000,type:'memberTier',value:'diamond'},
+ {id:'badgeGold',group:'Hồ sơ & chat',icon:'🏅',title:'Huy hiệu Vàng',desc:'Hiện huy hiệu Vàng trên hồ sơ và phòng chat',cost:20000,type:'badge',value:'gold'},
+ {id:'badgeDiamond',group:'Hồ sơ & chat',icon:'💎',title:'Huy hiệu Kim Cương',desc:'Huy hiệu cao cấp trên hồ sơ và phòng chat',cost:100000,type:'badge',value:'diamond'},
+ {id:'frameNeon',group:'Hồ sơ & chat',icon:'🌈',title:'Khung avatar Neon',desc:'Khung phát sáng trên ảnh đại diện',cost:50000,type:'frame',value:'neon'},
+ {id:'frameAnimated',group:'Hồ sơ & chat',icon:'🌀',title:'Khung avatar chuyển động',desc:'Khung đổi màu chuyển động',cost:150000,type:'frame',value:'animated'},
+ {id:'nameColor',group:'Hồ sơ & chat',icon:'🎨',title:'Màu tên phòng chat',desc:'Chọn một màu tên cao cấp',cost:30000,type:'nameColor'},
+ {id:'customTitle',group:'Hồ sơ & chat',icon:'🏷',title:'Danh hiệu tự chọn',desc:'Tạo dòng danh hiệu riêng dưới tên',cost:80000,type:'customTitle'},
+ {id:'limitedTitle',group:'Hồ sơ & chat',icon:'⏳',title:'Danh hiệu giới hạn tuần',desc:'Danh hiệu đổi theo từng tuần',cost:200000,type:'limitedTitle'},
+ {id:'rename',group:'Hồ sơ & chat',icon:'✎',title:'Đổi tên hiển thị',desc:'Đổi tên hồ sơ, không đổi username',cost:5000,type:'rename'},
+ {id:'iconStar',group:'Hồ sơ & chat',icon:'⭐',title:'Biểu tượng Ngôi sao',desc:'Hiện cạnh tên trong phòng chat',cost:30000,type:'nameIcon',value:'⭐'},
+ {id:'iconCrown',group:'Hồ sơ & chat',icon:'👑',title:'Biểu tượng Vương miện',desc:'Hiện cạnh tên trong phòng chat',cost:60000,type:'nameIcon',value:'👑'},
+ {id:'iconDiamond',group:'Hồ sơ & chat',icon:'💎',title:'Biểu tượng Kim cương',desc:'Hiện cạnh tên trong phòng chat',cost:100000,type:'nameIcon',value:'💎'},
+ {id:'effectRainbow',group:'Hồ sơ & chat',icon:'✨',title:'Hiệu ứng Rainbow',desc:'Hiệu ứng chuyển màu cho tin nhắn',cost:50000,type:'chatEffect',value:'rainbow'},
+ {id:'mysteryBox',group:'Trò chơi cao cấp',icon:'🎁',title:'Hộp quà bí ẩn',desc:'Có thể nhận điểm, VIP, huy hiệu hoặc khung',cost:10000,type:'mystery',repeat:true},
+ {id:'premiumSpin',group:'Trò chơi cao cấp',icon:'🎡',title:'Vòng quay cao cấp',desc:'Giải tới 25.000 điểm, VIP và huy hiệu',cost:5000,type:'premiumSpin',repeat:true},
+ {id:'themeRequest',group:'Dịch vụ Admin',icon:'🛠',title:'Yêu cầu tìm/chuyển theme',desc:'Gửi yêu cầu theme cho Admin xử lý',cost:25000,type:'request',repeat:true},
+ {id:'themePriority',group:'Dịch vụ Admin',icon:'🚀',title:'Yêu cầu theme ưu tiên',desc:'Đưa yêu cầu lên hàng ưu tiên',cost:50000,type:'request',repeat:true},
+ {id:'privateRoom',group:'Dịch vụ Admin',icon:'🔐',title:'Tạo phòng chat riêng',desc:'Nhận mã mời phòng riêng vĩnh viễn',cost:200000,type:'privateRoom'},
+ {id:'skinOcean',group:'Giao diện ứng dụng',icon:'🌊',title:'Giao diện Ocean',desc:'Tông xanh biển dịu mắt',cost:15000,type:'appSkin',value:'ocean'},
+ {id:'skinPurple',group:'Giao diện ứng dụng',icon:'💜',title:'Giao diện Purple',desc:'Tông tím cao cấp',cost:25000,type:'appSkin',value:'purple'},
+ {id:'skinGold',group:'Giao diện ứng dụng',icon:'✨',title:'Giao diện Gold',desc:'Tông vàng sang trọng',cost:50000,type:'appSkin',value:'gold'},
+ {id:'skinDynamic',group:'Giao diện ứng dụng',icon:'🌌',title:'Nền động Aurora',desc:'Hiệu ứng nền chuyển động',cost:100000,type:'appSkin',value:'dynamic'},
+ {id:'navCompact',group:'Giao diện ứng dụng',icon:'⌁',title:'Điều hướng gọn',desc:'Thanh menu nhỏ và gọn hơn',cost:30000,type:'navStyle',value:'compact'}
+];
+
+function cacheBust(url){return url+(url.includes('?')?'&':'?')+'v='+Date.now()}
+
+function extractPreviewDriveId(url){
+ const value=String(url||'');
+ const match=value.match(/drive\.google\.com\/file\/d\/([^/?#]+)/i)
+  ||value.match(/[?&]id=([^&#]+)/i);
+ return match?match[1]:'';
+}
+function previewSource(url){
+ let value=String(url||'').trim();
+ if(!value)return 'assets/theme-placeholder.svg';
+ if(/^data:image\//i.test(value))return value;
+
+ const driveId=extractPreviewDriveId(value);
+ if(driveId){
+  value='https://drive.google.com/thumbnail?id='
+   +encodeURIComponent(driveId)+'&sz=w1600';
+ }
+
+ if(location.hostname==='m4x.local'&&/^https?:\/\//i.test(value)){
+  return '/__m4x_image?url='+encodeURIComponent(value);
+ }
+ return value;
+}
+function imageFallback(image){
+ image.onerror=null;
+ image.src='assets/theme-placeholder.svg';
+}
+
+function normalizeTheme(t,i){
+ const category=t.category||'Khác',mode=t.mode||'Mặc định';
+ return {
+  id:String(t.id||('theme-'+i)),name:String(t.name||'Theme chưa đặt tên'),author:String(t.author||'M4X THEME'),
+  category:String(category),mode:String(mode),size:String(t.size||'Không rõ'),rating:Number(t.rating||0),
+  downloads:Number(t.downloads||0),version:String(t.version||'1.0'),description:String(t.description||''),
+  tags:Array.isArray(t.tags)?t.tags.filter(Boolean):[category,mode].filter(Boolean),
+  preview:String(t.preview||''),downloadUrl:String(t.downloadUrl||t.download||''),
+  pointCost:Number(t.pointCost||0),password:String(t.password||''),creatorUsername:String(t.creatorUsername||''),community:!!t.community
+ }
+}
+function applyThemeCatalogChanges(list,changes){
+ const map=new Map((Array.isArray(list)?list:[]).map((t,i)=>{const n=normalizeTheme(t,i);return[n.id,n]}));
+ (Array.isArray(changes)?changes:[]).forEach((change,index)=>{
+  const id=String(change.id||'');if(!id)return;
+  if(String(change.action)==='deleted'){map.delete(id);return}
+  const base=map.get(id)||{};
+  map.set(id,normalizeTheme({...base,...change,id},index));
+ });
+ return [...map.values()];
+}
+function rebuildThemeIndexes(){
+ themeById=new Map(themes.map(t=>[t.id,t]));
+ cats=['Tất cả',...new Set(themes.flatMap(t=>[t.category,t.mode]).filter(Boolean))];
+ localStorage.setItem('m4xThemeCache',JSON.stringify(themes));
+}
+function adminThemeRecord(id){
+ return themes.find(t=>t.id===id)||themeCatalogChangesCache.find(t=>t.id===id)||null;
+}
+function renderAdminPublishedThemeCard(t,deleted=false){
+ const item=normalizeTheme(t,0);
+ return `<div class="adminCard glass adminThemeCard ${deleted?'adminThemeDeleted':''}">
+  <img class="adminThemeThumb" src="${esc(previewSource(item.preview))}" alt="${esc(item.name)}" loading="lazy" onerror="imageFallback(this)">
+  <div class="adminThemeMeta">
+   <div class="row"><div style="min-width:0"><b>${esc(item.name)}</b><div class="muted">${esc(item.author)} · ${esc(item.category)}</div></div><span class="statusPill ${deleted?'rejected':'approved'}">${deleted?'Đã xóa':'Đang hiện'}</span></div>
+   <div class="muted">${Number(item.pointCost||0).toLocaleString('vi-VN')} điểm · ${Number(item.rating||0).toFixed(1)} ★</div>
+   <div class="adminThemeId">${esc(item.id)}</div>
+   <div class="adminActions">
+    ${deleted?`<button class="goodBtn" onclick="restoreAdminPublishedTheme('${esc(item.id)}')">Khôi phục</button>`:`<button class="smallBtn" onclick="openAdminThemeEditor('${esc(item.id)}')">Sửa</button><button class="dangerBtn" onclick="deleteAdminPublishedTheme('${esc(item.id)}')">Xóa</button>`}
+    ${item.preview?`<button class="smallBtn" onclick="openExternal('${esc(item.preview)}')">Ảnh</button>`:''}
+    ${item.downloadUrl?`<button class="smallBtn" onclick="openExternal('${esc(item.downloadUrl)}')">File</button>`:''}
+   </div>
+  </div>
+ </div>`;
+}
+async function loadAdminPublishedThemes(){
+ try{
+  const response=await api('themeCatalogChanges');
+  themeCatalogChangesCache=Array.isArray(response.changes)?response.changes:[];
+  const query=String(adminThemeSearch.value||'').trim().toLowerCase();
+  const visible=themes.filter(t=>!query||[t.name,t.author,t.category,t.id].join(' ').toLowerCase().includes(query));
+  const deleted=themeCatalogChangesCache.filter(t=>String(t.action)==='deleted').filter(t=>!query||[t.name,t.author,t.category,t.id].join(' ').toLowerCase().includes(query));
+  adminThemeList.innerHTML=(visible.length||deleted.length)
+   ?visible.map(t=>renderAdminPublishedThemeCard(t,false)).join('')+deleted.map(t=>renderAdminPublishedThemeCard(t,true)).join('')
+   :'<div class="empty">Không tìm thấy theme</div>';
+  adminThemeCount.textContent=`${visible.length} đang hiển thị${deleted.length?' · '+deleted.length+' đã xóa':''}`;
+ }catch(e){toastMsg(e.message)}
+}
+function debouncedAdminThemeSearch(){clearTimeout(adminThemeSearchTimer);adminThemeSearchTimer=setTimeout(loadAdminPublishedThemes,220)}
+function openAdminThemeEditor(id){
+ const t=adminThemeRecord(id);if(!t)return toastMsg('Không tìm thấy theme');
+ adminThemeEditingId=t.id;
+ adminThemeEditIdLabel.textContent='ID: '+t.id;
+ adminThemeEditName.value=t.name||'';
+ adminThemeEditAuthor.value=t.author||'';
+ adminThemeEditCategory.value=t.category||'';
+ adminThemeEditMode.value=t.mode||'';
+ adminThemeEditSize.value=t.size||'';
+ adminThemeEditRating.value=Number(t.rating||0);
+ adminThemeEditVersion.value=t.version||'1.0';
+ adminThemeEditPrice.value=Number(t.pointCost||0);
+ adminThemeEditPassword.value=t.password||'';
+ adminThemeEditPreview.value=t.preview||'';
+ adminThemeEditDownload.value=t.downloadUrl||'';
+ adminThemeEditTags.value=(t.tags||[]).join(', ');
+ adminThemeEditDescription.value=t.description||'';
+ previewAdminThemeImage();
+ adminThemeEditModal.classList.remove('hidden');
+}
+function closeAdminThemeEditor(){adminThemeEditModal.classList.add('hidden');adminThemeEditingId=''}
+function previewAdminThemeImage(){adminThemeEditPreviewImg.src=previewSource(adminThemeEditPreview.value.trim())}
+function themeFromAdminEditor(){
+ const old=adminThemeRecord(adminThemeEditingId)||{};
+ return normalizeTheme({...old,
+  id:adminThemeEditingId,
+  name:adminThemeEditName.value.trim(),
+  author:adminThemeEditAuthor.value.trim(),
+  category:adminThemeEditCategory.value.trim(),
+  mode:adminThemeEditMode.value.trim(),
+  size:adminThemeEditSize.value.trim(),
+  rating:Number(adminThemeEditRating.value||0),
+  version:adminThemeEditVersion.value.trim(),
+  pointCost:Number(adminThemeEditPrice.value||0),
+  password:adminThemeEditPassword.value.trim(),
+  preview:adminThemeEditPreview.value.trim(),
+  downloadUrl:adminThemeEditDownload.value.trim(),
+  tags:adminThemeEditTags.value.split(',').map(x=>x.trim()).filter(Boolean),
+  description:adminThemeEditDescription.value.trim()
+ },0);
+}
+async function saveAdminThemeEditor(){
+ if(!adminThemeEditingId)return;
+ const theme=themeFromAdminEditor();
+ if(theme.name.length<2)return toastMsg('Tên theme quá ngắn');
+ adminThemeSaveBtn.disabled=true;adminThemeSaveBtn.textContent='Đang lưu…';
+ try{
+  await api('adminSavePublishedTheme',{theme});
+  closeAdminThemeEditor();
+  await loadRemote();
+  await loadAdminPublishedThemes();
+  toastMsg('Đã cập nhật theme');
+ }catch(e){toastMsg(e.message)}finally{adminThemeSaveBtn.disabled=false;adminThemeSaveBtn.textContent='Lưu thay đổi'}
+}
+async function deleteAdminPublishedTheme(id){
+ const theme=adminThemeRecord(id);if(!theme)return toastMsg('Không tìm thấy theme');
+ if(!confirm(`Xóa "${theme.name}" khỏi ứng dụng?\n\nTheme sẽ biến mất với mọi người dùng nhưng có thể khôi phục.`))return;
+ try{
+  await api('adminDeletePublishedTheme',{theme});
+  if(current&&current.id===id)closeDetail();
+  await loadRemote();
+  await loadAdminPublishedThemes();
+  toastMsg('Đã xóa theme khỏi ứng dụng');
+ }catch(e){toastMsg(e.message)}
+}
+async function restoreAdminPublishedTheme(id){
+ try{
+  await api('adminRestorePublishedTheme',{themeId:id});
+  await loadRemote();
+  await loadAdminPublishedThemes();
+  toastMsg('Đã khôi phục theme');
+ }catch(e){toastMsg(e.message)}
+}
+
+function normalizeUser(user){
+ const u=user||{};
+ return {
+  username:String(u.username||''),name:String(u.name||'Người dùng'),role:String(u.role||'user'),
+  status:String(u.status||'active'),points:Number(u.points||0),
+  favorites:Array.isArray(u.favorites)?u.favorites:[],downloads:Array.isArray(u.downloads)?u.downloads:[],
+  unlocked:Array.isArray(u.unlocked)?u.unlocked:[],tasks:u.tasks&&typeof u.tasks==='object'?u.tasks:{},
+  history:Array.isArray(u.history)?u.history:[],views:Array.isArray(u.views)?u.views:[],
+  profile:u.profile&&typeof u.profile==='object'?u.profile:{},vipActive:!!u.vipActive,themePassActive:!!u.themePassActive,
+  createdAt:String(u.createdAt||''),updatedAt:String(u.updatedAt||'')
+ }
+}
+function esc(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
+function cacheBustRemote(url){return url+(url.includes('?')?'&':'?')+'v='+Date.now()}
+async function loadLocalConfig(){
+ try{
+  const response=await fetch(cacheBust('app-config.json'),{cache:'no-store'});
+  if(response.ok){
+   const config=await response.json();
+   appConfig={...appConfig,...config};
+  }
+ }catch(_){}
+}
+async function readJsonSource(source){
+ const isRemote=/^https?:\/\//i.test(source);
+ if(isRemote&&location.hostname==='m4x.local'){
+   const proxy='/__m4x_catalog?url='+encodeURIComponent(source);
+   const response=await fetch(cacheBustRemote(proxy),{cache:'no-store'});
+   const text=await response.text();
+   let data;try{data=JSON.parse(text)}catch(e){throw new Error('Dữ liệu JSON không hợp lệ')}
+   if(!response.ok)throw new Error(data&&data.error?data.error:'HTTP '+response.status);
+   return data;
+ }
+ const response=await fetch(cacheBustRemote(source),{cache:'no-store'});
+ if(!response.ok)throw new Error('HTTP '+response.status);
+ return await response.json();
+}
+async function loadRemote(){
+ let remoteError='';
+ try{
+   await loadLocalConfig();
+   if(appConfig.onlineConfigUrl){
+     try{appConfig={...appConfig,...await readJsonSource(appConfig.onlineConfigUrl)}}catch(e){}
+   }
+   const data=await readJsonSource(appConfig.onlineThemesUrl||'themes.json');
+   const list=Array.isArray(data)?data:(data&&Array.isArray(data.themes)?data.themes:[]);
+   themes=list.map(normalizeTheme);
+   try{
+    const community=await api('approvedThemes');
+    if(Array.isArray(community.themes)){
+     themes=[
+      ...community.themes.map(normalizeTheme),
+      ...themes.filter(x=>!community.themes.some(y=>String(y.id)===x.id))
+     ];
+    }
+   }catch(_){}
+   try{
+    const overrideResponse=await apiNetworkRequest('themeCatalogChanges',{
+     fresh:Date.now()
+    });
+    themeCatalogChangesCache=Array.isArray(overrideResponse.changes)
+     ?overrideResponse.changes
+     :[];
+    themes=applyThemeCatalogChanges(themes,themeCatalogChangesCache);
+   }catch(_){}
+   rebuildThemeIndexes();
+ }catch(e){
+   remoteError=String(e&&e.message?e.message:e);
+   let cached=[];
+   try{cached=JSON.parse(localStorage.getItem('m4xThemeCache')||'[]')}catch(_){}
+   const fallback=cached.length?cached:(window.M4X_THEMES||[]);
+   themes=Array.isArray(fallback)?fallback.map(normalizeTheme):[];
+   themeById=new Map(themes.map(t=>[t.id,t]));
+ }
+ announcement.textContent=appConfig.announcement||'';
+ donateQr.src=appConfig.donateQr||'assets/donate-qr.jpg';
+ versionText.textContent=appConfig.appVersion||'1.1';
+ cats=['Tất cả',...new Set(themes.flatMap(t=>[t.category,t.mode]).filter(Boolean))];
+ if(currentUser)renderAll();
+ if(remoteError)toastMsg('Không tải được theme: '+remoteError);
+}
+function isApiConfigured(){
+ return /^https:\/\/.+/i.test(String(appConfig.onlineUserApiUrl||''))
+   && !String(appConfig.onlineUserApiUrl).includes('PASTE_');
+}
+function nativeApiPost(url,payload){
+ return new Promise((resolve,reject)=>{
+  const requestId='api_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+  const timeout=payload&&payload.action==='uploadSmallFile'?120000:25000;const timer=setTimeout(()=>{delete apiWaiters[requestId];reject(new Error('Máy chủ phản hồi quá lâu'))},timeout);
+  apiWaiters[requestId]={
+   resolve:text=>{clearTimeout(timer);try{resolve(JSON.parse(text))}catch(e){reject(new Error('Phản hồi máy chủ không hợp lệ'))}},
+   reject:message=>{clearTimeout(timer);reject(new Error(message||'Không kết nối được máy chủ'))}
+  };
+  Android.apiPost(url,JSON.stringify(payload),requestId);
+ });
+}
+window.onAndroidApiSuccess=function(id,text){const w=apiWaiters[id];if(!w)return;delete apiWaiters[id];w.resolve(text)};
+window.onAndroidApiError=function(id,message){const w=apiWaiters[id];if(!w)return;delete apiWaiters[id];w.reject(message)};
+function getStableDeviceId(){
+ if(window.Android&&typeof Android.getDeviceId==='function'){
+  try{
+   const nativeId=String(Android.getDeviceId()||'').trim();
+   if(nativeId)return nativeId;
+  }catch(_){}
+ }
+ let id=localStorage.getItem('m4xBrowserDeviceId')||'';
+ if(!id){
+  const bytes=new Uint8Array(16);
+  if(window.crypto&&crypto.getRandomValues)crypto.getRandomValues(bytes);
+  else for(let i=0;i<bytes.length;i++)bytes[i]=Math.floor(Math.random()*256);
+  id='web_'+Array.from(bytes).map(x=>x.toString(16).padStart(2,'0')).join('');
+  localStorage.setItem('m4xBrowserDeviceId',id);
+ }
+ return id;
+}
+
+const API_CACHE_TTL={
+ health:30000,
+ approvedThemes:180000,
+ profileSummary:60000,
+ inventory:45000,
+ spendingLeaderboard:60000,
+ myPurchaseRequests:30000,
+ referralInfo:60000,
+ myThemeSubmissions:30000,
+ loginGiftStatus:30000,
+ weeklyTasks:30000,
+ spendingMilestones:60000,
+ seasonalEvent:60000,
+ weeklyLeaderboard:45000,
+ questMap:30000,
+ birthdayEventStatus:30000
+};
+const apiResponseCache=new Map();
+const apiInFlight=new Map();
+
+function apiCacheKey(action,payload){
+ const clean={...payload};
+ delete clean.token;
+ return action+'|'+JSON.stringify(clean);
+}
+function clearApiReadCache(){
+ apiResponseCache.clear();
+}
+async function apiNetworkRequest(action,payload={}){
+ if(!isApiConfigured())throw new Error('Admin chưa cấu hình máy chủ tài khoản');
+ const body={action,...payload};
+ body.language=currentLang;
+ body.deviceId=getStableDeviceId();
+ const token=localStorage.getItem('m4xAuthToken');
+ if(token)body.token=token;
+ let data;
+ if(window.Android&&typeof Android.apiPost==='function'){
+  data=await nativeApiPost(appConfig.onlineUserApiUrl,body);
+ }else{
+  const response=await fetch(appConfig.onlineUserApiUrl,{
+   method:'POST',
+   headers:{'Content-Type':'text/plain;charset=utf-8'},
+   body:JSON.stringify(body),
+   redirect:'follow'
+  });
+  data=await response.json();
+ }
+ if(!data||data.ok!==true)throw new Error(data&&data.error?data.error:'Yêu cầu thất bại');
+ return data;
+}
+async function api(action,payload={}){
+ const ttl=Number(API_CACHE_TTL[action]||0);
+ const key=apiCacheKey(action,payload);
+ const now=Date.now();
+
+ if(ttl){
+  const cached=apiResponseCache.get(key);
+  if(cached&&now-cached.time<ttl)return cached.data;
+  if(apiInFlight.has(key))return apiInFlight.get(key);
+ }
+
+ const request=apiNetworkRequest(action,payload)
+  .then(data=>{
+   if(ttl)apiResponseCache.set(key,{time:Date.now(),data});
+   else clearApiReadCache();
+   return data;
+  })
+  .finally(()=>apiInFlight.delete(key));
+
+ if(ttl)apiInFlight.set(key,request);
+ return request;
+}
+
+
+const pageLoadedAt={};
+function shouldLoadPageData(name,ttl){
+ const now=Date.now(),last=Number(pageLoadedAt[name]||0);
+ if(now-last<ttl)return false;
+ pageLoadedAt[name]=now;
+ return true;
+}
+function visiblePageName(){
+ const page=document.querySelector('.page:not(.hidden)');
+ return page&&page.id?page.id.replace(/Page$/,''):'home';
+}
+function renderVisibleUserPage(){
+ if(!currentUser)return;
+ const page=visiblePageName();
+ if(page==='home')renderHome();
+ else if(page==='category')renderCategory();
+ else if(page==='missions')renderMissions();
+ else if(page==='shop')renderShop();
+ else if(page==='favorite')renderFavorites();
+ else if(page==='profile')updateStats();
+ else if(page==='inventory')renderInventoryLocal();
+}
+
+function applyUser(user,fullRender=true){
+ currentUser=normalizeUser(user);
+ localStorage.setItem('m4xUserCache',JSON.stringify(currentUser));
+ saveNativeSession();
+ if(currentUser.status!=='active'){logout(false);throw new Error('Tài khoản đã bị khóa')}
+ lastMeRefresh=Date.now();
+ applyAppAppearance();
+ updateStats();
+ if(fullRender)renderAll();
+ else renderVisibleUserPage();
+ startAirdropPolling();
+ if(current)favBig.textContent=isFav(current.id)?'♥':'♡';
+}
+function today(){return new Date().toISOString().slice(0,10)}
+function toastMsg(x){toast.textContent=x;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2600)}
+function switchAuth(m){loginForm.classList.toggle('hidden',m!=='login');registerForm.classList.toggle('hidden',m!=='register');loginTab.classList.toggle('active',m==='login');registerTab.classList.toggle('active',m==='register')}
+function setAuthBusy(form,busy,label){
+ authBusy=busy;
+ const button=form.querySelector('button.primary');
+ if(!button)return;
+ if(!button.dataset.normalText)button.dataset.normalText=button.textContent;
+ button.disabled=busy;
+ button.textContent=busy?(label||'Đang xử lý…'):button.dataset.normalText;
+}
+function rememberKnownUser(username){
+ const key='m4xKnownUsers';
+ let users=[];
+ try{users=JSON.parse(localStorage.getItem(key)||'[]')}catch(_){}
+ if(!users.includes(username)){
+  users.push(username);
+  localStorage.setItem(key,JSON.stringify(users.slice(-100)));
+ }
+}
+function isKnownExistingUser(username){
+ const admins=Array.isArray(appConfig.existingAdminUsernames)
+  ?appConfig.existingAdminUsernames.map(x=>String(x).toLowerCase())
+  :[];
+ if(admins.includes(username))return true;
+ try{
+  return JSON.parse(localStorage.getItem('m4xKnownUsers')||'[]').includes(username);
+ }catch(_){return false}
+}
+function warmApi(){
+ if(!isApiConfigured())return Promise.resolve();
+ if(!apiWarmPromise){
+  apiWarmPromise=api('health').catch(()=>null).finally(()=>{
+   setTimeout(()=>{apiWarmPromise=null},30000);
+  });
+ }
+ return apiWarmPromise;
+}
+function saveNativeSession(){
+ if(!(window.Android&&typeof Android.saveSession==='function'))return;
+ const token=localStorage.getItem('m4xAuthToken')||'';
+ const user=localStorage.getItem('m4xUserCache')||'';
+ if(token&&user){try{Android.saveSession(token,user)}catch(_){}}
+}
+function restoreNativeSession(){
+ if(!(window.Android&&typeof Android.loadSession==='function'))return;
+ try{
+  const raw=Android.loadSession(); if(!raw)return;
+  const saved=JSON.parse(raw);
+  if(saved.token&&!localStorage.getItem('m4xAuthToken'))localStorage.setItem('m4xAuthToken',saved.token);
+  if(saved.user&&!localStorage.getItem('m4xUserCache'))localStorage.setItem('m4xUserCache',saved.user);
+ }catch(_){}
+}
+function clearNativeSession(){
+ if(window.Android&&typeof Android.clearSession==='function'){try{Android.clearSession()}catch(_){}}
+}
+
+async function register(){
+ if(authBusy)return;
+ const n=regName.value.trim(),u=regUser.value.trim().toLowerCase(),p=regPass.value,referralCode=regReferral.value.trim().toUpperCase();
+ if(n.length<2||!/^[a-z0-9_]{3,24}$/.test(u)||p.length<6)return toastMsg('Thông tin đăng ký chưa hợp lệ');
+ if(isKnownExistingUser(u)){
+  loginUser.value=u;loginPass.value=p;switchAuth('login');
+  toastMsg('Tài khoản này đã có — hãy đăng nhập');
+  loginPass.focus();
+  return;
+ }
+ setAuthBusy(registerForm,true,'Đang tạo tài khoản…');
+ try{
+  const result=await api('register',{name:n,username:u,password:p,referralCode});
+  localStorage.setItem('m4xAuthToken',result.token);
+  rememberKnownUser(u);
+  applyUser(result.user);authScreen.classList.add('hidden');toastMsg('Đăng ký thành công');
+ }catch(e){
+  if(/đã tồn tại/i.test(e.message)){
+   rememberKnownUser(u);loginUser.value=u;loginPass.value=p;switchAuth('login');
+  }
+  toastMsg(e.message);
+ }finally{setAuthBusy(registerForm,false)}
+}
+async function login(){
+ if(authBusy)return;
+ const u=loginUser.value.trim().toLowerCase(),p=loginPass.value;
+ if(!u||!p)return toastMsg('Nhập tài khoản và mật khẩu');
+ setAuthBusy(loginForm,true,'Đang đăng nhập…');
+ try{
+  const result=await api('login',{username:u,password:p});
+  localStorage.setItem('m4xAuthToken',result.token);
+  rememberKnownUser(u);
+  applyUser(result.user);authScreen.classList.add('hidden');toastMsg('Đăng nhập thành công');
+ }catch(e){toastMsg(e.message)}
+ finally{setAuthBusy(loginForm,false)}
+}
+async function logout(callServer=true){
+ try{if(callServer&&localStorage.getItem('m4xAuthToken'))await api('logout')}catch(e){}
+ stopChatPolling();stopAirdropPolling();localStorage.removeItem('m4xAuthToken');localStorage.removeItem('m4xUserCache');clearNativeSession();currentUser=null;authScreen.classList.remove('hidden');closeAdminPanel();
+}
+async function refreshMe(silent=true){
+ if(!localStorage.getItem('m4xAuthToken'))return;
+ try{const result=await api('me');applyUser(result.user,false)}catch(e){if(!silent)toastMsg(e.message);if(/hết hạn|khóa|không tồn tại/i.test(e.message))logout(false);else if(!silent)toastMsg('Mạng chậm — giữ nguyên tài khoản')}
+}
+
+
+function userProfile(){return currentUser&&currentUser.profile&&typeof currentUser.profile==='object'?currentUser.profile:{} }
+function userInventory(){const p=userProfile();return p.inventory&&typeof p.inventory==='object'?p.inventory:{badges:[],frames:[],colors:[],icons:[],effects:[],skins:[],navStyles:[],titles:[]} }
+function isVip(){const until=Number(userProfile().vipUntil||0);return until===-1||until>Date.now()}
+function isThemePass(){return Number(userProfile().themePassUntil||0)>Date.now()}
+function vipText(){const p=userProfile(),parts=[];const until=Number(p.vipUntil||0),pass=Number(p.themePassUntil||0);if(until===-1)parts.push('VIP vĩnh viễn');else if(until>Date.now())parts.push('VIP đến '+new Date(until).toLocaleDateString('vi-VN'));if(pass>Date.now())parts.push('Vé mở theme đến '+new Date(pass).toLocaleDateString('vi-VN'));if(p.privateRoomCode)parts.push('Mã phòng riêng: '+p.privateRoomCode);return parts.length?parts.join(' · '):'Chưa kích hoạt quyền lợi cao cấp'}
+function tierRank(v){return ({'':0,silver:1,gold:2,diamond:3})[v||'']||0}
+function ownsStoreItem(item){const p=userProfile(),inv=userInventory();if(item.repeat)return false;if(item.id==='vipForever')return Number(p.vipUntil||0)===-1;if(item.type==='badge')return (inv.badges||[]).includes(item.value);if(item.type==='frame')return (inv.frames||[]).includes(item.value);if(item.type==='nameIcon')return (inv.icons||[]).includes(item.value);if(item.type==='chatEffect')return (inv.effects||[]).includes(item.value);if(item.type==='appSkin')return (inv.skins||[]).includes(item.value);if(item.type==='navStyle')return (inv.navStyles||[]).includes(item.value);if(item.type==='memberTier')return tierRank(p.memberTier)>=tierRank(item.value);if(item.type==='limitedTitle')return p.limitedWeek===currentWeekKeyClient();if(item.type==='privateRoom')return !!p.privateRoomId;return false}
+function isActiveStoreItem(item){const p=userProfile();if(item.type==='badge')return p.badge===item.value;if(item.type==='frame')return p.frame===item.value;if(item.type==='nameIcon')return p.nameIcon===item.value;if(item.type==='chatEffect')return p.chatEffect===item.value;if(item.type==='appSkin')return p.appTheme===item.value;if(item.type==='navStyle')return p.navStyle===item.value;return false}
+function currentWeekKeyClient(){const d=new Date(),jan=new Date(d.getFullYear(),0,1),days=Math.floor((d-jan)/86400000),week=Math.ceil((days+jan.getDay()+1)/7);return d.getFullYear()+'-'+String(week).padStart(2,'0')}
+function birthdayDiscountClient(){const d=new Date();return d.getMonth()===7&&d.getDate()===6}
+function storeDisplayCost(cost){return birthdayDiscountClient()?Math.floor(Number(cost||0)*.6):Number(cost||0)}
+function renderShop(){
+ if(!currentUser)return;
+ shopBalance.textContent=Number(currentUser.points||0).toLocaleString('vi-VN');vipStatusText.textContent=vipText();
+ const discount=birthdayDiscountClient();birthdayDiscountBanner.classList.toggle('hidden',!discount);
+ const groups=[...new Set(STORE_ITEMS.map(x=>x.group))];
+ shopGroups.innerHTML=groups.map(group=>`<section><div class="shopGroupTitle"><h3>${esc(group)}</h3><span class="shopTag">${STORE_ITEMS.filter(x=>x.group===group).length} món</span></div><div class="shopGrid">${STORE_ITEMS.filter(x=>x.group===group).map(item=>{const owned=ownsStoreItem(item),active=isActiveStoreItem(item),cost=storeDisplayCost(item.cost);let action=owned?(active?'<span class="shopOwned">Đang dùng</span>':item.type==='badge'||item.type==='frame'||item.type==='nameIcon'||item.type==='chatEffect'||item.type==='appSkin'||item.type==='navStyle'?`<button class="smallBtn" onclick="activateStoreItem('${item.id}')">Dùng</button>`:'<span class="shopOwned">Đã sở hữu</span>'):`<button class="smallBtn" onclick="buyStoreItem('${item.id}')">Mua</button>`;return `<div class="shopCard glass"><div class="shopIcon">${item.icon}</div><h3>${esc(item.title)}</h3><p>${esc(item.desc)}</p><div class="row"><span class="shopPrice">${discount?`<span class="discountOld">${item.cost.toLocaleString('vi-VN')}</span>`:''}${cost.toLocaleString('vi-VN')}đ</span><div class="shopActions">${action}</div></div></div>`}).join('')}</div></section>`).join('');
+}
+function promptItemValue(item){
+ if(item.type==='rename')return prompt('Nhập tên hiển thị mới:',currentUser.name)||'';
+ if(item.type==='customTitle')return prompt('Nhập danh hiệu từ 2–28 ký tự:','Nhà sưu tập M4X')||'';
+ if(item.type==='privateRoom')return prompt('Nhập tên phòng chat riêng:','Phòng của '+currentUser.name)||'';
+ if(item.type==='request')return prompt('Mô tả theme cần tìm/chuyển, kèm link hoặc yêu cầu rõ ràng:','')||'';
+ if(item.type==='nameColor'){
+  const choice=prompt('Chọn màu: 1 Xanh, 2 Vàng, 3 Hồng, 4 Tím, 5 Lục','1');
+  return ({'1':'#70d6ff','2':'#ffd166','3':'#ff70a6','4':'#b388ff','5':'#7cf29a'})[choice||'']||'';
+ }
+ return '';
+}
+async function buyStoreItem(itemId){
+ const item=STORE_ITEMS.find(x=>x.id===itemId);if(!item)return;
+ const needsValue=['rename','customTitle','privateRoom','request','nameColor'].includes(item.type);
+ const value=needsValue?promptItemValue(item):'';if(needsValue&&!String(value).trim())return;
+ const displayCost=storeDisplayCost(item.cost);if(!confirm(`Dùng ${displayCost.toLocaleString('vi-VN')} điểm để mua ${item.title}?`))return;
+ try{
+  const r=await api('purchaseStoreItem',{itemId,value:String(value).trim()});applyUser(r.user,false);renderShop();updateStats();
+  if(item.type==='appSkin'||item.type==='navStyle')applyAppAppearance();
+  if(r.outcome)showBoxReveal(r.outcome.label,item.type==='premiumSpin'?'🎰':'🎁');else if(r.room)toastMsg('Đã tạo phòng · mã '+r.room.code);else if(r.request)toastMsg('Đã gửi yêu cầu cho Admin');else toastMsg('Đã mua '+r.label);
+  if(r.room)await loadChatRooms();
+ }catch(e){toastMsg(e.message)}
+}
+async function activateStoreItem(itemId){
+ try{
+  const r=await api('activateStoreItem',{itemId});
+  applyUser(r.user,false);
+  applyAppAppearance();
+  renderShop();
+  updateStats();
+  toastMsg('Đã kích hoạt giao diện');
+ }catch(e){toastMsg(e.message)}
+}
+async function transferPoints(){
+ const targetUsername=transferUsername.value.trim().toLowerCase(),amount=Math.floor(Number(transferAmount.value||0));
+ if(!targetUsername||amount<100)return toastMsg('Nhập người nhận và ít nhất 100 điểm');
+ const fee=Math.ceil(amount*.20),total=amount+fee;if(!confirm(`Chuyển ${amount.toLocaleString('vi-VN')} điểm cho @${targetUsername}? Phí ${fee.toLocaleString('vi-VN')} điểm, tổng trừ ${total.toLocaleString('vi-VN')} điểm.`))return;
+ try{const r=await api('transferPoints',{targetUsername,amount});applyUser(r.user,false);transferAmount.value='';renderShop();toastMsg(`Đã chuyển ${r.amount.toLocaleString('vi-VN')} điểm · phí ${r.fee.toLocaleString('vi-VN')}`)}catch(e){toastMsg(e.message)}
+}
+async function loadSpendingLeaderboard(){
+ try{const r=await api('spendingLeaderboard');const list=Array.isArray(r.leaderboard)?r.leaderboard:[];monthlyTopUsername=list.length?list[0].username:'';updateStats();leaderboardList.innerHTML=list.length?list.map((x,i)=>`<div class="leaderRow ${x.username===currentUser.username?'me':''}"><b>${i===0?'🏆':i===1?'🥈':i===2?'🥉':'#'+(i+1)}</b><span>@${esc(x.username)}</span><b>${Number(x.spent).toLocaleString('vi-VN')}đ</b></div>`).join(''):'<div class="empty">Chưa có giao dịch tiêu điểm trong tháng</div>'}catch(e){leaderboardList.innerHTML='<div class="empty">Không tải được bảng xếp hạng</div>'}
+}
+function requestStatusText(v){return ({pending:'Đang chờ',processing:'Đang xử lý',done:'Hoàn thành',rejected:'Từ chối'})[v]||v}
+async function loadMyRequests(){
+ try{const r=await api('themeRequestList');const list=Array.isArray(r.requests)?r.requests:[];myRequestList.innerHTML=list.length?list.map(x=>`<div class="requestCard glass"><div class="row"><b>${x.requestType==='priority'?'🚀 Ưu tiên':'🛠 Thường'}</b><span class="requestStatus ${esc(x.status)}">${requestStatusText(x.status)}</span></div><div style="margin-top:7px">${esc(x.requestText)}</div>${x.adminNote?`<div class="muted" style="margin-top:6px">Admin: ${esc(x.adminNote)}</div>`:''}<div class="muted" style="margin-top:6px">${Number(x.cost).toLocaleString('vi-VN')} điểm</div></div>`).join(''):'<div class="empty">Chưa có yêu cầu theme</div>'}catch(e){}
+}
+const CHAT_STICKERS=['😀','😂','😍','😎','😭','😡','👍','❤️','🔥','🎉','💎','👑','M4X'];
+let chatMessages=[],chatPollTimer=null,chatBusy=false,currentChatRoom='global',chatRoomsCache=[],chatTopUsername='';
+function stopChatPolling(){if(chatPollTimer){clearInterval(chatPollTimer);chatPollTimer=null}}
+function startChatPolling(){stopChatPolling();renderStickerBar();loadChatRooms().then(()=>loadChat(true));chatPollTimer=setInterval(()=>{if(!chatPage.classList.contains('hidden'))loadChat(true)},12000)}
+function renderStickerBar(){stickerBar.innerHTML=CHAT_STICKERS.map(x=>`<button class="stickerBtn" onclick="chooseSticker('${x}')">${x}</button>`).join('')}
+function chooseSticker(x){selectedSticker=x;if(x!=='M4X')chatInput.value=chatInput.value+x;else sendChat('sticker')}
+async function loadChatRooms(){try{const r=await api('chatRooms');chatRoomsCache=Array.isArray(r.rooms)?r.rooms:[];const options=[{id:'global',name:'Phòng chung'},...chatRoomsCache];chatRoomSelect.innerHTML=options.map(x=>`<option value="${esc(x.id)}">${esc(x.name)}${x.code?' · '+esc(x.code):''}</option>`).join('');if(!options.some(x=>x.id===currentChatRoom))currentChatRoom='global';chatRoomSelect.value=currentChatRoom}catch(e){}}
+async function joinRoomByCode(){const code=(prompt('Nhập mã phòng riêng:','030E81')||'').trim().toUpperCase();if(!code)return;try{const r=await api('joinChatRoom',{code});toastMsg('Đã tham gia '+r.room.name);currentChatRoom=r.room.id;await loadChatRooms();await loadChat(false)}catch(e){toastMsg(e.message)}}
+function changeChatRoom(){currentChatRoom=chatRoomSelect.value||'global';chatMessages=[];chatList.innerHTML='<div class="empty">Đang tải phòng…</div>';loadChat(false)}
+function formatChatTime(value){const d=new Date(Number(value)||value);return Number.isNaN(d.getTime())?'':d.toLocaleTimeString(currentLang==='en'?'en-US':'vi-VN',{hour:'2-digit',minute:'2-digit'})}
+function reactionHtml(m){const r=m.reactions&&typeof m.reactions==='object'?m.reactions:{};const chips=Object.entries(r).filter(x=>Array.isArray(x[1])&&x[1].length).map(([e,u])=>`<button class="reactionChip" onclick="reactChat('${esc(m.id)}','${e}')">${e} ${u.length}</button>`).join('');return `<div class="reactionRow">${chips}</div><div class="reactionPicker">${['👍','❤️','😂','🔥'].map(e=>`<button onclick="reactChat('${esc(m.id)}','${e}')">${e}</button>`).join('')}</div>`}
+function renderChatMessages(){const nearBottom=window.innerHeight+window.scrollY>=document.body.offsetHeight-180;chatList.innerHTML=chatMessages.length?chatMessages.map(m=>{const mine=m.username===currentUser.username,admin=m.role==='admin',pinned=Number(m.pinnedUntil)>Date.now(),top=m.username===chatTopUsername;const color=/^#[0-9a-f]{6}$/i.test(m.nameColor||'')?m.nameColor:'';return `<div class="chatMessage ${mine?'mine':''} ${m.highlighted?'highlighted':''} ${pinned?'pinned':''} ${m.effect?'effect-'+esc(m.effect):''}"><div class="chatMeta"><b class="${admin?'chatAdmin':''} ${top?'chatTop':''}" style="${color?'color:'+color:''}">${m.nameIcon?`<span class="chatNameIcon">${esc(m.nameIcon)}</span> `:''}${admin?'ADMIN · ':''}${esc(m.name)}${verifiedIcon(m.verifiedType)}</b><span>@${esc(m.username)}</span><span>${formatChatTime(m.timestamp)}</span>${currentUser.role==='admin'?`<button class="chatDelete" onclick="adminDeleteChat('${esc(m.id)}')">Xóa</button>`:''}</div>${m.title?`<div class="chatTitle">${esc(m.title)}</div>`:''}${m.sticker?`<div class="chatSticker">${esc(m.sticker)}</div>`:''}${m.text?`<div class="chatText">${esc(m.text)}</div>`:''}${m.highlighted?'<div class="reward">⭐ Tin nổi bật</div>':''}${pinned?'<div class="chatPin">📌 Đang ghim</div>':''}${reactionHtml(m)}</div>`}).join(''):'<div class="empty">Chưa có tin nhắn.</div>';if(nearBottom||chatMessages.length<8)setTimeout(()=>window.scrollTo(0,document.body.scrollHeight),30)}
+async function loadChat(silent=true){if(!currentUser)return;try{const r=await api('chatList',{roomId:currentChatRoom});chatMessages=Array.isArray(r.messages)?r.messages:[];chatTopUsername=r.topUsername||'';renderChatMessages()}catch(e){if(!silent)toastMsg(e.message)}}
+async function sendChat(mode){if(chatBusy)return;let text=chatInput.value.trim(),sticker=mode==='sticker'?(selectedSticker||'M4X'):'';if(!text&&!sticker)return toastMsg('Nhập nội dung hoặc chọn nhãn dán');const highlighted=mode==='highlight',pinned=mode==='pin';const cost=pinned?3000:highlighted?500:0;if(cost&&currentUser.points<cost)return toastMsg('Không đủ điểm');chatBusy=true;chatSendBtn.disabled=true;const pending={id:'pending-'+Date.now(),timestamp:Date.now(),username:currentUser.username,name:currentUser.name,role:currentUser.role,text,sticker,highlighted,pinnedUntil:pinned?Date.now()+600000:0,reactions:{},...userProfile()};chatMessages.push(pending);renderChatMessages();chatInput.value='';selectedSticker='';try{const r=await api('chatSend',{text,sticker,highlighted,pinned,roomId:currentChatRoom});applyUser(r.user,false);await loadChat(true)}catch(e){chatMessages=chatMessages.filter(x=>x.id!==pending.id);renderChatMessages();chatInput.value=text;toastMsg(e.message)}finally{chatBusy=false;chatSendBtn.disabled=false}}
+async function reactChat(id,emoji){try{const r=await api('chatReact',{id,emoji});chatMessages=chatMessages.map(x=>x.id===id?r.message:x);renderChatMessages()}catch(e){toastMsg(e.message)}}
+async function adminDeleteChat(id){if(currentUser.role!=='admin'||!confirm('Xóa tin nhắn này?'))return;try{await api('adminDeleteChatMessage',{id});chatMessages=chatMessages.filter(x=>x.id!==id);renderChatMessages();toastMsg('Đã xóa tin nhắn')}catch(e){toastMsg(e.message)}}
+async function spinLucky(){
+ if(spinBusy)return;
+ if(!currentUser||Number(currentUser.points)<10){toastMsg('Bạn cần ít nhất 10 điểm để quay');return}
+ spinBusy=true;renderMissions();
+ try{
+  const result=await api('spinLucky'); applyUser(result.user,false);
+  const net=Number(result.net||0);
+  if(result.special)toastMsg('🍀 Chúc bạn may mắn lần sau · đã trừ 10 điểm');
+  else if(Number(result.reward)===0)toastMsg('❌ Không trúng điểm · đã trừ 10 điểm');
+  else if(Number(result.reward)===10)toastMsg('💰 Trúng 10 điểm — hoàn vốn');
+  else toastMsg((result.emoji||'🎉')+' Trúng '+result.reward+' điểm! Lãi '+net+' điểm');
+ }catch(e){toastMsg(e.message)}finally{spinBusy=false;renderMissions()}
+}
+function getTaskState(taskId){
+ if(!currentUser||!currentUser.tasks||typeof currentUser.tasks!=='object')return {};
+ const state=currentUser.tasks[taskId];
+ return state&&typeof state==='object'?state:{};
+}
+function isTaskDone(task){
+ if(!task||task.type==='repeat')return false;
+ const state=getTaskState(task.id);
+ if(task.type==='daily')return state.done===true&&state.date===today();
+ if(task.type==='once')return state.done===true;
+ return state.done===true;
+}
+function taskProgress(t){
+ if(t.id==='fav2')return Math.min(currentUser.favorites.length,2);
+ return isTaskDone(t)?1:0
+}
+async function doTask(id){
+ if(id==='lucky')await spinLucky();
+ else if(id==='daily')await completeTask(id);
+ else if(id==='share'){shareApp();setTimeout(()=>completeTask(id),500)}
+ else if(id==='telegram'){openExternal(appConfig.channelTelegram);setTimeout(()=>completeTask(id),800)}
+ else if(id==='chatDaily')showPage('chat');
+ else if(['fav2','download1','unlockPaid'].includes(id))showPage('home');
+}
+function renderMissions(){
+ if(!currentUser)return;
+ walletPoints.textContent=currentUser.points;
+ const p=currentUser.points%100,l=Math.floor(currentUser.points/100)+1;
+ levelBar.style.width=p+'%';levelName.textContent=l<2?'Thành viên mới':l<5?'Thành viên bạc':'Thành viên vàng';nextLevel.textContent=p+'/100';
+ const odds=`<div class="glass" style="padding:14px;margin-bottom:12px"><div class="row"><b>🎰 Tỷ lệ vòng quay</b><span class="reward">Phí 10 điểm</span></div><div style="display:grid;grid-template-columns:1fr auto;gap:7px;margin-top:12px">${SPIN_ODDS.map(o=>`<span>${o.icon} ${o.label}</span><b>${o.chance}</b>`).join('')}</div></div>`;
+ taskList.innerHTML=odds+TASKS.map(t=>{const d=isTaskDone(t),v=taskProgress(t),target=t.target||1,reward=t.rewardText||t.reward,rewardLabel=t.id==='lucky'?reward:'+'+reward,buttonLabel=t.id==='lucky'?(spinBusy?'Đang quay…':'Quay 10đ'):(d?'Đã nhận':'Làm');return `<div class="task glass"><div class="taskIcon">${t.icon}</div><div class="grow"><div class="row"><b>${t.title}</b><span class="reward">${rewardLabel}</span></div><div class="muted">${t.desc}</div>${t.target?`<div class="progress" style="margin-top:8px"><i style="width:${v/target*100}%"></i></div>`:''}</div><button class="smallBtn" ${(d||(spinBusy&&t.id==='lucky'))?'disabled':''} onclick="doTask('${t.id}')">${buttonLabel}</button></div>`}).join('');
+ pointHistory.innerHTML=currentUser.history.slice(0,12).map(h=>{const a=Number(h.amount)||0,icon=a>0?'＋':a<0?'−':'•';return `<div class="listItem glass"><div class="taskIcon">${icon}</div><div class="grow"><b>${esc(h.text)}</b><div class="muted">${new Date(Number(h.time)||h.time).toLocaleString('vi-VN')}</div></div><b>${a>0?'+':''}${a}</b></div>`}).join('');
+}
+function isFav(id){return !!currentUser&&currentUser.favorites.includes(id)}
+function isUnlocked(id){return !!currentUser&&(isVip()||isThemePass()||currentUser.unlocked.includes(id)||themeById.get(id)?.pointCost===0)}
+function syncFavoriteButtons(id){
+ document.querySelectorAll('[data-fav-id]').forEach(btn=>{
+  if(btn.dataset.favId===id){
+   const on=isFav(id);
+   btn.classList.toggle('on',on);
+   btn.textContent=on?'♥':'♡';
+  }
+ });
+ if(current&&current.id===id)favBig.textContent=isFav(id)?'♥':'♡';
+}
+async function toggleFav(id,e){
+ if(e)e.stopPropagation();
+ if(!currentUser)return;
+ const before=[...currentUser.favorites];
+ const exists=before.includes(id);
+ currentUser.favorites=exists?before.filter(x=>x!==id):[...before,id];
+ syncFavoriteButtons(id);renderFavorites();updateStats();
+ try{
+  const result=await api('toggleFavorite',{themeId:id});
+  applyUser(result.user,false);
+  syncFavoriteButtons(id);
+ }catch(err){
+  currentUser.favorites=before;
+  syncFavoriteButtons(id);renderFavorites();updateStats();
+  toastMsg(err.message);
+ }
+}
+let featuredThemeId='';
+function chooseFeaturedTheme(){
+ if(!themes.length)return null;
+ return [...themes].sort((a,b)=>{
+  const scoreB=(Number(b.downloads||0)*2)+(Number(b.rating||0)*100)+(Number(b.pointCost||0)>0?15:0);
+  const scoreA=(Number(a.downloads||0)*2)+(Number(a.rating||0)*100)+(Number(a.pointCost||0)>0?15:0);
+  return scoreB-scoreA;
+ })[0];
+}
+function renderFeaturedTheme(){
+ const t=chooseFeaturedTheme();
+ if(!t)return;
+ featuredThemeId=t.id;
+ const image=document.getElementById('featuredThemeImage');
+ image.src=previewSource(t.preview);
+ image.alt=t.name;
+ document.getElementById('featuredThemeName').textContent=t.name;
+ document.getElementById('featuredThemeMeta').textContent=`${t.category} · ${Number(t.rating||0).toFixed(1)} ★ · ${Number(t.downloads||0).toLocaleString('vi-VN')} lượt tải`;
+}
+function openFeaturedTheme(){
+ if(featuredThemeId)openDetail(featuredThemeId);
+}
+function card(t,index=99){
+ const eager=index<4;
+ return `<article class="card" onclick="openDetail('${esc(t.id)}')"><div class="preview"><img src="${esc(previewSource(t.preview))}" loading="${eager?'eager':'lazy'}" fetchpriority="${eager?'high':'low'}" decoding="async" alt="${esc(t.name)}" onerror="imageFallback(this)"><span class="badge">${esc(t.category)}</span><button class="heart ${isFav(t.id)?'on':''}" data-fav-id="${esc(t.id)}" onclick="toggleFav('${esc(t.id)}',event)">${isFav(t.id)?'♥':'♡'}</button></div><div class="meta"><b>${esc(t.name)}</b><small>@${esc(t.author)} · ${esc(t.size)}</small><div class="cardBottom"><span class="cardPrice">${isUnlocked(t.id)?'Đã mở':Number(t.pointCost||0).toLocaleString('vi-VN')+'đ'}</span><span class="cardRating">★ ${Number(t.rating||0).toFixed(1)}</span></div></div></article>`
+}
+function match(t,c){return c==='Tất cả'||t.category===c||t.mode===c}
+function renderChips(){chips.innerHTML=cats.map(c=>`<button class="chip ${c===active?'active':''}" onclick="active=decodeURIComponent('${encodeURIComponent(c)}');renderChips();renderHome()">${esc(c)}</button>`).join('');categoryChips.innerHTML=cats.map(c=>`<button class="chip ${c===categoryActive?'active':''}" onclick="categoryActive=decodeURIComponent('${encodeURIComponent(c)}');renderCategory()">${esc(c)}</button>`).join('')}
+function scheduleHomeRender(){if(homeRenderFrame)return;homeRenderFrame=requestAnimationFrame(()=>{homeRenderFrame=0;renderHome()})}
+function renderHome(){if(!currentUser)return;renderFeaturedTheme();const z=(q.value||'').toLowerCase(),list=themes.filter(t=>match(t,active)&&(`${t.name} ${t.author} ${t.category}`).toLowerCase().includes(z));resultCount.textContent=list.length+' theme';grid.innerHTML=list.length?list.map(card).join(''):'<div class="empty">Không tìm thấy theme</div>'}
+function renderCategory(){if(!currentUser)return;const list=themes.filter(t=>match(t,categoryActive));categoryTitle.textContent=categoryActive;categoryGrid.innerHTML=list.length?list.map(card).join(''):'<div class="empty">Không có theme</div>'}
+function renderFavorites(){const list=themes.filter(t=>isFav(t.id));favoriteGrid.innerHTML=list.length?list.map(card).join(''):'<div class="empty">Chưa có theme yêu thích</div>'}
+function renderAll(){
+ if(!currentUser)return;
+ applyBirthdayDecor();
+ renderChips();
+ updateStats();
+ renderVisibleUserPage();
+}
+function showPage(n){
+ document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));
+ document.getElementById(n+'Page').classList.remove('hidden');
+ document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('activeNav',x.dataset.page===n));
+
+ if(n==='home')renderHome();
+ if(n==='category')renderCategory();
+ if(n==='missions')renderMissions();
+ if(n==='favorite')renderFavorites();
+
+ if(n==='profile'){
+  updateStats();
+  if(shouldLoadPageData('profile',60000))loadProfileSummary();
+ }
+ if(n==='inventory'){
+  renderInventoryLocal();
+  if(shouldLoadPageData('inventory',45000))loadInventory();
+ }
+ if(n==='shop'){
+  renderShop();
+  if(shouldLoadPageData('shop',60000)){
+   Promise.allSettled([loadSpendingLeaderboard(),loadMyRequests()]);
+  }
+ }
+ if(n==='creator'&&shouldLoadPageData('creator',45000))loadCreatorHub();
+ if(n==='member'&&shouldLoadPageData('member',45000)){
+  Promise.allSettled([
+   loadMemberCenter(),
+   loadQuestMap(),
+   loadWeeklyLeaderboard(),
+   loadBirthdayEvent()
+  ]);
+ }
+ if(n==='chat')startChatPolling();else stopChatPolling();
+
+ window.scrollTo({top:0,behavior:'instant'});
+ requestAnimationFrame(applyLanguage);
+}
+function focusSearch(){showPage('home');setTimeout(()=>q.focus(),80)}
+function verifiedIcon(type){return type?`<span class="verified" title="${esc(type)}">✓</span>`:''}
+function openDetail(id){
+ current=themeById.get(id);if(!current)return;const t=current;
+ detailBody.innerHTML=`<div class="gallery"><img class="heroPreview" src="${esc(previewSource(t.preview))}" decoding="async" alt="${esc(t.name)}" onerror="imageFallback(this)"><div class="sidePreviews"><img class="sidePreview" src="${esc(previewSource(t.preview))}" loading="lazy" decoding="async" alt="" onerror="imageFallback(this)"><img class="sidePreview" src="${esc(previewSource(t.preview))}" loading="lazy" decoding="async" alt="" onerror="imageFallback(this)"></div></div><h2>${esc(t.name)}</h2><div class="row"><span class="muted">${esc(t.size)} · ${esc(t.author)}${t.community?' · Cộng đồng':''}</span><b>${Number(t.rating||0).toFixed(1)} ⭐</b></div><div class="tags" style="margin:17px 0">${(t.tags||[]).map(x=>`<span class="tag">${esc(x)}</span>`).join('')}</div><div class="glass" style="padding:15px"><div class="row"><span>Giá mở khóa</span><b>${isUnlocked(t.id)?'Đã mở khóa':(t.pointCost||0)+' điểm'}</b></div><div class="row" style="margin-top:10px"><span>Số dư</span><b>${currentUser.points} điểm</b></div>${t.password?`<div class="row" style="margin-top:10px"><span>Mật khẩu</span><b>${isUnlocked(t.id)?esc(t.password):'Mở khóa để xem'}</b></div>`:''}</div><h3>Mô tả</h3><p class="muted">${esc(t.description)}</p><div class="section"><h3>Đánh giá & bình luận</h3><button class="smallBtn" onclick="reportCurrentTheme()">Báo lỗi</button></div><div class="glass" style="padding:14px"><div class="reviewStars">${[1,2,3,4,5].map(n=>`<button onclick="setReviewStars(${n})" id="reviewStar${n}">★</button>`).join('')}</div><textarea class="field" id="reviewComment" maxlength="300" placeholder="Viết nhận xét…"></textarea><button class="primary" style="margin-top:9px" onclick="submitCurrentReview()">Gửi đánh giá</button></div><div id="themeReviewList"><div class="empty">Đang tải đánh giá…</div></div>`;
+ favBig.textContent=isFav(t.id)?'♥':'♡';favBig.onclick=()=>toggleFav(t.id);downloadBtn.textContent=isUnlocked(t.id)?'Tải xuống':`Mở khóa · ${t.pointCost||0} điểm`;downloadBtn.onclick=downloadCurrent;detail.classList.add('open');setReviewStars(5);loadThemeReviews(t.id)
+}
+function closeDetail(){detail.classList.remove('open')}
+function closeModal(){confirmModal.classList.add('hidden')}
+async function downloadCurrent(){
+ const t=current;if(!t)return;
+ if(!isUnlocked(t.id)){
+  modalTitle.textContent='Mở khóa theme';modalText.textContent=`Dùng ${t.pointCost||0} điểm để mở khóa ${t.name}?`;
+  modalConfirm.onclick=async()=>{
+   try{const r=await api('unlockTheme',{themeId:t.id});applyUser(r.user);closeModal();openDetail(t.id);toastMsg('Đã mở khóa theme')}catch(e){toastMsg(e.message)}
+  };
+  confirmModal.classList.remove('hidden');return;
+ }
+ if(!t.downloadUrl)return toastMsg('Theme chưa được gắn file .mtz');
+ api('recordDownload',{themeId:t.id}).then(r=>applyUser(r.user,false)).catch(()=>{});
+ const url=directDownloadUrl(t.downloadUrl);
+ if(window.Android&&Android.download)Android.download(url,t.name+'.mtz');else location.href=url
+}
+function directDownloadUrl(url){const m=String(url||'').match(/drive\.google\.com\/file\/d\/([^/?#]+)/i);return m?'https://drive.google.com/uc?export=download&id='+m[1]:url}
+function openExternal(url){if(window.Android&&Android.openExternal)Android.openExternal(url);else location.href=url}
+function shareCurrent(){if(current)shareText(current.name+' - M4X THEME')}
+function shareApp(){shareText('M4X THEME - Kho theme HyperOS')}
+function shareText(t){if(navigator.share)navigator.share({title:'M4X THEME',text:t});else toastMsg('Thiết bị không hỗ trợ chia sẻ')}
+function updateStats(){
+ if(!currentUser)return;
+ favStat.textContent=currentUser.favorites.length;downStat.textContent=currentUser.downloads.length;pointStat.textContent=Number(currentUser.points||0).toLocaleString('vi-VN');
+ const pp=userProfile();profileName.innerHTML=esc(currentUser.name)+verifiedIcon(pp.verifiedType);profileUser.textContent='@'+currentUser.username;
+ avatar.textContent=pp.avatarUrl?'':currentUser.name.slice(0,2).toUpperCase();
+ const avatarSrc=pp.avatarUrl?previewSource(pp.avatarUrl):'';
+ avatar.style.backgroundImage=avatarSrc?`url("${String(avatarSrc).replace(/"/g,'')}")`:'';
+ avatar.style.backgroundSize='cover';
+ avatar.style.backgroundPosition='center';
+ avatar.style.backgroundRepeat='no-repeat';
+ adminSetting.classList.toggle('hidden',currentUser.role!=='admin');adminRoleBadge.classList.toggle('hidden',currentUser.role!=='admin');
+ vipRoleBadge.classList.toggle('hidden',!isVip());goldRoleBadge.classList.add('hidden');
+ avatar.classList.toggle('neonFrame',pp.frame==='neon');avatar.classList.toggle('animatedFrame',pp.frame==='animated');avatar.classList.toggle('birthdayFrame',pp.frame==='birthday48');
+ profileName.style.color=/^#[0-9a-f]{6}$/i.test(pp.nameColor||'')?pp.nameColor:'';
+ profileTitleText.textContent=pp.customTitle||'';profileTitleText.classList.toggle('hidden',!pp.customTitle);
+ const badges=[];if(pp.badge==='gold')badges.push('🏅 HUY HIỆU VÀNG');if(pp.badge==='diamond')badges.push('💎 KIM CƯƠNG');if(pp.badge==='birthdayAdmin48')badges.push('🎂 SINH NHẬT ADMIN 4/8');if(pp.memberTier)badges.push('CẤP '+String(pp.memberTier).toUpperCase());if(pp.nameIcon)badges.push(pp.nameIcon+' BIỂU TƯỢNG');if(currentUser.username===monthlyTopUsername)badges.push('🏆 TOP ĐẠI GIA THÁNG');profileBadges.innerHTML=badges.map(x=>`<span class="miniBadge">${esc(x)}</span>`).join('');
+ birthdayClueProfile.classList.toggle('hidden',!(new Date().getMonth()===7&&new Date().getDate()===3));
+}
+function openGiftCode(){giftCodeInput.value='';giftModal.classList.remove('hidden');setTimeout(()=>giftCodeInput.focus(),100)}
+function closeGiftCode(){giftModal.classList.add('hidden')}
+async function redeemGiftCode(){
+ const code=giftCodeInput.value.trim().toUpperCase();if(!code)return toastMsg('Nhập Giftcode');
+ try{const result=await api('redeemGiftCode',{code});applyUser(result.user);closeGiftCode();toastMsg('+'+result.reward+' điểm từ Giftcode')}catch(e){toastMsg(e.message)}
+}
+
+function openAdminPanel(){if(currentUser?.role!=='admin')return toastMsg('Không có quyền quản trị');adminPanel.classList.add('open');showAdminTab('users',false);adminStats.innerHTML='<div class="adminStat glass loadingText">Đang tải…</div>';adminUserList.innerHTML='<div class="empty loadingText">Đang tải người dùng…</div>';refreshAdmin();}
+function closeAdminPanel(){adminPanel.classList.remove('open')}
+function showAdminTab(tab,shouldLoad=true){
+ adminCurrentTab=tab;const users=tab==='users',gifts=tab==='gifts',requests=tab==='requests',submissions=tab==='submissions',published=tab==='themes';
+ adminUsersSection.classList.toggle('hidden',!users);adminGiftsSection.classList.toggle('hidden',!gifts);adminRequestsSection.classList.toggle('hidden',!requests);adminSubmissionsSection.classList.toggle('hidden',!submissions);adminThemesSection.classList.toggle('hidden',!published);
+ adminUsersTab.classList.toggle('active',users);adminGiftsTab.classList.toggle('active',gifts);adminRequestsTab.classList.toggle('active',requests);adminSubmissionsTab.classList.toggle('active',submissions);adminThemesTab.classList.toggle('active',published);
+ if(shouldLoad){if(users)loadAdminUsers();else if(gifts)loadAdminGiftCodes();else if(requests)loadAdminRequests();else if(submissions)loadAdminSubmissions();else loadAdminPublishedThemes()}
+}
+async function loadAdminStats(){
+ const r=await api('adminStats');
+ adminStats.innerHTML=`<div class="adminStat glass"><b>${r.stats.users}</b><span class="muted">Người dùng</span></div><div class="adminStat glass"><b>${r.stats.activeGiftCodes}</b><span class="muted">Giftcode đang bật</span></div><div class="adminStat glass"><b>${r.stats.pendingRequests||0}</b><span class="muted">Yêu cầu chờ</span></div><div class="adminStat glass"><b>${r.stats.pendingSubmissions||0}</b><span class="muted">Theme chờ</span></div>`;
+}
+async function refreshAdmin(){
+ if(currentUser?.role!=='admin')return;
+ try{const listPromise=adminCurrentTab==='users'?loadAdminUsers():adminCurrentTab==='gifts'?loadAdminGiftCodes():adminCurrentTab==='requests'?loadAdminRequests():adminCurrentTab==='submissions'?loadAdminSubmissions():loadAdminPublishedThemes();await Promise.all([listPromise,loadAdminStats()])}catch(e){toastMsg(e.message)}
+}
+function debouncedAdminSearch(){clearTimeout(adminSearchTimer);adminSearchTimer=setTimeout(loadAdminUsers,350)}
+async function loadAdminUsers(){
+ try{
+  const r=await api('adminListUsers',{search:adminUserSearch.value.trim()});
+  adminUsersCache=r.users;adminUserList.innerHTML=r.users.length?r.users.map(adminUserCard).join(''):'<div class="empty">Không có người dùng</div>'
+ }catch(e){toastMsg(e.message)}
+}
+function adminUserCard(u){
+ const banned=u.status==='banned';
+ const p=u.profile||{};return `<div class="adminCard glass"><div class="row"><div><b>${esc(u.name)}${verifiedIcon(p.verifiedType)}</b><div class="muted">@${esc(u.username)} · ${esc(u.role)}</div>${p.suspicious?'<div class="riskBadge">⚠ Có thể là tài khoản phụ</div>':''}</div><div style="text-align:right"><b>${u.points} điểm</b><div class="muted">${banned?'Đã khóa':'Hoạt động'}</div></div></div><div class="adminActions"><button class="goodBtn" onclick="adminAdjustPoints('${esc(u.username)}',10)">+10</button><button class="goodBtn" onclick="adminAdjustPoints('${esc(u.username)}',50)">+50</button><button class="smallBtn" onclick="adminCustomPoints('${esc(u.username)}')">Tùy chỉnh</button><button class="smallBtn" onclick="adminVerifyUser('${esc(u.username)}')">Xác minh</button><button class="${banned?'goodBtn':'dangerBtn'}" onclick="adminToggleUserStatus('${esc(u.username)}','${banned?'active':'banned'}')">${banned?'Mở khóa':'Khóa'}</button></div></div>`
+}
+async function adminAdjustPoints(username,amount,reason='Admin cộng điểm'){
+ toastMsg('Đang cập nhật điểm…');
+ try{
+  const r=await api('adminAdjustPoints',{username,amount,reason});
+  adminUsersCache=adminUsersCache.map(u=>u.username===username?r.user:u);
+  adminUserList.innerHTML=adminUsersCache.length?adminUsersCache.map(adminUserCard).join(''):'<div class="empty">Không có người dùng</div>';
+  toastMsg((r.actualAmount>=0?'+':'')+r.actualAmount+' điểm cho @'+username);
+ }catch(e){toastMsg(e.message)}
+}
+async function adminCustomPoints(username){
+ const raw=prompt('Nhập số điểm cộng hoặc trừ. Ví dụ 100 hoặc -20:','100');if(raw===null)return;
+ const amount=Number(raw);if(!Number.isFinite(amount)||amount===0)return toastMsg('Số điểm không hợp lệ');
+ const reason=prompt('Lý do:','Admin điều chỉnh điểm')||'Admin điều chỉnh điểm';
+ await adminAdjustPoints(username,amount,reason)
+}
+async function adminToggleUserStatus(username,status){
+ if(!confirm((status==='banned'?'Khóa ':'Mở khóa ')+'@'+username+'?'))return;
+ toastMsg('Đang cập nhật tài khoản…');
+ try{
+  const r=await api('adminSetStatus',{username,status});
+  adminUsersCache=adminUsersCache.map(u=>u.username===username?r.user:u);
+  adminUserList.innerHTML=adminUsersCache.length?adminUsersCache.map(adminUserCard).join(''):'<div class="empty">Không có người dùng</div>';
+  toastMsg(status==='banned'?'Đã khóa tài khoản':'Đã mở tài khoản');
+ }catch(e){toastMsg(e.message)}
+}
+async function loadAdminGiftCodes(){
+ try{
+  const r=await api('adminListGiftCodes');
+  adminGiftList.innerHTML=r.giftCodes.length?r.giftCodes.map(g=>`<div class="adminCard glass"><div class="row"><div><b>${esc(g.code)}</b><div class="muted">${g.points} điểm · ${g.usedCount}/${g.maxUses||'∞'} lượt</div></div><div class="muted">${g.enabled?'Đang bật':'Đã tắt'}</div></div><div class="muted" style="margin-top:8px">${g.expiresAt?'Hết hạn '+esc(g.expiresAt):'Không hết hạn'}${g.note?' · '+esc(g.note):''}</div><div class="adminActions"><button class="smallBtn" onclick="adminToggleGift('${esc(g.code)}')">${g.enabled?'Tắt':'Bật'}</button><button class="dangerBtn" onclick="adminDeleteGift('${esc(g.code)}')">Xóa</button></div></div>`).join(''):'<div class="empty">Chưa có Giftcode</div>'
+ }catch(e){toastMsg(e.message)}
+}
+async function adminCreateGiftCode(){
+ const code=giftAdminCode.value.trim().toUpperCase(),points=Number(giftAdminPoints.value),maxUses=Number(giftAdminMaxUses.value||0),perUserLimit=Number(giftAdminPerUser.value||1),expiresAt=giftAdminExpiry.value,note=giftAdminNote.value.trim();
+ try{
+  await api('adminCreateGiftCode',{code,points,maxUses,perUserLimit,expiresAt,note});
+  giftAdminCode.value='';giftAdminPoints.value='';giftAdminMaxUses.value='';giftAdminExpiry.value='';giftAdminNote.value='';
+  toastMsg('Đã tạo Giftcode '+code);await Promise.all([loadAdminGiftCodes(),loadAdminStats()])
+ }catch(e){toastMsg(e.message)}
+}
+async function adminToggleGift(code){try{await api('adminToggleGiftCode',{code});await loadAdminGiftCodes()}catch(e){toastMsg(e.message)}}
+async function adminDeleteGift(code){if(!confirm('Xóa Giftcode '+code+'?'))return;try{await api('adminDeleteGiftCode',{code});toastMsg('Đã xóa '+code);await Promise.all([loadAdminGiftCodes(),loadAdminStats()])}catch(e){toastMsg(e.message)}}
+
+async function loadAdminRequests(){
+ try{const r=await api('adminListThemeRequests');const list=Array.isArray(r.requests)?r.requests:[];adminRequestList.innerHTML=list.length?list.map(x=>`<div class="adminCard glass"><div class="row"><div><b>@${esc(x.username)}</b><div class="muted">${x.requestType==='priority'?'🚀 Ưu tiên':'🛠 Thường'} · ${Number(x.cost).toLocaleString('vi-VN')} điểm</div></div><span class="requestStatus ${esc(x.status)}">${requestStatusText(x.status)}</span></div><div style="margin-top:8px">${esc(x.requestText)}</div>${x.adminNote?`<div class="muted" style="margin-top:6px">Ghi chú: ${esc(x.adminNote)}</div>`:''}<div class="adminRequestActions"><button class="smallBtn" onclick="adminSetRequest('${esc(x.id)}','processing')">Đang xử lý</button><button class="goodBtn" onclick="adminSetRequest('${esc(x.id)}','done')">Hoàn thành</button><button class="dangerBtn" onclick="adminSetRequest('${esc(x.id)}','rejected')">Từ chối</button></div></div>`).join(''):'<div class="empty">Chưa có yêu cầu theme</div>'}catch(e){toastMsg(e.message)}
+}
+async function adminSetRequest(id,status){const note=prompt('Ghi chú cho người dùng:','')||'';try{await api('adminSetThemeRequestStatus',{id,status,adminNote:note});toastMsg('Đã cập nhật yêu cầu');await Promise.all([loadAdminRequests(),loadAdminStats()])}catch(e){toastMsg(e.message)}}
+
+
+function applyAppAppearance(){
+ const p=userProfile();
+ let saved={};
+ try{saved=JSON.parse(localStorage.getItem('m4xAppearance')||'{}')}catch(_){}
+ const appTheme=String(p.appTheme||saved.appTheme||'default');
+ const navStyle=String(p.navStyle||saved.navStyle||'default');
+ document.body.classList.remove('skin-ocean','skin-purple','skin-gold','skin-dynamic','skin-birthdayFireworks','nav-compact');
+ if(appTheme!=='default')document.body.classList.add('skin-'+appTheme);
+ if(navStyle==='compact')document.body.classList.add('nav-compact');
+ localStorage.setItem('m4xAppearance',JSON.stringify({appTheme,navStyle}));
+ document.documentElement.style.backgroundColor=
+  appTheme==='gold'?'#1c1304':
+  appTheme==='purple'?'#130922':
+  appTheme==='ocean'?'#031725':
+  appTheme==='dynamic'?'#071226':appTheme==='birthdayFireworks'?'#13091d':'#06111f';
+}
+const I18N={en:{'Trang chủ':'Home','Danh mục':'Categories','Nhiệm vụ':'Missions','Yêu thích':'Favorites','Tài khoản':'Account','Cửa hàng điểm':'Point Shop','Phòng chat M4X':'M4X Chat','Đăng xuất':'Log out','Ủng hộ Admin':'Support Admin','Liên hệ Admin':'Contact Admin','Đăng nhập':'Log in','Đăng ký':'Register','Tạo tài khoản':'Create account','Tên đăng nhập':'Username','Mật khẩu':'Password','Trung tâm tác giả':'Creator Hub','Thành viên M4X':'M4X Member','Ngôn ngữ':'Language','Nhiệm vụ tuần':'Weekly missions','Đánh giá & bình luận':'Reviews & comments','Gửi đánh giá':'Submit review','Báo lỗi':'Report issue','Sao chép mã':'Copy code','Nhận quà đủ 3 ngày':'Claim after 3 days'}};
+function applyLanguage(){document.documentElement.lang=currentLang;const map=I18N[currentLang]||{};document.querySelectorAll('button,span,h2,h3,p,b,label').forEach(el=>{if(el.children.length)return;const raw=(el.dataset.viText||el.textContent).trim();if(!el.dataset.viText&&raw)el.dataset.viText=raw;if(map[el.dataset.viText])el.textContent=map[el.dataset.viText]});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{el.placeholder=el.dataset[currentLang==='en'?'enPlaceholder':'viPlaceholder']||el.placeholder})}
+function setLanguage(lang){currentLang=lang==='en'?'en':'vi';localStorage.setItem('m4xLang',currentLang);applyLanguage();toastMsg(currentLang==='en'?'Language changed':'Đã đổi ngôn ngữ')}
+function showBoxReveal(label,icon){boxReveal.classList.remove('hidden');boxOrb.textContent=icon||'🎁';boxResult.textContent=currentLang==='en'?'Opening…':'Đang mở…';setTimeout(()=>{boxResult.textContent=label},1000);setTimeout(()=>boxReveal.classList.add('hidden'),2800)}
+async function fileToUploadedUrl(input,maxMb){const file=input.files&&input.files[0];if(!file)return'';if(file.size>maxMb*1024*1024)throw new Error('File vượt quá '+maxMb+' MB');const base64=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result).split(',')[1]||'');reader.onerror=reject;reader.readAsDataURL(file)});const r=await api('uploadSmallFile',{base64,fileName:file.name,mimeType:file.type||'application/octet-stream'});return r.url}
+async function loadCreatorHub(){try{const [ref,subs]=await Promise.all([api('referralInfo'),api('myThemeSubmissions')]);referralCodeText.textContent=ref.code||'—';referralInfoText.textContent=`Đã mời ${ref.invitedCount||0} · Đủ điều kiện ${ref.activatedCount||0}`;const list=subs.submissions||[];mySubmissionList.innerHTML=list.length?list.map(x=>`<div class="submissionCard glass"><div class="row"><b>${esc(x.name)}</b><span class="statusPill ${esc(x.status)}">${esc(x.status)}</span></div><div class="muted">${esc(x.category)} · ${Number(x.downloads||0)} lượt tải · ${Number(x.earnings||0).toLocaleString('vi-VN')}đ kiếm được</div>${x.adminNote?`<div class="muted">Admin: ${esc(x.adminNote)}</div>`:''}</div>`).join(''):'<div class="empty">Chưa có theme gửi lên</div>'}catch(e){toastMsg(e.message)}}
+function copyReferralCode(){const code=referralCodeText.textContent.trim();if(navigator.clipboard)navigator.clipboard.writeText(code);toastMsg('Đã sao chép '+code)}
+async function claimReferralReward(){try{const r=await api('claimReferral');applyUser(r.user,false);toastMsg('+'+r.reward+' điểm')}catch(e){toastMsg(e.message)}}
+async function submitThemeFromApp(){const btn=submitThemeBtn;btn.disabled=true;btn.textContent='Đang tải file…';try{let preview=submitPreviewUrl.value.trim(),download=submitThemeUrl.value.trim();if(!preview)preview=await fileToUploadedUrl(submitPreviewFile,3);if(!download)download=await fileToUploadedUrl(submitThemeFile,12);const r=await api('submitTheme',{name:submitThemeName.value.trim(),category:submitThemeCategory.value.trim(),description:submitThemeDescription.value.trim(),pointCost:Number(submitThemePrice.value||0),previewUrl:preview,downloadUrl:download,fileName:submitThemeFile.files?.[0]?.name||''});toastMsg('Đã gửi Admin duyệt');submitThemeName.value='';submitThemeDescription.value='';submitThemeUrl.value='';submitPreviewUrl.value='';await loadCreatorHub()}catch(e){toastMsg(e.message)}finally{btn.disabled=false;btn.textContent='Gửi Admin duyệt'}}
+async function loadThemeReviews(themeId){try{const r=await api('themeReviews',{themeId});const list=r.reviews||[];themeReviewList.innerHTML=`<div class="reviewCard glass"><span class="reviewSummary">${Number(r.average||0).toFixed(1)} ★</span> · ${r.count||0} đánh giá</div>`+(list.length?list.map(x=>`<div class="reviewCard glass"><div class="row"><b>${esc(x.name)}</b><span>${'★'.repeat(x.rating)}</span></div><div class="muted">@${esc(x.username)}</div><div>${esc(x.comment)}</div></div>`).join(''):'<div class="empty">Chưa có đánh giá</div>')}catch(e){themeReviewList.innerHTML='<div class="empty">Không tải được đánh giá</div>'}}
+function setReviewStars(n){reviewStars=n;[1,2,3,4,5].forEach(i=>{const el=document.getElementById('reviewStar'+i);if(el)el.style.opacity=i<=n?'1':'.25'})}
+async function submitCurrentReview(){if(!current)return;try{const r=await api('submitThemeReview',{themeId:current.id,rating:reviewStars,comment:reviewComment.value.trim()});applyUser(r.user,false);toastMsg('Đã gửi đánh giá');await loadThemeReviews(current.id)}catch(e){toastMsg(e.message)}}
+async function reportCurrentTheme(){if(!current)return;const reason=prompt('Mô tả lỗi theme:','Link hỏng / không tương thích');if(!reason)return;try{await api('reportTheme',{themeId:current.id,reason});toastMsg('Đã gửi báo lỗi cho Admin')}catch(e){toastMsg(e.message)}}
+async function claimDailyGift(){try{const r=await api('claimLoginGift');applyUser(r.user,false);showBoxReveal(`Ngày ${r.streak}: +${r.reward} điểm`,'🎁');loadMemberCenter()}catch(e){toastMsg(e.message)}}
+async function loadMemberCenter(){try{const [gift,weekly,milestone,season]=await Promise.all([api('loginGiftStatus'),api('weeklyTasks'),api('spendingMilestones'),api('seasonalEvent')]);dailyGiftStatus.textContent=gift.claimable?`Chuỗi ${gift.streak||0} ngày · Bấm nhận`:'Hôm nay đã nhận';weeklyTaskList.innerHTML=(weekly.tasks||[]).map(t=>`<div class="weekTask glass"><div class="row"><div><b>${esc(t.label)}</b><div class="muted">${Math.min(t.progress,t.target).toLocaleString('vi-VN')}/${t.target.toLocaleString('vi-VN')}</div></div><button class="smallBtn" ${t.claimed||t.progress<t.target?'disabled':''} onclick="claimWeekly('${t.id}')">${t.claimed?'Đã nhận':'+'+t.reward}</button></div><div class="progress" style="margin-top:9px"><i style="width:${Math.min(100,t.progress/t.target*100)}%"></i></div></div>`).join('');const next=[10000,100000,1000000].find(x=>x>milestone.totalSpent)||1000000;milestoneBox.innerHTML=`<div class="row"><b>${Number(milestone.totalSpent).toLocaleString('vi-VN')} điểm đã tiêu</b><span>${(milestone.milestones||[]).length}/3 mốc</span></div><div class="milestoneTrack" style="margin-top:10px"><i style="width:${Math.min(100,milestone.totalSpent/next*100)}%"></i></div><div class="achievementRow" style="margin-top:10px">${(milestone.milestones||[]).map(x=>`<span class="achievement">🏆 ${esc(x)}</span>`).join('')}</div>`;renderSeasonEvent(season.event)}catch(e){toastMsg(e.message)}}
+async function claimWeekly(id){try{const r=await api('claimWeeklyTask',{taskId:id});applyUser(r.user,false);toastMsg('+'+r.reward+' điểm');loadMemberCenter()}catch(e){toastMsg(e.message)}}
+function renderSeasonEvent(event){seasonEventBox.innerHTML=`<div class="seasonHero glass"><div class="row"><div><h3 style="margin:0">${event.icon} ${esc(event.name)}</h3><div class="muted">Vật phẩm giới hạn ${event.ends?'· đến '+event.ends:''}</div></div></div><div class="seasonItems" style="margin-top:12px">${(event.items||[]).map(x=>`<div class="seasonItem glass"><b>${esc(x.label)}</b><div class="reward">${Number(x.cost).toLocaleString('vi-VN')}đ</div><button class="smallBtn" onclick="buySeasonItem('${x.id}')">Mua</button></div>`).join('')}</div></div>`}
+async function buySeasonItem(id){try{const r=await api('purchaseSeasonItem',{itemId:id});applyUser(r.user,false);showBoxReveal('Đã nhận '+r.item.label,'✨')}catch(e){toastMsg(e.message)}}
+function prettyMemberAchievement(value){const raw=String(value||'').trim();const known={collector10k:'🏆 Collector 10K',diamond100k:'💎 Diamond 100K',birthdayFrame:'🎂 Birthday Frame',birthday48:'🎂 Sinh nhật 4/8',birthdayAdmin48:'🎂 Sinh nhật Admin',vipForever:'♛ VIP vĩnh viễn'};if(known[raw])return known[raw];return raw.replace(/([a-z0-9])([A-Z])/g,'$1 $2').replace(/[_-]+/g,' ').replace(/\b\w/g,x=>x.toUpperCase())}
+function openMemberCard(){const p=userProfile();const name=String(currentUser.name||currentUser.username||'M4X Member');const avatarEl=document.getElementById('memberCardAvatar');const avatarSrc=p.avatarUrl?previewSource(p.avatarUrl):'';memberCardName.innerHTML=esc(name)+verifiedIcon(p.verifiedType);memberCardUser.textContent='ID · '+String(currentUser.username||'member').toUpperCase()+'-'+String(currentUser.createdAt||'').slice(0,4);memberCardLevel.textContent='LV.'+(Math.floor(Number(p.totalSpent||0)/10000)+1);memberCardVip.textContent=isVip()?'VIP ACTIVE':'STANDARD';memberCardStatus.textContent=isVip()?'VIP':'ACTIVE';memberCardStatus.classList.toggle('vip',isVip());memberCardJoined.textContent=new Date(currentUser.createdAt).toLocaleDateString(currentLang==='en'?'en-US':'vi-VN');avatarEl.textContent=avatarSrc?'':name.slice(0,2).toUpperCase();avatarEl.style.backgroundImage=avatarSrc?`url("${String(avatarSrc).replace(/"/g,'')}")`:'';avatarEl.style.backgroundSize='cover';avatarEl.style.backgroundPosition='center';const items=(p.achievements||[]).slice(0,8);memberCardAchievements.innerHTML=items.length?items.map(x=>`<span class="achievement">${esc(prettyMemberAchievement(x))}</span>`).join(''):'<span class="achievement">✦ Thành viên M4X</span>';memberCardModal.classList.remove('hidden')}
+async function loadAdminSubmissions(){
+ try{
+  const r=await api('adminListThemeSubmissions');
+  const list=r.submissions||[];
+  adminSubmissionList.innerHTML=list.length?list.map(x=>{
+   const reviewed=x.status==='approved'||x.status==='rejected';
+   return `<div class="adminCard glass">
+    <div class="row">
+     <div><b>${esc(x.name)}</b><div class="muted">@${esc(x.username)} · ${esc(x.category)}</div></div>
+     <span class="statusPill ${esc(x.status)}">${esc(x.status)}</span>
+    </div>
+    <div class="muted">Giá ${Number(x.pointCost).toLocaleString('vi-VN')}đ · ${esc(x.fileName||'Drive')}</div>
+    <div class="adminActions">
+     <button class="smallBtn" onclick="openExternal('${esc(x.previewUrl)}')">Ảnh</button>
+     <button class="smallBtn" onclick="openExternal('${esc(x.downloadUrl)}')">File</button>
+     <button class="goodBtn" onclick="reviewSubmission('${x.id}','approved',${Number(x.pointCost)})">Duyệt</button>
+     <button class="dangerBtn" onclick="reviewSubmission('${x.id}','rejected',${Number(x.pointCost)})">Từ chối</button>
+     ${reviewed?`<button class="dangerBtn" onclick="deleteReviewedSubmission('${x.id}','${esc(x.name)}','${esc(x.status)}')">Xóa</button>`:''}
+    </div>
+   </div>`;
+  }).join(''):'<div class="empty">Chưa có theme gửi lên</div>';
+ }catch(e){toastMsg(e.message)}
+}
+async function reviewSubmission(id,status,currentPrice){const price=status==='approved'?Number(prompt('Giá mở khóa:',String(currentPrice))):currentPrice;const note=prompt('Ghi chú Admin:','')||'';try{await api('adminReviewThemeSubmission',{id,status,pointCost:price,adminNote:note});toastMsg('Đã cập nhật');loadAdminSubmissions()}catch(e){toastMsg(e.message)}}
+async function deleteReviewedSubmission(id,name,status){
+ const label=status==='approved'
+  ?'Theme đã duyệt vẫn còn trong kho công khai. Chỉ xóa khỏi danh sách quản lý.'
+  :'Theme bị từ chối sẽ được xóa khỏi danh sách quản lý.';
+ if(!confirm(`Xóa "${name}"?\n\n${label}`))return;
+ try{
+  await api('adminDeleteThemeSubmission',{id});
+  toastMsg('Đã xóa khỏi danh sách');
+  await Promise.all([loadAdminSubmissions(),loadAdminStats()]);
+ }catch(e){toastMsg(e.message)}
+}
+
+async function adminVerifyUser(username){const type=(prompt('Loại xác minh: creator / collaborator / trusted / để trống để xóa','creator')||'').trim().toLowerCase();try{const r=await api('adminSetVerified',{username,verifiedType:type});adminUsersCache=adminUsersCache.map(u=>u.username===username?r.user:u);adminUserList.innerHTML=adminUsersCache.map(adminUserCard).join('');toastMsg('Đã cập nhật xác minh')}catch(e){toastMsg(e.message)}}
+
+
+const INVENTORY_LABELS={
+ badge:{gold:['🏅','Huy hiệu Vàng'],diamond:['💎','Huy hiệu Kim Cương'],birthdayAdmin48:['🎂','Huy hiệu sinh nhật ADMIN']},
+ frame:{neon:['🌈','Khung Neon'],animated:['🌀','Khung chuyển động'],birthday48:['🎆','Khung avatar 4/8']},
+ color:{'#70d6ff':['🔵','Màu Xanh'],'#ffd166':['🟡','Màu Vàng'],'#ff70a6':['🌸','Màu Hồng'],'#b388ff':['🟣','Màu Tím'],'#7cf29a':['🟢','Màu Lục']},
+ icon:{'⭐':['⭐','Ngôi sao'],'👑':['👑','Vương miện'],'💎':['💎','Kim cương']},
+ effect:{rainbow:['✨','Hiệu ứng Rainbow']},
+ skin:{ocean:['🌊','Giao diện Ocean'],purple:['💜','Giao diện Purple'],gold:['✨','Giao diện Gold'],dynamic:['🌌','Nền Aurora'],birthdayFireworks:['🎆','Nền pháo hoa 4/8']},
+ nav:{compact:['⌁','Điều hướng gọn']},
+ title:{birthdayGuest:['🏷️','Khách mời sinh nhật ADMIN']}
+};
+function inventoryItemsFromUser(){
+ const inv=userInventory(),out=[];
+ [['badge','badges'],['frame','frames'],['color','colors'],['icon','icons'],['effect','effects'],['skin','skins'],['nav','navStyles'],['title','titles']].forEach(pair=>{
+  (inv[pair[1]]||[]).forEach(value=>{const meta=(INVENTORY_LABELS[pair[0]]||{})[value]||['◆',String(value)];out.push({type:pair[0],value,icon:meta[0],label:meta[1]})})
+ });
+ return out;
+}
+function inventoryActive(type,value){const p=userProfile();return(type==='badge'&&p.badge===value)||(type==='frame'&&p.frame===value)||(type==='color'&&p.nameColor===value)||(type==='icon'&&p.nameIcon===value)||(type==='effect'&&p.chatEffect===value)||(type==='skin'&&p.appTheme===value)||(type==='nav'&&p.navStyle===value)||(type==='title'&&p.customTitle==='Khách mời sinh nhật ADMIN')}
+function renderInventoryLocal(){
+ if(!currentUser||!document.getElementById('inventoryGrid'))return;
+ const items=inventoryItemsFromUser(),p=userProfile();
+ inventoryStatusBox.innerHTML=`<div class="row"><div><div class="muted">Quyền lợi</div><div class="points" style="font-size:25px">${isVip()?'VIP ACTIVE':'FREE'}</div></div><div style="text-align:right"><b>${items.length} vật phẩm</b><div class="muted">${vipText()}</div></div></div>`;
+ inventoryGrid.innerHTML=items.length?items.map(x=>`<div class="inventoryCard glass"><div class="row"><span class="inventoryIcon">${x.icon}</span>${inventoryActive(x.type,x.value)?'<span class="activePill">Đang dùng</span>':''}</div><h4>${esc(x.label)}</h4><p>${x.type==='skin'?'Đổi nền ứng dụng':x.type==='frame'?'Trang trí ảnh đại diện':x.type==='title'?'Danh hiệu hiển thị':'Vật phẩm hồ sơ và chat'}</p><button class="smallBtn" ${inventoryActive(x.type,x.value)?'disabled':''} onclick="activateInventory('${x.type}','${esc(x.value)}')">${inventoryActive(x.type,x.value)?'Đang dùng':'Sử dụng'}</button></div>`).join(''):'<div class="empty">Bạn chưa có vật phẩm. Hãy ghé Cửa hàng điểm.</div>';
+}
+async function loadInventory(){renderInventoryLocal();try{const r=await api('inventory');if(r.user)applyUser(r.user,false);renderInventoryLocal()}catch(e){toastMsg(e.message)}}
+async function activateInventory(type,value){try{const r=await api('activateInventoryItem',{itemType:type,value});applyUser(r.user,false);applyAppAppearance();renderInventoryLocal();toastMsg('Đã sử dụng vật phẩm')}catch(e){toastMsg(e.message)}}
+function editAvatar(){
+ document.getElementById('avatarModal').classList.remove('hidden');
+}
+function closeAvatarModal(){
+ document.getElementById('avatarModal').classList.add('hidden');
+}
+function chooseAvatarFromPhone(){
+ const input=document.getElementById('avatarFileInput');
+ input.value='';
+ input.click();
+ closeAvatarModal();
+}
+function chooseAvatarByLink(){
+ closeAvatarModal();
+ const current=userProfile().avatarUrl||'';
+ const initial=/^https:\/\//i.test(current)?current:'';
+ const value=prompt('Dán link ảnh HTTPS:',initial);
+ if(value===null)return;
+ const url=value.trim();
+ if(url&&!/^https:\/\//i.test(url))return toastMsg('Link ảnh phải bắt đầu bằng https://');
+ saveAvatarValue(url,url?'Đã cập nhật ảnh đại diện':'Đã dùng avatar chữ cái');
+}
+async function removeAvatarImage(){
+ closeAvatarModal();
+ await saveAvatarValue('','Đã dùng avatar chữ cái');
+}
+async function handleAvatarFile(event){
+ const file=event.target.files&&event.target.files[0];
+ if(!file)return;
+ if(!/^image\//i.test(file.type||''))return toastMsg('Vui lòng chọn một ảnh');
+ if(file.size>15*1024*1024)return toastMsg('Ảnh quá lớn, tối đa 15 MB');
+ toastMsg('Đang xử lý ảnh…');
+ try{
+  const dataUrl=await compressAvatarFile(file);
+  await saveAvatarValue(dataUrl,'Đã cập nhật ảnh từ thư viện');
+ }catch(error){
+  toastMsg(error&&error.message?error.message:'Không xử lý được ảnh');
+ }
+}
+function fileToImage(file){
+ return new Promise((resolve,reject)=>{
+  const reader=new FileReader();
+  reader.onerror=()=>reject(new Error('Không đọc được ảnh'));
+  reader.onload=()=>{
+   const image=new Image();
+   image.onerror=()=>reject(new Error('Ảnh không hợp lệ'));
+   image.onload=()=>resolve(image);
+   image.src=reader.result;
+  };
+  reader.readAsDataURL(file);
+ });
+}
+async function compressAvatarFile(file){
+ const image=await fileToImage(file);
+ const side=Math.min(image.naturalWidth||image.width,image.naturalHeight||image.height);
+ if(!side)throw new Error('Ảnh không hợp lệ');
+ const sx=((image.naturalWidth||image.width)-side)/2;
+ const sy=((image.naturalHeight||image.height)-side)/2;
+ let size=180,quality=.78,data='';
+ for(let attempt=0;attempt<8;attempt++){
+  const canvas=document.createElement('canvas');
+  canvas.width=size;canvas.height=size;
+  const ctx=canvas.getContext('2d',{alpha:false});
+  ctx.fillStyle='#071526';ctx.fillRect(0,0,size,size);
+  ctx.drawImage(image,sx,sy,side,side,0,0,size,size);
+  data=canvas.toDataURL('image/jpeg',quality);
+  if(data.length<=15500)return data;
+  if(quality>.48)quality-=.09;else size=Math.max(120,size-20);
+ }
+ if(data.length>17500)throw new Error('Không thể nén ảnh đủ nhỏ');
+ return data;
+}
+async function saveAvatarValue(value,message){
+ try{
+  const r=await api('updateAvatar',{avatarUrl:value});
+  applyUser(r.user,false);
+  const el=document.getElementById('avatar');
+  if(value){
+   el.style.backgroundImage=`url("${String(previewSource(value)).replace(/"/g,'')}")`;
+   el.textContent='';
+  }else{
+   el.style.backgroundImage='';
+   el.textContent=currentUser.name.slice(0,2).toUpperCase();
+  }
+  toastMsg(message);
+ }catch(e){toastMsg(e.message)}
+}
+async function loadProfileSummary(){try{const r=await api('profileSummary'),s=r.summary||{};profileLevelText.textContent=`LV.${s.level||1} · ${isVip()?'VIP M4X':'Thành viên M4X'}`;themePostedStat.textContent=s.approvedThemes||0;creatorDownloadStat.textContent=Number(s.themeDownloads||0).toLocaleString('vi-VN');badgeStat.textContent=s.badgeCount||0;profileInfoStrip.innerHTML=`<div class="row"><span>Ngày tham gia</span><b>${s.joinedAt?new Date(s.joinedAt).toLocaleDateString('vi-VN'):'—'}</b></div><div class="row"><span>Điểm tác giả đã nhận</span><b>${Number(s.creatorEarnings||0).toLocaleString('vi-VN')}đ</b></div><div class="row"><span>Trạng thái VIP</span><b>${s.vipActive?'Đang hoạt động':'Chưa kích hoạt'}</b></div>`}catch(e){profileInfoStrip.innerHTML='<div class="muted">Không tải được thống kê hồ sơ</div>'}}
+
+function rankRowHtml(x){return `<div class="weeklyRankRow ${x.username===currentUser.username?'me':''}"><b>${x.rank===1?'🏆':x.rank===2?'🥈':x.rank===3?'🥉':'#'+x.rank}</b><div><b>@${esc(x.username)}</b><div class="muted">${Number(x.score||0).toLocaleString('vi-VN')} điểm hoạt động</div></div><b class="reward">${Number(x.reward||0).toLocaleString('vi-VN')}đ</b></div>`}
+function showRankCategory(category){currentRankCategory=category;rankMemberTab.classList.toggle('active',category==='member');rankCreatorTab.classList.toggle('active',category==='creator');renderWeeklyLeaderboard()}
+function renderWeeklyLeaderboard(){if(!weeklyRankCache)return;const list=weeklyRankCache[currentRankCategory]||[],claimed=(weeklyRankCache.claimed||[]).includes(currentRankCategory);weeklyRankBox.innerHTML=(list.length?list.map(rankRowHtml).join(''):'<div class="empty">Chưa có dữ liệu tuần này</div>')+`<button class="primary" style="margin-top:12px" ${!weeklyRankCache.claimOpen||claimed?'disabled':''} onclick="claimRankReward('${currentRankCategory}')">${claimed?'Đã nhận thưởng':weeklyRankCache.claimOpen?'Nhận thưởng Top 5':'Mở từ 20:00 Chủ nhật'}</button>`}
+async function loadWeeklyLeaderboard(){try{weeklyRankCache=await api('weeklyLeaderboard');renderWeeklyLeaderboard()}catch(e){weeklyRankBox.innerHTML='<div class="empty">Không tải được BXH tuần</div>'}}
+async function claimRankReward(category){try{const r=await api('claimWeeklyRankReward',{category});applyUser(r.user,false);showBoxReveal(`Top ${r.rank}: +${Number(r.reward).toLocaleString('vi-VN')} điểm`,'🏆');await loadWeeklyLeaderboard()}catch(e){toastMsg(e.message)}}
+
+async function loadQuestMap(){try{const r=await api('questMap'),stages=r.stages||[];questMapBox.innerHTML=stages.map((q,i)=>`<div class="questStage glass ${q.claimed?'done':''}"><div class="row"><div><b>${q.icon} ${esc(q.name)}</b><div class="muted">${Math.min(q.progress,q.target).toLocaleString('vi-VN')}/${q.target.toLocaleString('vi-VN')}</div></div><button class="smallBtn" ${q.claimed||q.progress<q.target?'disabled':''} onclick="claimQuest('${q.id}')">${q.claimed?'Đã mở':'Rương +'+q.reward}</button></div><div class="progress" style="margin-top:9px"><i style="width:${Math.min(100,q.progress/q.target*100)}%"></i></div>${i===2&&new Date().getMonth()===7&&new Date().getDate()===3?'<div class="muted" style="margin-top:8px">Mảnh mã bí mật: <span class="clueFragment">08</span></div>':''}</div>${i<stages.length-1?'<div class="questRoad"></div>':''}`).join('')+`<div class="questStage glass ${r.boss.claimed?'done':''}"><div class="row"><div><b>${r.boss.icon} ${esc(r.boss.name)}</b><div class="muted">${r.boss.weekend?'Boss đã xuất hiện':'Mở Thứ bảy và Chủ nhật'}</div></div><button class="smallBtn" ${r.boss.claimed||!r.boss.ready||!r.boss.weekend?'disabled':''} onclick="claimQuest('boss')">${r.boss.claimed?'Đã hạ':'Đánh Boss +'+r.boss.reward}</button></div></div>`}catch(e){questMapBox.innerHTML='<div class="empty">Không tải được Quest Map</div>'}}
+async function claimQuest(id){try{const r=await api('claimQuestStage',{stageId:id});applyUser(r.user,false);showBoxReveal('+'+Number(r.reward).toLocaleString('vi-VN')+' điểm','🗺️');loadQuestMap()}catch(e){toastMsg(e.message)}}
+
+function applyBirthdayDecor(){const d=new Date(),active=d.getMonth()===7&&d.getDate()>=1&&d.getDate()<=7;document.body.classList.toggle('birthday-week',active);birthdayDecor.classList.toggle('hidden',!active);if(active&&!birthdayDecor.children.length){const icons=['🎈','🎉','🎂','✨','🎁'];for(let i=0;i<(document.documentElement.classList.contains('native-app')?8:18);i++){const el=document.createElement('i');el.textContent=icons[i%icons.length];el.style.left=(Math.random()*100)+'%';el.style.animationDuration=(7+Math.random()*8)+'s';el.style.animationDelay=(-Math.random()*12)+'s';el.style.fontSize=(16+Math.random()*19)+'px';birthdayDecor.appendChild(el)}}}
+async function loadBirthdayEvent(){try{const r=await api('birthdayEventStatus');if(!r.active){birthdayWeekBox.innerHTML='';return}const claimed=r.claimedDays||[],today=r.day;birthdayWeekBox.innerHTML=`<div class="birthdayHero glass"><div class="row"><div><h3 style="margin:0">🎂 Tuần lễ sinh nhật ADMIN</h3><div class="muted">01/08 – 07/08 · Sinh nhật 4/8</div></div><button class="iconbtn" onclick="playBirthdayMusic()">♫</button></div><div class="birthdaySchedule">${(r.schedule||[]).map(x=>`<div class="birthdayDay ${x.day===today?'today':''} ${claimed.includes(x.day)?'claimed':''}"><div class="row"><b>${x.icon} 0${x.day}/08</b><span>${claimed.includes(x.day)?'✓ Đã nhận':x.day===today?'Hôm nay':''}</span></div><div class="muted">${esc(x.title)}</div></div>`).join('')}</div><div class="birthdayActions"><button class="primary" ${claimed.includes(today)?'disabled':''} onclick="claimBirthdayToday()">${claimed.includes(today)?'Đã nhận quà':'Nhận quà hôm nay'}</button><button class="secondary" ${today!==5||!r.spinsUnlocked||r.spinsRemaining<=0?'disabled':''} onclick="birthdaySpin()">🎡 Quay (${r.spinsRemaining||0})</button></div>${today===2?'<div class="notice glass"><span>✨</span><b>Mọi nhiệm vụ hằng ngày được thưởng x2 hôm nay</b></div>':''}${today===6?'<div class="notice glass"><span>🏷️</span><b>Giảm 40% theme và vật phẩm hôm nay</b></div>':''}${today===7?`<div class="notice glass"><span>🐉</span><b>Boss cộng đồng: ${r.boss.progress}/${r.boss.goal}</b></div>`:''}${today===3?'<div class="muted" style="margin-top:10px">Tìm 3 mảnh mã trong Hồ sơ, Cửa hàng và Quest Map.</div>':''}</div>`}catch(e){birthdayWeekBox.innerHTML=''}}
+async function claimBirthdayToday(){let payload={};const d=new Date();if(d.getMonth()===7&&d.getDate()===3){const code=prompt('Nhập Giftcode bí mật đã ghép:','');if(!code)return;payload.code=code}try{const r=await api('claimBirthdayDay',payload);applyUser(r.user,false);showBoxReveal(r.reward?`+${Number(r.reward).toLocaleString('vi-VN')} điểm`:'Đã mở 4 lượt quay','🎂');applyBirthdayDecor();loadBirthdayEvent()}catch(e){toastMsg(e.message)}}
+async function birthdaySpin(){try{const r=await api('birthdaySpin');applyUser(r.user,false);showBoxReveal(`+${Number(r.reward).toLocaleString('vi-VN')} điểm`,'🎡');loadBirthdayEvent()}catch(e){toastMsg(e.message)}}
+function playBirthdayMusic(){try{birthdayAudioCtx=birthdayAudioCtx||new(window.AudioContext||window.webkitAudioContext)();const notes=[523,659,523,784,698,659,587,1046];notes.forEach((f,i)=>{const o=birthdayAudioCtx.createOscillator(),g=birthdayAudioCtx.createGain();o.frequency.value=f;o.type='sine';g.gain.setValueAtTime(.0001,birthdayAudioCtx.currentTime+i*.22);g.gain.exponentialRampToValueAtTime(.07,birthdayAudioCtx.currentTime+i*.22+.03);g.gain.exponentialRampToValueAtTime(.0001,birthdayAudioCtx.currentTime+i*.22+.19);o.connect(g).connect(birthdayAudioCtx.destination);o.start(birthdayAudioCtx.currentTime+i*.22);o.stop(birthdayAudioCtx.currentTime+i*.22+.2)})}catch(_){toastMsg('Thiết bị không hỗ trợ phát nhạc')}}
+
+function startAirdropPolling(){if(airdropPollTimer||!currentUser)return;checkAirdrop();airdropPollTimer=setInterval(checkAirdrop,60000)}
+function stopAirdropPolling(){clearInterval(airdropPollTimer);airdropPollTimer=null;activeAirdrop=null;if(document.getElementById('airdropFloat'))airdropFloat.classList.add('hidden')}
+async function checkAirdrop(){if(!currentUser)return;try{const r=await api('airdropStatus');activeAirdrop=r.active&&!r.claimed?r:null;airdropFloat.classList.toggle('hidden',!activeAirdrop);if(activeAirdrop)airdropRewardText.textContent='+'+Number(activeAirdrop.reward).toLocaleString('vi-VN')+'đ'}catch(_){}}
+async function claimAirdrop(){if(!activeAirdrop)return;const id=activeAirdrop.id;activeAirdrop=null;airdropFloat.classList.add('hidden');try{const r=await api('claimAirdrop',{dropId:id});applyUser(r.user,false);showBoxReveal(`Airdrop +${Number(r.reward).toLocaleString('vi-VN')} điểm`,'🎁')}catch(e){toastMsg(e.message)}}
+
+function restoreFastCache(){
+ restoreNativeSession();
+ try{
+  const cachedThemes=JSON.parse(localStorage.getItem('m4xThemeCache')||'[]');
+  if(Array.isArray(cachedThemes)&&cachedThemes.length){
+   themes=cachedThemes.map(normalizeTheme);
+   themeById=new Map(themes.map(t=>[t.id,t]));
+   cats=['Tất cả',...new Set(themes.flatMap(t=>[t.category,t.mode]).filter(Boolean))];
+  }
+ }catch(_){}
+ const token=localStorage.getItem('m4xAuthToken');
+ if(token){
+  if(currentUser)authScreen.classList.add('hidden');
+  try{
+   const cachedUser=JSON.parse(localStorage.getItem('m4xUserCache')||'null');
+   if(cachedUser){
+    currentUser=normalizeUser(cachedUser);
+    authScreen.classList.add('hidden');
+    renderAll();
+   }
+  }catch(_){}
+ }
+}
+async function boot(){
+ applyBirthdayDecor();
+ restoreFastCache();
+ await loadLocalConfig();
+ const themeJob=loadRemote();
+ if(!isApiConfigured()){
+  authScreen.classList.remove('hidden');
+  setTimeout(()=>toastMsg('Admin chưa cấu hình máy chủ tài khoản'),500);
+  await themeJob;
+  return;
+ }
+ warmApi();
+ const token=localStorage.getItem('m4xAuthToken');
+ if(token){
+  try{
+   const result=await api('me');
+   applyUser(result.user,false);
+   authScreen.classList.add('hidden');
+   applyLanguage();
+   setTimeout(()=>api('loginGiftStatus').then(x=>{if(x.claimable)toastMsg('🎁 Bạn có quà đăng nhập hôm nay')}).catch(()=>{}),900);
+  }catch(e){
+   // Chỉ xóa phiên khi máy chủ xác nhận phiên thực sự không còn hợp lệ.
+   if(/tài khoản đã bị khóa/i.test(String(e.message||''))){
+    localStorage.removeItem('m4xAuthToken');
+    localStorage.removeItem('m4xUserCache');
+    clearNativeSession();
+    currentUser=null;
+    authScreen.classList.remove('hidden');
+   }else if(currentUser){
+    authScreen.classList.add('hidden');
+    toastMsg('Mạng chậm — đang dùng dữ liệu đã lưu');
+   }else{
+    authScreen.classList.remove('hidden');
+   }
+  }
+ }else authScreen.classList.remove('hidden');
+ await themeJob;
+}
+boot();
+setInterval(()=>{if(currentUser)refreshMe(true)},600000);
+if(location.hostname!=='m4x.local'&&'serviceWorker'in navigator)navigator.serviceWorker.register('sw.js');
+
+</script>
+<script src="community-v2.js?v=50001"></script>
+
+<script id="m4x-community-v2-bridge">
+(function () {
+    let communityOpened = false;
+
+    function syncCommunityPage() {
+        const page =
+            document.getElementById("chatPage");
+
+        if (!page || !window.M4XCommunityV2) {
+            return;
+        }
+
+        const visible =
+            !page.hidden &&
+            !page.classList.contains("hidden") &&
+            getComputedStyle(page).display !== "none";
+
+        if (visible && !communityOpened) {
+            communityOpened = true;
+            window.M4XCommunityV2.open();
+        }
+
+        if (!visible && communityOpened) {
+            communityOpened = false;
+            window.M4XCommunityV2.close();
+        }
+    }
+
+    document.addEventListener(
+        "click",
+        function () {
+            setTimeout(syncCommunityPage, 80);
+        },
+        true
+    );
+
+    new MutationObserver(syncCommunityPage)
+        .observe(document.documentElement, {
+            subtree: true,
+            attributes: true,
+            attributeFilter: [
+                "class",
+                "style",
+                "hidden"
+            ]
+        });
+
+    window.addEventListener(
+        "load",
+        syncCommunityPage
+    );
+
+    setTimeout(syncCommunityPage, 1000);
+})();
+</script>
+
+  <script src="m4x-web.js?v=50013"></script>
+  <script src="theme-manager-4911.js?v=50001"></script>
+  <script src="m4x-ota.js?v=50014"></script>
+</body></html>

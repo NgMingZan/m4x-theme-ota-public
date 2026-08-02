@@ -1,0 +1,21 @@
+#m4xOtaOverlay{
+  position:fixed;inset:0;z-index:999999;display:none;align-items:flex-end;
+  padding:16px;background:rgba(0,0,0,.58);backdrop-filter:blur(10px);
+}
+#m4xOtaOverlay.show{display:flex}
+#m4xOtaSheet{
+  width:min(100%,520px);margin:0 auto;padding:18px;border-radius:24px;
+  border:1px solid rgba(102,210,255,.28);background:rgba(8,18,31,.97);
+  box-shadow:0 24px 80px rgba(0,0,0,.48);color:#fff;
+}
+.m4xOtaHead{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.m4xOtaTitle{font-size:18px;font-weight:800}
+.m4xOtaClose{width:38px;height:38px;border:0;border-radius:50%;font-size:22px;color:#fff;background:rgba(255,255,255,.08)}
+#m4xOtaStatus{margin-top:8px;color:rgba(235,243,255,.72);font-size:14px;line-height:1.5}
+#m4xOtaProgressWrap{display:none;height:7px;margin-top:14px;border-radius:99px;overflow:hidden;background:rgba(255,255,255,.09)}
+#m4xOtaProgress{height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#25b9f3,#7768ff);transition:width .25s ease}
+.m4xOtaActions{display:flex;gap:10px;margin-top:16px}
+.m4xOtaActions button{flex:1;min-height:46px;border:0;border-radius:15px;font-size:14px;font-weight:800}
+#m4xOtaCheckButton{color:#eaf6ff;background:rgba(255,255,255,.09)}
+#m4xOtaInstallButton{color:#fff;background:linear-gradient(135deg,#16a9e5,#5b65f5)}
+#m4xOtaInstallButton[hidden]{display:none!important}

@@ -1,353 +1,353 @@
 {
   "success": true,
-  "available": false,
+  "available": true,
   "compatible": true,
-  "versionName": "1.0",
-  "version": "1.0",
-  "latestVersion": "1.0",
-  "appVersion": "1.0",
-  "webVersion": "1.0",
-  "versionCode": 10000,
-  "message": "M4X 1.0 — máy chủ OTA trực tuyến đã sẵn sàng",
-  "changelog": "M4X 1.0 — máy chủ OTA trực tuyến đã sẵn sàng",
-  "releaseNotes": "M4X 1.0 — máy chủ OTA trực tuyến đã sẵn sàng",
-  "notes": "M4X 1.0 — máy chủ OTA trực tuyến đã sẵn sàng",
+  "versionName": "1.1",
+  "version": "1.1",
+  "latestVersion": "1.1",
+  "appVersion": "1.1",
+  "webVersion": "1.1",
+  "versionCode": 10100,
+  "message": "Thẻ thành viên mới, M4X Web ngoài trang chủ và OTA trực tuyến ổn định",
+  "changelog": "Thẻ thành viên mới, M4X Web ngoài trang chủ và OTA trực tuyến ổn định",
+  "releaseNotes": "Thẻ thành viên mới, M4X Web ngoài trang chủ và OTA trực tuyến ổn định",
+  "notes": "Thẻ thành viên mới, M4X Web ngoài trang chủ và OTA trực tuyến ổn định",
   "channel": "stable-1.x",
   "minimumVersion": "1.0",
   "minVersion": "1.0",
   "minAppVersion": "1.0",
   "minimumAppVersion": "1.0",
   "minNativeVersion": "1.0",
-  "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-  "downloadUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-  "bundleUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-  "packageUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-  "zipUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-  "fileUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-  "sha256": "31bf08ade4b18d7b69da7c460ad6d70d94e099de8721d1626f55617bdf60c44c",
-  "checksum": "31bf08ade4b18d7b69da7c460ad6d70d94e099de8721d1626f55617bdf60c44c",
-  "hash": "31bf08ade4b18d7b69da7c460ad6d70d94e099de8721d1626f55617bdf60c44c",
-  "size": 720825,
-  "publishedAt": "2026-08-02T08:40:23Z",
+  "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+  "downloadUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+  "bundleUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+  "packageUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+  "zipUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+  "fileUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+  "sha256": "86621c1b4fbc349e5d438ab6d11d1cacb5cfab25e8e2c82d751302cd0dc33523",
+  "checksum": "86621c1b4fbc349e5d438ab6d11d1cacb5cfab25e8e2c82d751302cd0dc33523",
+  "hash": "86621c1b4fbc349e5d438ab6d11d1cacb5cfab25e8e2c82d751302cd0dc33523",
+  "size": 720826,
+  "publishedAt": "2026-08-02T08:41:44Z",
   "files": [
     {
       "path": "app-config.json",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/app-config.json",
-      "sha256": "24cc38cb94e1efde53b0d30401cd4c143f749bcef3de69a6933bc9535f139df8",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/app-config.json",
+      "sha256": "b58622c3f6e8ebc26acbb3e071dc58f34d8dbc11926cfb7adeb8f65a575f782e",
       "size": 703
     },
     {
       "path": "assets/donate-qr.jpg",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/donate-qr.jpg",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/donate-qr.jpg",
       "sha256": "0c90038b6192101e80d2dd907d0c86ed3bd2496ee3dc2fd8ed17b6a487733083",
       "size": 128950
     },
     {
       "path": "assets/previews/aurora-os.jpg",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/aurora-os.jpg",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/aurora-os.jpg",
       "sha256": "676ce37b48503aea060ccb45eaec4ba53454cc74f7046fe8de7e0d485b6fa312",
       "size": 41203
     },
     {
       "path": "assets/previews/dark-vision.jpg",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/dark-vision.jpg",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/dark-vision.jpg",
       "sha256": "7f0018ab79587f7b24d3ca7025c766a036b6677cfd0c0c28f88af01812a6e8ce",
       "size": 35930
     },
     {
       "path": "assets/previews/hyper-glass.jpg",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/hyper-glass.jpg",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/hyper-glass.jpg",
       "sha256": "d9085d70f0398482e03305c2cf0aa79ae113c109483720d12ea79ac6b987d800",
       "size": 35749
     },
     {
       "path": "assets/previews/limitless.jpg",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/limitless.jpg",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/limitless.jpg",
       "sha256": "c660362ade7f274e53116be75a5de0cc2b6ef818c048bf4c52a7770e4dccb6a6",
       "size": 39269
     },
     {
       "path": "assets/previews/luminous-light.jpg",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/luminous-light.jpg",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/luminous-light.jpg",
       "sha256": "0f5bed106f5ea52b58700ae3a70f9eb8694c038efc362f9c9146e0c1c4f3b30d",
       "size": 27430
     },
     {
       "path": "assets/previews/midnight-blue.jpg",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/midnight-blue.jpg",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/midnight-blue.jpg",
       "sha256": "80f0328e5e3f33e6880c07dcef0401e4dc3d161b7733fdc98002e87fe74aa708",
       "size": 37176
     },
     {
       "path": "assets/theme-placeholder.svg",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/theme-placeholder.svg",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/theme-placeholder.svg",
       "sha256": "47f1f4595da1fa24634a16a6072117d255e6611ccb1bced59d458af5cab93a37",
       "size": 1080
     },
     {
       "path": "community-v2.css",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/community-v2.css",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/community-v2.css",
       "sha256": "5f3ad01faddf6ee5da0f756345838b714658efb086198baaac1d352fd9be0ebb",
       "size": 7901
     },
     {
       "path": "community-v2.js",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/community-v2.js",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/community-v2.js",
       "sha256": "5729bdfd360b9d62ed2e1549837d7353badcc1b5c6000779281363ec46aa1684",
       "size": 23388
     },
     {
       "path": "icons/icon-192.png",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/icons/icon-192.png",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/icons/icon-192.png",
       "sha256": "ac2058d8a2e35ff19e01d9459a75ed0f13000cbfb4121b891fa2fbdedb08c98b",
       "size": 54663
     },
     {
       "path": "icons/icon-512.png",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/icons/icon-512.png",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/icons/icon-512.png",
       "sha256": "2a7413110e83356e5426d664a059f709e0d4527e9fd6c0ec94f12029bc4dfb40",
       "size": 303078
     },
     {
       "path": "index.html",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/index.html",
-      "sha256": "9e51b757a43de6711426e9ee8265429abc0ca28c3460af69f346b16a5140a0ce",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/index.html",
+      "sha256": "0251fecb191895ca6b61763d8429e6f30bf8cdc83df221386e5b6f03ad0add8c",
       "size": 178811
     },
     {
       "path": "m4x-ota.css",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/m4x-ota.css",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/m4x-ota.css",
       "sha256": "904980b5cf8bae326fa5ffdbf5fec84e254e4948696ee8c300b99b48f16f4b1c",
       "size": 1377
     },
     {
       "path": "m4x-ota.js",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/m4x-ota.js",
-      "sha256": "30ee2dd1a9102ff1960011235e761b06d4b6aac29f6daf1356976f66fac4e828",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/m4x-ota.js",
+      "sha256": "94cfdf6685f86431f2788005378a82366fc25f58232564550610e93d28e6c723",
       "size": 7407
     },
     {
       "path": "m4x-web.css",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/m4x-web.css",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/m4x-web.css",
       "sha256": "2ba99339b1cd2cbea6ef0af89a48eea4ce84ca9815ab3f5d048ee9ec03802427",
       "size": 6709
     },
     {
       "path": "m4x-web.js",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/m4x-web.js",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/m4x-web.js",
       "sha256": "b76fe941990771e2f575aa831374f06f60e8be9799212c4ae3b7b4922ac1c526",
       "size": 19213
     },
     {
       "path": "manifest.webmanifest",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/manifest.webmanifest",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/manifest.webmanifest",
       "sha256": "65586ac22b38870804c70dda705e176b57b82fab54fdd16a79d1c52bf4176279",
       "size": 381
     },
     {
       "path": "sw.js",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/sw.js",
-      "sha256": "cbf9a45647ae38c7ab12eb574b0daf727aea805e0931564af2677154d897ff4a",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/sw.js",
+      "sha256": "e4cad944f68a34e223b4cccf2ba03fa9edf95f4c428c3ff5631a625ec1e12871",
       "size": 760
     },
     {
       "path": "theme-manager-4911.css",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/theme-manager-4911.css",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/theme-manager-4911.css",
       "sha256": "a75d09b6ebb105cafc96a56cb764bb06e509dfdaf43f12da50d10ab10bd7225c",
       "size": 1039
     },
     {
       "path": "theme-manager-4911.js",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/theme-manager-4911.js",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/theme-manager-4911.js",
       "sha256": "33776154375688508b1e6a5cfde7349204065a5277baa0dcbaaf7c725293ccf5",
       "size": 8477
     },
     {
       "path": "themes.js",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/themes.js",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/themes.js",
       "sha256": "17a026c0c42bebad06f8ae9fc484386b5f010ce6becaefff395ce5b91515ed5e",
       "size": 2585
     },
     {
       "path": "themes.json",
-      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/themes.json",
+      "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/themes.json",
       "sha256": "c8a45856f7c5d8b29882d531a035b11232dd98ab0dbbbc77d1073e85e7bd1053",
       "size": 3082
     }
   ],
   "update": {
     "success": true,
-    "available": false,
+    "available": true,
     "compatible": true,
-    "versionName": "1.0",
-    "version": "1.0",
-    "latestVersion": "1.0",
-    "appVersion": "1.0",
-    "webVersion": "1.0",
-    "versionCode": 10000,
-    "message": "M4X 1.0 — máy chủ OTA trực tuyến đã sẵn sàng",
-    "changelog": "M4X 1.0 — máy chủ OTA trực tuyến đã sẵn sàng",
-    "releaseNotes": "M4X 1.0 — máy chủ OTA trực tuyến đã sẵn sàng",
-    "notes": "M4X 1.0 — máy chủ OTA trực tuyến đã sẵn sàng",
+    "versionName": "1.1",
+    "version": "1.1",
+    "latestVersion": "1.1",
+    "appVersion": "1.1",
+    "webVersion": "1.1",
+    "versionCode": 10100,
+    "message": "Thẻ thành viên mới, M4X Web ngoài trang chủ và OTA trực tuyến ổn định",
+    "changelog": "Thẻ thành viên mới, M4X Web ngoài trang chủ và OTA trực tuyến ổn định",
+    "releaseNotes": "Thẻ thành viên mới, M4X Web ngoài trang chủ và OTA trực tuyến ổn định",
+    "notes": "Thẻ thành viên mới, M4X Web ngoài trang chủ và OTA trực tuyến ổn định",
     "channel": "stable-1.x",
     "minimumVersion": "1.0",
     "minVersion": "1.0",
     "minAppVersion": "1.0",
     "minimumAppVersion": "1.0",
     "minNativeVersion": "1.0",
-    "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-    "downloadUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-    "bundleUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-    "packageUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-    "zipUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-    "fileUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-    "sha256": "31bf08ade4b18d7b69da7c460ad6d70d94e099de8721d1626f55617bdf60c44c",
-    "checksum": "31bf08ade4b18d7b69da7c460ad6d70d94e099de8721d1626f55617bdf60c44c",
-    "hash": "31bf08ade4b18d7b69da7c460ad6d70d94e099de8721d1626f55617bdf60c44c",
-    "size": 720825,
-    "publishedAt": "2026-08-02T08:40:23Z",
+    "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+    "downloadUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+    "bundleUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+    "packageUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+    "zipUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+    "fileUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+    "sha256": "86621c1b4fbc349e5d438ab6d11d1cacb5cfab25e8e2c82d751302cd0dc33523",
+    "checksum": "86621c1b4fbc349e5d438ab6d11d1cacb5cfab25e8e2c82d751302cd0dc33523",
+    "hash": "86621c1b4fbc349e5d438ab6d11d1cacb5cfab25e8e2c82d751302cd0dc33523",
+    "size": 720826,
+    "publishedAt": "2026-08-02T08:41:44Z",
     "files": [
       {
         "path": "app-config.json",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/app-config.json",
-        "sha256": "24cc38cb94e1efde53b0d30401cd4c143f749bcef3de69a6933bc9535f139df8",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/app-config.json",
+        "sha256": "b58622c3f6e8ebc26acbb3e071dc58f34d8dbc11926cfb7adeb8f65a575f782e",
         "size": 703
       },
       {
         "path": "assets/donate-qr.jpg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/donate-qr.jpg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/donate-qr.jpg",
         "sha256": "0c90038b6192101e80d2dd907d0c86ed3bd2496ee3dc2fd8ed17b6a487733083",
         "size": 128950
       },
       {
         "path": "assets/previews/aurora-os.jpg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/aurora-os.jpg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/aurora-os.jpg",
         "sha256": "676ce37b48503aea060ccb45eaec4ba53454cc74f7046fe8de7e0d485b6fa312",
         "size": 41203
       },
       {
         "path": "assets/previews/dark-vision.jpg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/dark-vision.jpg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/dark-vision.jpg",
         "sha256": "7f0018ab79587f7b24d3ca7025c766a036b6677cfd0c0c28f88af01812a6e8ce",
         "size": 35930
       },
       {
         "path": "assets/previews/hyper-glass.jpg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/hyper-glass.jpg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/hyper-glass.jpg",
         "sha256": "d9085d70f0398482e03305c2cf0aa79ae113c109483720d12ea79ac6b987d800",
         "size": 35749
       },
       {
         "path": "assets/previews/limitless.jpg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/limitless.jpg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/limitless.jpg",
         "sha256": "c660362ade7f274e53116be75a5de0cc2b6ef818c048bf4c52a7770e4dccb6a6",
         "size": 39269
       },
       {
         "path": "assets/previews/luminous-light.jpg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/luminous-light.jpg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/luminous-light.jpg",
         "sha256": "0f5bed106f5ea52b58700ae3a70f9eb8694c038efc362f9c9146e0c1c4f3b30d",
         "size": 27430
       },
       {
         "path": "assets/previews/midnight-blue.jpg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/midnight-blue.jpg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/midnight-blue.jpg",
         "sha256": "80f0328e5e3f33e6880c07dcef0401e4dc3d161b7733fdc98002e87fe74aa708",
         "size": 37176
       },
       {
         "path": "assets/theme-placeholder.svg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/theme-placeholder.svg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/theme-placeholder.svg",
         "sha256": "47f1f4595da1fa24634a16a6072117d255e6611ccb1bced59d458af5cab93a37",
         "size": 1080
       },
       {
         "path": "community-v2.css",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/community-v2.css",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/community-v2.css",
         "sha256": "5f3ad01faddf6ee5da0f756345838b714658efb086198baaac1d352fd9be0ebb",
         "size": 7901
       },
       {
         "path": "community-v2.js",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/community-v2.js",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/community-v2.js",
         "sha256": "5729bdfd360b9d62ed2e1549837d7353badcc1b5c6000779281363ec46aa1684",
         "size": 23388
       },
       {
         "path": "icons/icon-192.png",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/icons/icon-192.png",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/icons/icon-192.png",
         "sha256": "ac2058d8a2e35ff19e01d9459a75ed0f13000cbfb4121b891fa2fbdedb08c98b",
         "size": 54663
       },
       {
         "path": "icons/icon-512.png",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/icons/icon-512.png",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/icons/icon-512.png",
         "sha256": "2a7413110e83356e5426d664a059f709e0d4527e9fd6c0ec94f12029bc4dfb40",
         "size": 303078
       },
       {
         "path": "index.html",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/index.html",
-        "sha256": "9e51b757a43de6711426e9ee8265429abc0ca28c3460af69f346b16a5140a0ce",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/index.html",
+        "sha256": "0251fecb191895ca6b61763d8429e6f30bf8cdc83df221386e5b6f03ad0add8c",
         "size": 178811
       },
       {
         "path": "m4x-ota.css",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/m4x-ota.css",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/m4x-ota.css",
         "sha256": "904980b5cf8bae326fa5ffdbf5fec84e254e4948696ee8c300b99b48f16f4b1c",
         "size": 1377
       },
       {
         "path": "m4x-ota.js",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/m4x-ota.js",
-        "sha256": "30ee2dd1a9102ff1960011235e761b06d4b6aac29f6daf1356976f66fac4e828",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/m4x-ota.js",
+        "sha256": "94cfdf6685f86431f2788005378a82366fc25f58232564550610e93d28e6c723",
         "size": 7407
       },
       {
         "path": "m4x-web.css",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/m4x-web.css",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/m4x-web.css",
         "sha256": "2ba99339b1cd2cbea6ef0af89a48eea4ce84ca9815ab3f5d048ee9ec03802427",
         "size": 6709
       },
       {
         "path": "m4x-web.js",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/m4x-web.js",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/m4x-web.js",
         "sha256": "b76fe941990771e2f575aa831374f06f60e8be9799212c4ae3b7b4922ac1c526",
         "size": 19213
       },
       {
         "path": "manifest.webmanifest",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/manifest.webmanifest",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/manifest.webmanifest",
         "sha256": "65586ac22b38870804c70dda705e176b57b82fab54fdd16a79d1c52bf4176279",
         "size": 381
       },
       {
         "path": "sw.js",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/sw.js",
-        "sha256": "cbf9a45647ae38c7ab12eb574b0daf727aea805e0931564af2677154d897ff4a",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/sw.js",
+        "sha256": "e4cad944f68a34e223b4cccf2ba03fa9edf95f4c428c3ff5631a625ec1e12871",
         "size": 760
       },
       {
         "path": "theme-manager-4911.css",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/theme-manager-4911.css",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/theme-manager-4911.css",
         "sha256": "a75d09b6ebb105cafc96a56cb764bb06e509dfdaf43f12da50d10ab10bd7225c",
         "size": 1039
       },
       {
         "path": "theme-manager-4911.js",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/theme-manager-4911.js",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/theme-manager-4911.js",
         "sha256": "33776154375688508b1e6a5cfde7349204065a5277baa0dcbaaf7c725293ccf5",
         "size": 8477
       },
       {
         "path": "themes.js",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/themes.js",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/themes.js",
         "sha256": "17a026c0c42bebad06f8ae9fc484386b5f010ce6becaefff395ce5b91515ed5e",
         "size": 2585
       },
       {
         "path": "themes.json",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/themes.json",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/themes.json",
         "sha256": "c8a45856f7c5d8b29882d531a035b11232dd98ab0dbbbc77d1073e85e7bd1053",
         "size": 3082
       }
@@ -355,177 +355,177 @@
   },
   "release": {
     "success": true,
-    "available": false,
+    "available": true,
     "compatible": true,
-    "versionName": "1.0",
-    "version": "1.0",
-    "latestVersion": "1.0",
-    "appVersion": "1.0",
-    "webVersion": "1.0",
-    "versionCode": 10000,
-    "message": "M4X 1.0 — máy chủ OTA trực tuyến đã sẵn sàng",
-    "changelog": "M4X 1.0 — máy chủ OTA trực tuyến đã sẵn sàng",
-    "releaseNotes": "M4X 1.0 — máy chủ OTA trực tuyến đã sẵn sàng",
-    "notes": "M4X 1.0 — máy chủ OTA trực tuyến đã sẵn sàng",
+    "versionName": "1.1",
+    "version": "1.1",
+    "latestVersion": "1.1",
+    "appVersion": "1.1",
+    "webVersion": "1.1",
+    "versionCode": 10100,
+    "message": "Thẻ thành viên mới, M4X Web ngoài trang chủ và OTA trực tuyến ổn định",
+    "changelog": "Thẻ thành viên mới, M4X Web ngoài trang chủ và OTA trực tuyến ổn định",
+    "releaseNotes": "Thẻ thành viên mới, M4X Web ngoài trang chủ và OTA trực tuyến ổn định",
+    "notes": "Thẻ thành viên mới, M4X Web ngoài trang chủ và OTA trực tuyến ổn định",
     "channel": "stable-1.x",
     "minimumVersion": "1.0",
     "minVersion": "1.0",
     "minAppVersion": "1.0",
     "minimumAppVersion": "1.0",
     "minNativeVersion": "1.0",
-    "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-    "downloadUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-    "bundleUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-    "packageUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-    "zipUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-    "fileUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-    "sha256": "31bf08ade4b18d7b69da7c460ad6d70d94e099de8721d1626f55617bdf60c44c",
-    "checksum": "31bf08ade4b18d7b69da7c460ad6d70d94e099de8721d1626f55617bdf60c44c",
-    "hash": "31bf08ade4b18d7b69da7c460ad6d70d94e099de8721d1626f55617bdf60c44c",
-    "size": 720825,
-    "publishedAt": "2026-08-02T08:40:23Z",
+    "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+    "downloadUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+    "bundleUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+    "packageUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+    "zipUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+    "fileUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+    "sha256": "86621c1b4fbc349e5d438ab6d11d1cacb5cfab25e8e2c82d751302cd0dc33523",
+    "checksum": "86621c1b4fbc349e5d438ab6d11d1cacb5cfab25e8e2c82d751302cd0dc33523",
+    "hash": "86621c1b4fbc349e5d438ab6d11d1cacb5cfab25e8e2c82d751302cd0dc33523",
+    "size": 720826,
+    "publishedAt": "2026-08-02T08:41:44Z",
     "files": [
       {
         "path": "app-config.json",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/app-config.json",
-        "sha256": "24cc38cb94e1efde53b0d30401cd4c143f749bcef3de69a6933bc9535f139df8",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/app-config.json",
+        "sha256": "b58622c3f6e8ebc26acbb3e071dc58f34d8dbc11926cfb7adeb8f65a575f782e",
         "size": 703
       },
       {
         "path": "assets/donate-qr.jpg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/donate-qr.jpg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/donate-qr.jpg",
         "sha256": "0c90038b6192101e80d2dd907d0c86ed3bd2496ee3dc2fd8ed17b6a487733083",
         "size": 128950
       },
       {
         "path": "assets/previews/aurora-os.jpg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/aurora-os.jpg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/aurora-os.jpg",
         "sha256": "676ce37b48503aea060ccb45eaec4ba53454cc74f7046fe8de7e0d485b6fa312",
         "size": 41203
       },
       {
         "path": "assets/previews/dark-vision.jpg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/dark-vision.jpg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/dark-vision.jpg",
         "sha256": "7f0018ab79587f7b24d3ca7025c766a036b6677cfd0c0c28f88af01812a6e8ce",
         "size": 35930
       },
       {
         "path": "assets/previews/hyper-glass.jpg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/hyper-glass.jpg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/hyper-glass.jpg",
         "sha256": "d9085d70f0398482e03305c2cf0aa79ae113c109483720d12ea79ac6b987d800",
         "size": 35749
       },
       {
         "path": "assets/previews/limitless.jpg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/limitless.jpg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/limitless.jpg",
         "sha256": "c660362ade7f274e53116be75a5de0cc2b6ef818c048bf4c52a7770e4dccb6a6",
         "size": 39269
       },
       {
         "path": "assets/previews/luminous-light.jpg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/luminous-light.jpg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/luminous-light.jpg",
         "sha256": "0f5bed106f5ea52b58700ae3a70f9eb8694c038efc362f9c9146e0c1c4f3b30d",
         "size": 27430
       },
       {
         "path": "assets/previews/midnight-blue.jpg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/midnight-blue.jpg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/midnight-blue.jpg",
         "sha256": "80f0328e5e3f33e6880c07dcef0401e4dc3d161b7733fdc98002e87fe74aa708",
         "size": 37176
       },
       {
         "path": "assets/theme-placeholder.svg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/theme-placeholder.svg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/theme-placeholder.svg",
         "sha256": "47f1f4595da1fa24634a16a6072117d255e6611ccb1bced59d458af5cab93a37",
         "size": 1080
       },
       {
         "path": "community-v2.css",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/community-v2.css",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/community-v2.css",
         "sha256": "5f3ad01faddf6ee5da0f756345838b714658efb086198baaac1d352fd9be0ebb",
         "size": 7901
       },
       {
         "path": "community-v2.js",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/community-v2.js",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/community-v2.js",
         "sha256": "5729bdfd360b9d62ed2e1549837d7353badcc1b5c6000779281363ec46aa1684",
         "size": 23388
       },
       {
         "path": "icons/icon-192.png",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/icons/icon-192.png",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/icons/icon-192.png",
         "sha256": "ac2058d8a2e35ff19e01d9459a75ed0f13000cbfb4121b891fa2fbdedb08c98b",
         "size": 54663
       },
       {
         "path": "icons/icon-512.png",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/icons/icon-512.png",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/icons/icon-512.png",
         "sha256": "2a7413110e83356e5426d664a059f709e0d4527e9fd6c0ec94f12029bc4dfb40",
         "size": 303078
       },
       {
         "path": "index.html",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/index.html",
-        "sha256": "9e51b757a43de6711426e9ee8265429abc0ca28c3460af69f346b16a5140a0ce",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/index.html",
+        "sha256": "0251fecb191895ca6b61763d8429e6f30bf8cdc83df221386e5b6f03ad0add8c",
         "size": 178811
       },
       {
         "path": "m4x-ota.css",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/m4x-ota.css",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/m4x-ota.css",
         "sha256": "904980b5cf8bae326fa5ffdbf5fec84e254e4948696ee8c300b99b48f16f4b1c",
         "size": 1377
       },
       {
         "path": "m4x-ota.js",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/m4x-ota.js",
-        "sha256": "30ee2dd1a9102ff1960011235e761b06d4b6aac29f6daf1356976f66fac4e828",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/m4x-ota.js",
+        "sha256": "94cfdf6685f86431f2788005378a82366fc25f58232564550610e93d28e6c723",
         "size": 7407
       },
       {
         "path": "m4x-web.css",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/m4x-web.css",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/m4x-web.css",
         "sha256": "2ba99339b1cd2cbea6ef0af89a48eea4ce84ca9815ab3f5d048ee9ec03802427",
         "size": 6709
       },
       {
         "path": "m4x-web.js",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/m4x-web.js",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/m4x-web.js",
         "sha256": "b76fe941990771e2f575aa831374f06f60e8be9799212c4ae3b7b4922ac1c526",
         "size": 19213
       },
       {
         "path": "manifest.webmanifest",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/manifest.webmanifest",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/manifest.webmanifest",
         "sha256": "65586ac22b38870804c70dda705e176b57b82fab54fdd16a79d1c52bf4176279",
         "size": 381
       },
       {
         "path": "sw.js",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/sw.js",
-        "sha256": "cbf9a45647ae38c7ab12eb574b0daf727aea805e0931564af2677154d897ff4a",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/sw.js",
+        "sha256": "e4cad944f68a34e223b4cccf2ba03fa9edf95f4c428c3ff5631a625ec1e12871",
         "size": 760
       },
       {
         "path": "theme-manager-4911.css",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/theme-manager-4911.css",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/theme-manager-4911.css",
         "sha256": "a75d09b6ebb105cafc96a56cb764bb06e509dfdaf43f12da50d10ab10bd7225c",
         "size": 1039
       },
       {
         "path": "theme-manager-4911.js",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/theme-manager-4911.js",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/theme-manager-4911.js",
         "sha256": "33776154375688508b1e6a5cfde7349204065a5277baa0dcbaaf7c725293ccf5",
         "size": 8477
       },
       {
         "path": "themes.js",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/themes.js",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/themes.js",
         "sha256": "17a026c0c42bebad06f8ae9fc484386b5f010ce6becaefff395ce5b91515ed5e",
         "size": 2585
       },
       {
         "path": "themes.json",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/themes.json",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/themes.json",
         "sha256": "c8a45856f7c5d8b29882d531a035b11232dd98ab0dbbbc77d1073e85e7bd1053",
         "size": 3082
       }
@@ -533,177 +533,177 @@
   },
   "data": {
     "success": true,
-    "available": false,
+    "available": true,
     "compatible": true,
-    "versionName": "1.0",
-    "version": "1.0",
-    "latestVersion": "1.0",
-    "appVersion": "1.0",
-    "webVersion": "1.0",
-    "versionCode": 10000,
-    "message": "M4X 1.0 — máy chủ OTA trực tuyến đã sẵn sàng",
-    "changelog": "M4X 1.0 — máy chủ OTA trực tuyến đã sẵn sàng",
-    "releaseNotes": "M4X 1.0 — máy chủ OTA trực tuyến đã sẵn sàng",
-    "notes": "M4X 1.0 — máy chủ OTA trực tuyến đã sẵn sàng",
+    "versionName": "1.1",
+    "version": "1.1",
+    "latestVersion": "1.1",
+    "appVersion": "1.1",
+    "webVersion": "1.1",
+    "versionCode": 10100,
+    "message": "Thẻ thành viên mới, M4X Web ngoài trang chủ và OTA trực tuyến ổn định",
+    "changelog": "Thẻ thành viên mới, M4X Web ngoài trang chủ và OTA trực tuyến ổn định",
+    "releaseNotes": "Thẻ thành viên mới, M4X Web ngoài trang chủ và OTA trực tuyến ổn định",
+    "notes": "Thẻ thành viên mới, M4X Web ngoài trang chủ và OTA trực tuyến ổn định",
     "channel": "stable-1.x",
     "minimumVersion": "1.0",
     "minVersion": "1.0",
     "minAppVersion": "1.0",
     "minimumAppVersion": "1.0",
     "minNativeVersion": "1.0",
-    "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-    "downloadUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-    "bundleUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-    "packageUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-    "zipUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-    "fileUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.0/m4x-web-1.0.zip",
-    "sha256": "31bf08ade4b18d7b69da7c460ad6d70d94e099de8721d1626f55617bdf60c44c",
-    "checksum": "31bf08ade4b18d7b69da7c460ad6d70d94e099de8721d1626f55617bdf60c44c",
-    "hash": "31bf08ade4b18d7b69da7c460ad6d70d94e099de8721d1626f55617bdf60c44c",
-    "size": 720825,
-    "publishedAt": "2026-08-02T08:40:23Z",
+    "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+    "downloadUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+    "bundleUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+    "packageUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+    "zipUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+    "fileUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.1/m4x-web-1.1.zip",
+    "sha256": "86621c1b4fbc349e5d438ab6d11d1cacb5cfab25e8e2c82d751302cd0dc33523",
+    "checksum": "86621c1b4fbc349e5d438ab6d11d1cacb5cfab25e8e2c82d751302cd0dc33523",
+    "hash": "86621c1b4fbc349e5d438ab6d11d1cacb5cfab25e8e2c82d751302cd0dc33523",
+    "size": 720826,
+    "publishedAt": "2026-08-02T08:41:44Z",
     "files": [
       {
         "path": "app-config.json",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/app-config.json",
-        "sha256": "24cc38cb94e1efde53b0d30401cd4c143f749bcef3de69a6933bc9535f139df8",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/app-config.json",
+        "sha256": "b58622c3f6e8ebc26acbb3e071dc58f34d8dbc11926cfb7adeb8f65a575f782e",
         "size": 703
       },
       {
         "path": "assets/donate-qr.jpg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/donate-qr.jpg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/donate-qr.jpg",
         "sha256": "0c90038b6192101e80d2dd907d0c86ed3bd2496ee3dc2fd8ed17b6a487733083",
         "size": 128950
       },
       {
         "path": "assets/previews/aurora-os.jpg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/aurora-os.jpg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/aurora-os.jpg",
         "sha256": "676ce37b48503aea060ccb45eaec4ba53454cc74f7046fe8de7e0d485b6fa312",
         "size": 41203
       },
       {
         "path": "assets/previews/dark-vision.jpg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/dark-vision.jpg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/dark-vision.jpg",
         "sha256": "7f0018ab79587f7b24d3ca7025c766a036b6677cfd0c0c28f88af01812a6e8ce",
         "size": 35930
       },
       {
         "path": "assets/previews/hyper-glass.jpg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/hyper-glass.jpg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/hyper-glass.jpg",
         "sha256": "d9085d70f0398482e03305c2cf0aa79ae113c109483720d12ea79ac6b987d800",
         "size": 35749
       },
       {
         "path": "assets/previews/limitless.jpg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/limitless.jpg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/limitless.jpg",
         "sha256": "c660362ade7f274e53116be75a5de0cc2b6ef818c048bf4c52a7770e4dccb6a6",
         "size": 39269
       },
       {
         "path": "assets/previews/luminous-light.jpg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/luminous-light.jpg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/luminous-light.jpg",
         "sha256": "0f5bed106f5ea52b58700ae3a70f9eb8694c038efc362f9c9146e0c1c4f3b30d",
         "size": 27430
       },
       {
         "path": "assets/previews/midnight-blue.jpg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/previews/midnight-blue.jpg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/previews/midnight-blue.jpg",
         "sha256": "80f0328e5e3f33e6880c07dcef0401e4dc3d161b7733fdc98002e87fe74aa708",
         "size": 37176
       },
       {
         "path": "assets/theme-placeholder.svg",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/assets/theme-placeholder.svg",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/assets/theme-placeholder.svg",
         "sha256": "47f1f4595da1fa24634a16a6072117d255e6611ccb1bced59d458af5cab93a37",
         "size": 1080
       },
       {
         "path": "community-v2.css",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/community-v2.css",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/community-v2.css",
         "sha256": "5f3ad01faddf6ee5da0f756345838b714658efb086198baaac1d352fd9be0ebb",
         "size": 7901
       },
       {
         "path": "community-v2.js",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/community-v2.js",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/community-v2.js",
         "sha256": "5729bdfd360b9d62ed2e1549837d7353badcc1b5c6000779281363ec46aa1684",
         "size": 23388
       },
       {
         "path": "icons/icon-192.png",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/icons/icon-192.png",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/icons/icon-192.png",
         "sha256": "ac2058d8a2e35ff19e01d9459a75ed0f13000cbfb4121b891fa2fbdedb08c98b",
         "size": 54663
       },
       {
         "path": "icons/icon-512.png",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/icons/icon-512.png",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/icons/icon-512.png",
         "sha256": "2a7413110e83356e5426d664a059f709e0d4527e9fd6c0ec94f12029bc4dfb40",
         "size": 303078
       },
       {
         "path": "index.html",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/index.html",
-        "sha256": "9e51b757a43de6711426e9ee8265429abc0ca28c3460af69f346b16a5140a0ce",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/index.html",
+        "sha256": "0251fecb191895ca6b61763d8429e6f30bf8cdc83df221386e5b6f03ad0add8c",
         "size": 178811
       },
       {
         "path": "m4x-ota.css",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/m4x-ota.css",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/m4x-ota.css",
         "sha256": "904980b5cf8bae326fa5ffdbf5fec84e254e4948696ee8c300b99b48f16f4b1c",
         "size": 1377
       },
       {
         "path": "m4x-ota.js",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/m4x-ota.js",
-        "sha256": "30ee2dd1a9102ff1960011235e761b06d4b6aac29f6daf1356976f66fac4e828",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/m4x-ota.js",
+        "sha256": "94cfdf6685f86431f2788005378a82366fc25f58232564550610e93d28e6c723",
         "size": 7407
       },
       {
         "path": "m4x-web.css",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/m4x-web.css",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/m4x-web.css",
         "sha256": "2ba99339b1cd2cbea6ef0af89a48eea4ce84ca9815ab3f5d048ee9ec03802427",
         "size": 6709
       },
       {
         "path": "m4x-web.js",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/m4x-web.js",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/m4x-web.js",
         "sha256": "b76fe941990771e2f575aa831374f06f60e8be9799212c4ae3b7b4922ac1c526",
         "size": 19213
       },
       {
         "path": "manifest.webmanifest",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/manifest.webmanifest",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/manifest.webmanifest",
         "sha256": "65586ac22b38870804c70dda705e176b57b82fab54fdd16a79d1c52bf4176279",
         "size": 381
       },
       {
         "path": "sw.js",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/sw.js",
-        "sha256": "cbf9a45647ae38c7ab12eb574b0daf727aea805e0931564af2677154d897ff4a",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/sw.js",
+        "sha256": "e4cad944f68a34e223b4cccf2ba03fa9edf95f4c428c3ff5631a625ec1e12871",
         "size": 760
       },
       {
         "path": "theme-manager-4911.css",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/theme-manager-4911.css",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/theme-manager-4911.css",
         "sha256": "a75d09b6ebb105cafc96a56cb764bb06e509dfdaf43f12da50d10ab10bd7225c",
         "size": 1039
       },
       {
         "path": "theme-manager-4911.js",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/theme-manager-4911.js",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/theme-manager-4911.js",
         "sha256": "33776154375688508b1e6a5cfde7349204065a5277baa0dcbaaf7c725293ccf5",
         "size": 8477
       },
       {
         "path": "themes.js",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/themes.js",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/themes.js",
         "sha256": "17a026c0c42bebad06f8ae9fc484386b5f010ce6becaefff395ce5b91515ed5e",
         "size": 2585
       },
       {
         "path": "themes.json",
-        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.0/themes.json",
+        "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/files/1.1/themes.json",
         "sha256": "c8a45856f7c5d8b29882d531a035b11232dd98ab0dbbbc77d1073e85e7bd1053",
         "size": 3082
       }
