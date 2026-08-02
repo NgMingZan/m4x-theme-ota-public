@@ -2,22 +2,22 @@
   "success": true,
   "available": true,
   "compatible": true,
-  "versionName": "1.2",
-  "version": "1.2",
-  "latestVersion": "1.2",
-  "appVersion": "1.2",
-  "webVersion": "1.2",
-  "versionCode": 10200,
-  "message": "M4X 1.2 Smooth: tối ưu cuộn, giảm hiệu ứng nặng, tải ảnh nhanh và ổn định hơn",
-  "changelog": "M4X 1.2 Smooth: tối ưu cuộn, giảm hiệu ứng nặng, tải ảnh nhanh và ổn định hơn",
-  "releaseNotes": "M4X 1.2 Smooth: tối ưu cuộn, giảm hiệu ứng nặng, tải ảnh nhanh và ổn định hơn",
+  "versionName": "1.3.1",
+  "version": "1.3.1",
+  "latestVersion": "1.3.1",
+  "appVersion": "1.3",
+  "webVersion": 48301,
+  "versionCode": 48301,
+  "message": "M4X 1.3.1: sửa hiển thị phiên bản 1.3, vòng quay 3.500đ và sửa lỗi lưu Theme",
+  "changelog": "M4X 1.3.1: sửa hiển thị phiên bản 1.3, vòng quay 3.500đ và sửa lỗi lưu Theme",
+  "releaseNotes": "M4X 1.3.1: sửa hiển thị phiên bản 1.3, vòng quay 3.500đ và sửa lỗi lưu Theme",
   "notes": "M4X 1.2 Smooth: tối ưu cuộn, giảm hiệu ứng nặng, tải ảnh nhanh và ổn định hơn",
   "channel": "stable-1.x",
   "minimumVersion": "1.0",
   "minVersion": "1.0",
   "minAppVersion": "1.0",
   "minimumAppVersion": "1.0",
-  "minNativeVersion": "1.0",
+  "minNativeVersion": 1,
   "url": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.2/m4x-web-1.2.zip",
   "downloadUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.2/m4x-web-1.2.zip",
   "bundleUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/releases/1.2/m4x-web-1.2.zip",
@@ -756,5 +756,7 @@
         "size": 3082
       }
     ]
-  }
+  },
+  "minAppVersionCode": 1,
+  "minimumAppVersionCode": 1
 }

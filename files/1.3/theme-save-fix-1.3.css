@@ -1,0 +1,46 @@
+/* M4X 4.9.9 — Nhãn rõ ràng cho form sửa Theme */
+.adminThemeEditorGrid .adminThemeField{
+  display:grid;
+  gap:6px;
+  min-width:0;
+}
+.adminThemeEditorGrid .adminThemeField.wide{
+  grid-column:1/-1;
+}
+.adminThemeEditorGrid .adminThemeField > span{
+  color:#9da8bd;
+  font-size:11px;
+  font-weight:700;
+  padding-left:3px;
+}
+.adminThemeEditorGrid .adminThemeField input,
+.adminThemeEditorGrid .adminThemeField textarea{
+  width:100%;
+  min-width:0;
+}
+.adminThemeSaveNotice{
+  grid-column:1/-1;
+  padding:10px 12px;
+  border:1px solid rgba(82,198,255,.24);
+  border-radius:13px;
+  background:rgba(12,31,53,.72);
+  color:#a8b5ca;
+  font-size:11px;
+  line-height:1.45;
+}
+.adminThemeSaveNotice.ok{
+  border-color:rgba(58,211,151,.35);
+  color:#79e8b7;
+}
+.adminThemeSaveNotice.error{
+  border-color:rgba(255,103,135,.38);
+  color:#ff9eb3;
+}
+@media(max-width:420px){
+  .adminThemeEditorGrid{
+    grid-template-columns:1fr!important;
+  }
+  .adminThemeEditorGrid .adminThemeField.wide{
+    grid-column:auto;
+  }
+}
