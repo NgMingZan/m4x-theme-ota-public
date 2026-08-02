@@ -1,0 +1,19 @@
+{
+  "appVersion": "1.2",
+  "minimumVersion": "1.0.0",
+  "maintenance": false,
+  "maintenanceMessage": "M4X THEME đang bảo trì.",
+  "adminTelegram": "https://t.me/bengtayy",
+  "channelTelegram": "https://t.me/m4xthemestore",
+  "announcement": "⚡ M4X 1.2 Smooth: cuộn mượt hơn, tải ảnh nhẹ hơn và giảm hiệu ứng nặng.",
+  "donateQr": "assets/donate-qr.jpg",
+  "onlineThemesUrl": "https://drive.google.com/uc?export=download&id=1Hh-BVzBGSmIG67BpTK5M-eMWR_yu4sOt",
+  "onlineConfigUrl": "",
+  "onlineUserApiUrl": "https://script.google.com/macros/s/AKfycbzrjntTBpXTHQWrPyYAL2XU4wvqW9wnuFS01jPP8mbvwqFJfsu2940Zy3Vw8fmp4e5OqA/exec",
+  "existingAdminUsernames": [
+    "minhdan"
+  ],
+  "otaManifestUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/manifest.json",
+  "onlineUpdateUrl": "https://raw.githubusercontent.com/NgMingZan/m4x-theme-ota-public/main/manifest.json",
+  "otaChannel": "stable-1.x"
+}

@@ -1,0 +1,49 @@
+.adminThemeEditorGrid .adminThemeField{
+  display:grid;
+  gap:6px;
+  min-width:0;
+}
+.adminThemeEditorGrid .adminThemeField.wide{
+  grid-column:1/-1;
+}
+.adminThemeEditorGrid .adminThemeField > span{
+  padding-left:3px;
+  color:#a9b4c8;
+  font-size:11px;
+  font-weight:750;
+}
+.adminThemeEditorGrid .adminThemeField input,
+.adminThemeEditorGrid .adminThemeField textarea{
+  width:100%;
+  min-width:0;
+}
+.adminThemeSaveNotice{
+  grid-column:1/-1;
+  padding:10px 12px;
+  border:1px solid rgba(82,198,255,.25);
+  border-radius:13px;
+  background:rgba(10,28,49,.78);
+  color:#aab6ca;
+  font-size:11px;
+  line-height:1.45;
+}
+.adminThemeSaveNotice.ok{
+  border-color:rgba(63,220,154,.38);
+  color:#83efbf;
+}
+.adminThemeSaveNotice.error{
+  border-color:rgba(255,106,139,.42);
+  color:#ff9eb5;
+}
+#adminThemeSaveBtn[data-m4x-theme-save="4911"]{
+  position:relative;
+  z-index:2;
+}
+@media(max-width:420px){
+  .adminThemeEditorGrid{
+    grid-template-columns:1fr!important;
+  }
+  .adminThemeEditorGrid .adminThemeField.wide{
+    grid-column:auto;
+  }
+}
