@@ -6,7 +6,7 @@
   "version": "1.2",
   "latestVersion": "1.2",
   "appVersion": "1.2",
-  "webVersion": "1.2",
+  "webVersion": 10200,
   "versionCode": 10200,
   "message": "M4X 1.2 Smooth: tối ưu cuộn, giảm hiệu ứng nặng, tải ảnh nhanh và ổn định hơn",
   "changelog": "M4X 1.2 Smooth: tối ưu cuộn, giảm hiệu ứng nặng, tải ảnh nhanh và ổn định hơn",
@@ -756,5 +756,6 @@
         "size": 3082
       }
     ]
-  }
+  },
+  "minAppVersionCode": 10000
 }
