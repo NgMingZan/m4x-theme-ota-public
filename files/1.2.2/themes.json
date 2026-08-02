@@ -1,0 +1,122 @@
+[
+  {
+    "id": "aurora-os",
+    "name": "Aurora OS",
+    "author": "M4X Design",
+    "category": "HyperOS",
+    "mode": "Tối",
+    "size": "23,4 MB",
+    "rating": 5.0,
+    "downloads": 12540,
+    "version": "2.1",
+    "description": "Giao diện HyperOS tối giản với ánh sáng xanh tím, màn hình khóa hiện đại và hệ thống biểu tượng đồng nhất.",
+    "tags": [
+      "HyperOS",
+      "Tối",
+      "Kính mờ"
+    ],
+    "preview": "assets/previews/aurora-os.jpg",
+    "downloadUrl": "",
+    "pointCost": 0
+  },
+  {
+    "id": "luminous-light",
+    "name": "Luminous Light",
+    "author": "M4X Design",
+    "category": "MIUI",
+    "mode": "Sáng",
+    "size": "19,8 MB",
+    "rating": 4.9,
+    "downloads": 8920,
+    "version": "1.4",
+    "description": "Phong cách sáng nhẹ nhàng, màu pastel và hiệu ứng kính mờ tinh tế.",
+    "tags": [
+      "MIUI",
+      "Sáng",
+      "Pastel"
+    ],
+    "preview": "assets/previews/luminous-light.jpg",
+    "downloadUrl": "",
+    "pointCost": 20
+  },
+  {
+    "id": "limitless",
+    "name": "Limitless",
+    "author": "M4X Design",
+    "category": "HyperOS",
+    "mode": "Tối",
+    "size": "21,2 MB",
+    "rating": 4.8,
+    "downloads": 7830,
+    "version": "1.8",
+    "description": "Thiết kế không gian ba chiều với gradient xanh tím và đồng hồ khóa nổi bật.",
+    "tags": [
+      "HyperOS",
+      "Gradient",
+      "Không gian"
+    ],
+    "preview": "assets/previews/limitless.jpg",
+    "downloadUrl": "",
+    "pointCost": 35
+  },
+  {
+    "id": "dark-vision",
+    "name": "Dark Vision",
+    "author": "M4X Design",
+    "category": "AMOLED",
+    "mode": "AMOLED",
+    "size": "17,5 MB",
+    "rating": 4.7,
+    "downloads": 6380,
+    "version": "1.2",
+    "description": "Giao diện tối cao cấp, tiết kiệm pin và phù hợp màn hình AMOLED.",
+    "tags": [
+      "AMOLED",
+      "Đen sâu",
+      "Tiết kiệm pin"
+    ],
+    "preview": "assets/previews/dark-vision.jpg",
+    "downloadUrl": "",
+    "pointCost": 50
+  },
+  {
+    "id": "hyper-glass",
+    "name": "Hyper Glass",
+    "author": "M4X Design",
+    "category": "HyperOS",
+    "mode": "Sáng",
+    "size": "26,1 MB",
+    "rating": 4.9,
+    "downloads": 5420,
+    "version": "1.0",
+    "description": "Bộ theme kính mờ hiện đại, biểu tượng trong suốt và trung tâm điều khiển đồng bộ.",
+    "tags": [
+      "HyperOS",
+      "Glass",
+      "Sáng"
+    ],
+    "preview": "assets/previews/hyper-glass.jpg",
+    "downloadUrl": "",
+    "pointCost": 25
+  },
+  {
+    "id": "midnight-blue",
+    "name": "Midnight Blue",
+    "author": "M4X Design",
+    "category": "AMOLED",
+    "mode": "Tối",
+    "size": "20,6 MB",
+    "rating": 4.8,
+    "downloads": 4310,
+    "version": "1.1",
+    "description": "Xanh đêm thanh lịch với màn hình khóa tối giản và widget thời tiết hiện đại.",
+    "tags": [
+      "AMOLED",
+      "Xanh đêm",
+      "Tối"
+    ],
+    "preview": "assets/previews/midnight-blue.jpg",
+    "downloadUrl": "",
+    "pointCost": 40
+  }
+]

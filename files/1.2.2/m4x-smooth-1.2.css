@@ -1,0 +1,33 @@
+/* M4X 1.2 Smooth OTA */
+html { scroll-behavior: auto !important; }
+body { overscroll-behavior-y: contain; text-rendering: optimizeSpeed; }
+img { content-visibility: auto; contain-intrinsic-size: 300px 180px; }
+.theme-card, .card, .mission-card, .webDefaultCard, .defaultAppCard,
+.c2-post, .quest-card, .memberCard, section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 320px;
+}
+.theme-card, .webDefaultCard, .defaultAppCard, .memberCard {
+  contain: layout paint style;
+}
+* { -webkit-tap-highlight-color: transparent; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+body.m4x-low-power *, body.m4x-low-power *::before, body.m4x-low-power *::after {
+  animation-duration: .001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: .12s !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+body.m4x-scrolling .theme-card,
+body.m4x-scrolling .webDefaultCard,
+body.m4x-scrolling .defaultAppCard {
+  box-shadow: none !important;
+}
